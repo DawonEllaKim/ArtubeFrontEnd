@@ -1,87 +1,70 @@
-import React from "react";
 import styled from "styled-components";
+import React from "react";
 
-import { Text, Grid } from ".";
+const Image = props => {
+  const { shape, src, size } = props;
 
-const Input = props => {
-  const {
-    label,
-    placeholder,
-    _onChange,
-    type,
-    multiLine,
-    value,
-    is_submit,
-    onSubmit,
-  } = props;
+  const styles = {
+    src: src,
+    size: size,
+  };
 
-  if (multiLine) {
+  if (shape === "circle") {
+    return <ImageCircle {...styles}></ImageCircle>;
+  }
+
+  if (shape === "rectangle") {
     return (
-      <Grid>
-        <Text margin="0px">{label}</Text>
-        {is_submit ? (
-          <ElTextarea
-            rows={10}
-            placeholder={placeholder}
-            onChange={_onChange}
-            value={value}
-            onKeyPress={e => {
-              if (e.key === "Enter") {
-                onSubmit(e);
-              }
-            }}
-          ></ElTextarea>
-        ) : (
-          <ElTextarea
-            rows={10}
-            placeholder={placeholder}
-            value={value}
-            onChange={_onChange}
-          ></ElTextarea>
-        )}
-      </Grid>
+      <AspectOutter>
+        <AspectInner {...styles}></AspectInner>
+      </AspectOutter>
     );
   }
 
   return (
     <React.Fragment>
-      <Grid>
-        <Text margin="0px">{label}</Text>
-        <ElInput
-          type={type}
-          placeholder={placeholder}
-          onChange={_onChange}
-          value={value}
-        />
-      </Grid>
+      <ImageDefault {...styles}></ImageDefault>
     </React.Fragment>
   );
 };
 
-Input.defaultProps = {
-  multiLine: false,
-  label: "텍스트",
-  placeholder: "텍스트를 입력해주세요.",
-  type: "text",
-  _onChange: () => {},
-  value: "",
-  is_submit: false,
-  onSubmit: () => {},
+Image.defaultProps = {
+  shape: "circle",
+  src: "https://www.007.com/wp-content/uploads/2020/05/B25_11846_RC.jpg",
+  size: 36,
 };
 
-const ElTextarea = styled.textarea`
-  border: 1px solid #212121;
-  width: 100%;
-  padding: 12px 4px;
-  box-sizing: border-box;
+const ImageDefault = styled.div`
+  --size: ${props => props.size}px;
+  width: var(--size);
+  height: var(--size);
+  background-image: url("${props => props.src}");
+  background-size: cover;
 `;
 
-const ElInput = styled.input`
-  border: 1px solid #212121;
+const AspectOutter = styled.div`
   width: 100%;
-  padding: 12px 4px;
-  box-sizing: border-box;
-  border-radius: 7px;
+  min-width: 250px;
 `;
 
-export default Input;
+const AspectInner = styled.div`
+  margin: 0px 5px;
+  position: relative;
+  padding-top: 75%;
+  overflow: hidden;
+  background-image: url("${props => props.src}");
+  background-size: cover;
+`;
+
+const ImageCircle = styled.div`
+  --size: ${props => props.size}px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--size);
+
+  background-image: url("${props => props.src}");
+  background-size: cover;
+  margin: 4px;
+`;
+
+export default Image;
