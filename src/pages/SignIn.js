@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
 
-const SignIn = props => {
+const SignIn = (props) => {
   return (
     <>
       <Wrap>
@@ -19,6 +19,10 @@ const SignIn = props => {
           <input></input>
           <div> 수정 </div>
           <div> 수정 </div>
+          <div> hello </div>
+          <div> hello </div>
+          <div> hello </div>
+          <div> hello </div>
 
           <button>Sign In</button>
           <button>Don't have an account? Sign Up</button>
