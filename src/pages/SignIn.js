@@ -17,9 +17,6 @@ const SignIn = (props) => {
           <div>Sign In</div>
           <input></input>
           <input></input>
-          <div> 수정 </div>
-          <div> 수정 </div>
-          <div> 하하 </div>
 
           <button>Sign In</button>
           <button>Don't have an account? Sign Up</button>
