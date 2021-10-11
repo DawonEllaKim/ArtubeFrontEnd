@@ -3,18 +3,18 @@
     {
       "id": 1,
       "title": "Gibhub 뽀개기1",
-      "aurthor": "얄코",
+      "author": "얄코",
       "url": "https://www.youtube.com/watch?v=FXDjmsiv8fI",
       "desc": "세상에서 가장 쉬운 Git 강좌 (상)",
       "insert_dt": "2021-10-10 10:00:00"
     },
     {
-      "id": 2,
-      "title": "Gibhub 뽀개기2",
-      "aurthor": "횻홍",
+      "id": 4,
+      "title": "세상에서 가장 쉬운 Git 강좌 (하)",
       "url": "https://www.youtube.com/watch?v=GaKjTjwcKQo&t=492s",
-      "desc": "세상에서 가장 쉬운 Git 강좌 (하)",
-      "insert_dt": "2021-10-10 10:00:00"
+      "desc": "쉽겠지..?",
+      "author": "횻홍",
+      "insert_dt": "2021-10-01"
     }
   ],
   "comments": [

@@ -87,11 +87,8 @@ const signupMilddleware = (id, pwd, user_name) => {
 
 export default handleActions(
   {
-    // draft에 복사본이 들어옴
     [SET_USER]: (state, action) =>
       produce(state, draft => {
-        // 복사본에서 수정하고 싶은 것들 하면 됨
-        // action.변수명으로 들어왔던 것들이 action.payload.변수명 으로 들어옴
         draft.user = action.payload.user;
         draft.is_login = true;
       }),

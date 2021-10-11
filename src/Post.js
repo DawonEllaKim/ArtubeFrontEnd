@@ -20,7 +20,7 @@ const Post = props => {
               onClick={() => {}}
             />
             <Text bold>{props.author}</Text>
-            <Text bold>{props.insert_dt.split(" ")[0]}</Text>
+            {/* <Text bold>{props.insert_dt.split(" ")[0]}</Text> */}
           </Grid>
           <Grid is_flex width="auto">
             <Button

@@ -20,23 +20,27 @@ const getPostMiddleware = () => {
       .then(res => {
         const posts = res.data;
         dispatch(getPost(posts));
-        console.log(posts);
       })
       .catch(err => {
-        console.log("포스트 데이터 못가져옴");
+        console.log(err, "포스트 데이터 못가져옴");
       });
   };
 };
 
 const addPostMiddleware = post => {
   return function (dispatch) {
+    const posting = {
+      id: 4,
+      ...post,
+      insert_dt: "2021-10-01",
+    };
     apis
-      .addPost(post)
+      .addPost(posting)
       .then(res => {
-        dispatch(addPost(post));
+        dispatch(addPost(posting));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err, "포스트 업데이트 못함");
       });
   };
 };
