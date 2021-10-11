@@ -1,11 +1,12 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Header from "./component/Header";
+import SignIn from "./pages/SignIn";
+// import SignUp from "./pages/SignUp";
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <SignIn />
+      {/* <SignUp /> */}
     </div>
   );
 }
