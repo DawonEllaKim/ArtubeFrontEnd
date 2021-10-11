@@ -18,6 +18,8 @@ const SignIn = props => {
           <input></input>
           <input></input>
           <div> 수정 </div>
+          <div> 수정 </div>
+
           <button>Sign In</button>
           <button>Don't have an account? Sign Up</button>
         </RightBox>
