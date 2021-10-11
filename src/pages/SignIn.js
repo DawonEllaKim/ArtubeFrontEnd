@@ -19,10 +19,6 @@ const SignIn = (props) => {
           <input></input>
           <div> 수정 </div>
           <div> 수정 </div>
-          <div> hello </div>
-          <div> hello </div>
-          <div> hello </div>
-          <div> hello </div>
 
           <button>Sign In</button>
           <button>Don't have an account? Sign Up</button>
