@@ -1,11 +1,12 @@
-import logo from "./logo.svg";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import Header from "./component/Header";
+import { postCreators } from "./redux/modules/post";
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <div>호호호</div>
     </div>
   );
 }
