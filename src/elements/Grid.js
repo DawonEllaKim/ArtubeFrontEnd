@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const Grid = (props) => {
-  const { is_flex, width, margin, padding, children, center, _onClick } = props;
+  const { is_flex, width, margin, padding, children, border, borderRadius, center, _onClick } = props;
 
   const styles = {
     is_flex: is_flex,
     width: width,
     margin: margin,
     padding: padding,
+    border: border,
+    borderRadius:borderRadius,
     center: center,
   };
   return (
@@ -26,6 +28,8 @@ Grid.defaultProps = {
   padding: false,
   margin: false,
   bg: false,
+  border: false,
+  borderRadius: false,
   center: false,
   _onClick: () => {},
   children: null,
@@ -33,14 +37,19 @@ Grid.defaultProps = {
 
 const GridBox = styled.div`
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+  /* margin: auto; */
 
   width: ${(props) => props.width};
+  ${(props) => (props.border ? `border: ${props.border};` : "")};
+  ${(props) => (props.borderRadius ? `border-radius: ${props.borderRadius};` : "")};
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+
+  ${(props) =>
+    props.is_flex
+      ? `display: flex; align-items: center; justify-content: space-between;`
+      : ""}
+      
   text-align: center;
 `;
 export default Grid;
