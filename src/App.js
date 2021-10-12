@@ -11,6 +11,7 @@ import Detail from "./pages/Detail";
 import MyPage from "./pages/MyPage";
 
 function App() {
+  console.log("다이죠브");
   return (
     <div className="App">
       <ConnectedRouter history={history}>
