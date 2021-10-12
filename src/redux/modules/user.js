@@ -22,12 +22,15 @@ const signupMilddleware = user => {
       .signup(user)
       .then(res => {
         console.log(res);
-        // if (res.result === "success") {
-        //   localStorage.setItem("token", res.token);
-        //   dispatch(setUser(user));
-        // } else {
-        //   console.log(res.errorMessage);
-        // }
+        if (res.result === "success") {
+          localStorage.setItem("token", res.token);
+          // state.user 데이터에 uid 추가해서 넣기 위해서 uid 받아와야함
+          // res.data에 uid만 넘겨줄지, user정보 전체 넘겨줄지 알아야함.
+          dispatch(setUser(user));
+          history.push("/");
+        } else {
+          console.log(res.errorMessage);
+        }
       })
       .catch(err => {
         console.log(err, "회원가입 안됨");
@@ -35,37 +38,42 @@ const signupMilddleware = user => {
   };
 };
 
-// const loginMiddleware = (id, pwd) => {
-//   return function (dispatch) {
-//     apis
-//       .login(id, pwd)
-//       .then(res => {
-//         if (res.result === "success") {
-//           localStorage.setItem("token", res.token);
-//           // dispatch(setUser(user));
-//         } else {
-//           console.log(res.errorMessage);
-//         }
-//       })
-//       .catch(err => {
-//         console.log(err, "로그인 안됨");
-//       });
-//   };
-// };
+const loginMiddleware = (id, pwd) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .login(id, pwd)
+      .then(res => {
+        if (res.result === "success") {
+          localStorage.setItem("token", res.token);
+          // state.user 데이터에 uid 추가해서 넣기 위해서 uid 받아와야함
+          // res.data에 uid만 넘겨줄지, user정보 전체 넘겨줄지 알아야함.
+          const user = res.data;
 
-// const logoutMiddleware = () => {
-//   return function (dispatch) {
-//     apis
-//       .logout()
-//       .then(res => {
-//         dispatch(logout());
-//         localStorage.clear();
-//       })
-//       .catch(err => {
-//         console.log(err, "로그아웃 안됨");
-//       });
-//   };
-// };
+          dispatch(setUser(user));
+          history.push("/");
+        } else {
+          console.log(res.errorMessage);
+        }
+      })
+      .catch(err => {
+        console.log(err, "로그인 안됨");
+      });
+  };
+};
+
+const logoutMiddleware = () => {
+  return function (dispatch) {
+    apis
+      .logout()
+      .then(res => {
+        localStorage.clear();
+        dispatch(logout());
+      })
+      .catch(err => {
+        console.log(err, "로그아웃 안됨");
+      });
+  };
+};
 
 export default handleActions(
   {
@@ -85,8 +93,8 @@ export default handleActions(
 );
 
 const actionCreators = {
-  // loginMiddleware,
-  // logoutMiddleware,
+  loginMiddleware,
+  logoutMiddleware,
   signupMilddleware,
 };
 

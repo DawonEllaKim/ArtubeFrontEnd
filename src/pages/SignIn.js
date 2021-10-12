@@ -1,39 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
+import ArtubeLogo from "../Image/ArtubeLogo.png";
 import { Grid, Input, Button, Image } from "../elements";
-<<<<<<< HEAD
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
-
-// import ArtubeLogo from "../Image/ArtubeLogo.png";
 
 const SignIn = props => {
   const dispatch = useDispatch();
 
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
-  const [pwdCheck, setPwdCheck] = useState("");
 
   function TextInput(e, setState) {
     setState(e.target.value);
   }
 
-  const signin = () => {
-    const user = {
-      id,
-      pwd,
-    };
-    pwd === pwdCheck
-      ? dispatch(userActions.signupMilddleware(user))
-      : window.alert("잘보고치셈");
+  const login = () => {
+    dispatch(userActions.loginMiddleware(id, pwd));
   };
-
-=======
-import ArtubeLogo from "../Image/ArtubeLogo.png";
-
-const SignIn = (props) => {
->>>>>>> 79fe40db68ae6c94d0bb82f79b247d627445fef2
   return (
     <>
       <Wrap>
@@ -66,30 +51,19 @@ const SignIn = (props) => {
                 label="password1"
                 value={pwd}
               />
-              <Input
-                label="password2"
-                placeholder="Password 확인"
-                type="password"
-                _onChange={e => TextInput(e, setPwdCheck)}
-                value={pwdCheck}
-              />
             </Grid>
 
             <Grid>
-              <Button>LOG IN</Button>
-<<<<<<< HEAD
-              <Button _onClick={signin}>Sign Up</Button>
-=======
-              <NewUser>회원이 아니신가요? 회원가입하러 가기</NewUser>
->>>>>>> 79fe40db68ae6c94d0bb82f79b247d627445fef2
+              <Button _onClick={login}>LOG IN</Button>
+              <Button _onClick={() => {}}>Sign Up</Button>
             </Grid>
+            <NewUser>회원이 아니신가요? 회원가입하러 가기</NewUser>
           </Grid>
         </RightBox>
       </Wrap>
     </>
   );
 };
-export default SignIn;
 
 const Wrap = styled.div`
   display: flex;
@@ -134,6 +108,7 @@ const SignInText = styled.div`
   font-weight: bold;
   margin: 10px 0 20px 0px;
 `;
+
 const NewUser = styled.button`
   border: none;
   background-color: none;
@@ -143,3 +118,5 @@ const NewUser = styled.button`
   text-decoration: underline;
   font-size: 15px;
 `;
+
+export default SignIn;

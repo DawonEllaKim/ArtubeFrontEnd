@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // 기본적으로 우리가 바라볼 서버의 주소
-  baseURL: "http://localhost:4000/",
+  // base url 정보 수정해야함
+  baseURL: "3.34.90.85",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -10,18 +10,17 @@ const instance = axios.create({
 });
 
 export const apis = {
-  // 게시물 관련
-  // 게시물 불러오기
-  getPost: () => instance.get("/posts"),
-  // 게시물 작성하기
-  addPost: contents => instance.post("/posts", contents),
-  // 게시물 수정하기
-  editPost: (id, content) => instance.put(`/posts/${id}`, content),
-  // 게시물 삭제하기
+  // 게시물 호출
+  getPost: () => instance.get("/api"),
+  // 게시물 작성
+  addPost: contents => instance.post("/api/myPage", contents),
+  // 게시물 수정
+  editPost: (id, content) => instance.put(`/api/myPage/${id}`, content),
+  // 게시물 삭제
   delPost: id => instance.delete(`/posts/${id}`),
 
   //로그인 관련
-  signup: user => instance.post("/signup", user),
-  login: (id, pwd) => instance.post("/login"),
+  signup: user => instance.post("/api/signUp", user),
+  login: (id, pwd) => instance.post("/api/signin", { id, pwd }),
   logout: () => instance.get("/logout"),
 };

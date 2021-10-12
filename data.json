@@ -1,23 +1,27 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "Gibhub 뽀개기1",
-      "author": "얄코",
-      "url": "https://www.youtube.com/watch?v=FXDjmsiv8fI",
-      "desc": "세상에서 가장 쉬운 Git 강좌 (상)",
-      "insert_dt": "2021-10-10 10:00:00"
+      "_id": "60eb9a3b606aa4add9d7aebc",
+      "postId": "123",
+      "userId": "abc123",
+      "title": "모가디슈",
+      "img": "~~~~",
+      "url": "www.mogadishu.com",
+      "desc": "모가디슈 꿀잼입니다. 꼭 보세요",
+      "date": "2021-07-10"
     },
     {
-      "id": 4,
-      "title": "세상에서 가장 쉬운 Git 강좌 (하)",
-      "url": "https://www.youtube.com/watch?v=GaKjTjwcKQo&t=492s",
-      "desc": "쉽겠지..?",
-      "author": "횻홍",
-      "insert_dt": "2021-10-01"
+      "_id": "60eb9a3b606aa4add9d7aebc",
+      "postId": "123",
+      "userId": "abc123",
+      "title": "모가디슈",
+      "img": "~~~~",
+      "url": "www.mogadishu.com",
+      "desc": "모가디슈 꿀잼입니다. 꼭 보세요",
+      "date": "2021-07-10"
     }
   ],
-  "signup": [],
+  "users": [],
   "comments": [
     {
       "id": 1,

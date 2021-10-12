@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
 import { Grid, Input, Button } from "../elements";
-<<<<<<< HEAD
-import ArtubeLogo from "../Image/ArtubeLogo.png";
+// import ArtubeLogo from "../Image/ArtubeLogo.png";
 import { history } from "../redux/configuerStore";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
-=======
->>>>>>> 79fe40db68ae6c94d0bb82f79b247d627445fef2
 
 const SignUp = props => {
   const dispatch = useDispatch();
@@ -43,35 +40,33 @@ const SignUp = props => {
             <SignInText>Sign Up</SignInText>
           </Grid>
 
-            <Grid>
-              <Input
-                label=""
-                placeholder="Email Address*"
-                _onChange={e => TextInput(e, setId)}
-                value={id}
-              />
-              <Input
-                placeholder="Password"
-                type="password"
-                _onChange={e => TextInput(e, setPwd)}
-                label="password1"
-                value={pwd}
-              />
-              <Input
-                label="password2"
-                placeholder="Password 확인"
-                type="password"
-                _onChange={e => TextInput(e, setPwdCheck)}
-                value={pwdCheck}
-              />
-            </Grid>
+          <Grid>
+            <Input
+              label=""
+              placeholder="Email Address*"
+              _onChange={e => TextInput(e, setId)}
+              value={id}
+            />
+            <Input
+              placeholder="Password"
+              type="password"
+              _onChange={e => TextInput(e, setPwd)}
+              label="password1"
+              value={pwd}
+            />
+            <Input
+              label="password2"
+              placeholder="Password 확인"
+              type="password"
+              _onChange={e => TextInput(e, setPwdCheck)}
+              value={pwdCheck}
+            />
+          </Grid>
 
-            <Grid>
-              <Button>LOG IN</Button>
-              <Button _onClick={signup}>Sign Up</Button>
-            </Grid>
-
-
+          <Grid>
+            <Button>LOG IN</Button>
+            <Button _onClick={signup}>Sign Up</Button>
+          </Grid>
         </Grid>
       </Wrap>
     </>
