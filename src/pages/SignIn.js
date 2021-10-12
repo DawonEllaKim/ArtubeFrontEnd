@@ -17,6 +17,8 @@ const SignIn = (props) => {
           <div>Sign In</div>
           <input text="회원가입하기" />
           <button>로그인하기</button>
+          <input>회원가입하기</input>
+          <button>good morning</button>
 
           <button>Sign In</button>
           <button>Don't have an account? Sign Up</button>
