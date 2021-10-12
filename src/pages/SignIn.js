@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
-import { Grid, Input, Button } from "../elements";
-import ArtubeLogo from "../Image/ArtubeLogo.png";
+import { Grid, Input, Button, Image } from "../elements";
+// import ArtubeLogo from "../Image/ArtubeLogo.png";
 
 const SignIn = props => {
   return (
     <>
       <Wrap>
         <LeftBox>
-          <img
-            src={ArtubeLogo}
-            style={{
-              width: "100%",
-            }}
+          <Image
+            src="https://i.pinimg.com/originals/7d/c9/93/7dc993c70d4adba215b87cafdc59d82d.png"
+            size="100"
+            shape="rectangle"
           />
         </LeftBox>
 

@@ -20,11 +20,8 @@
   "users": [
     {
       "id": 1,
-      "title": "Gibhub 뽀개기1",
-      "author": "얄코",
-      "url": "https://www.youtube.com/watch?v=FXDjmsiv8fI",
-      "desc": "세상에서 가장 쉬운 Git 강좌 (상)",
-      "insert_dt": "2021-10-10 10:00:00"
+      "nickname": "Dawon",
+      "profile": ""
     },
     {
       "id": 4,
