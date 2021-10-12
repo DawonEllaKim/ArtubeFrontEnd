@@ -12,6 +12,7 @@
     "firebase-tools": "^9.18.0",
     "global": "^4.4.0",
     "history": "4.10.1",
+    "http-proxy-middleware": "^2.0.1",
     "immer": "^9.0.6",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -26,8 +27,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.1",
-    "web-vitals": "^1.0.1",
-    "proxy": "3.34.90.85:3000"
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
