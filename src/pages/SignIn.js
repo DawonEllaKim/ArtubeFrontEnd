@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
 
-const SignIn = (props) => {
+const SignIn = props => {
   return (
     <>
       <Wrap>
