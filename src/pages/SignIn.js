@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
 import { Grid, Input, Button, Image } from "../elements";
+<<<<<<< HEAD
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 
@@ -28,15 +29,16 @@ const SignIn = props => {
       : window.alert("잘보고치셈");
   };
 
+=======
+import ArtubeLogo from "../Image/ArtubeLogo.png";
+
+const SignIn = (props) => {
+>>>>>>> 79fe40db68ae6c94d0bb82f79b247d627445fef2
   return (
     <>
       <Wrap>
         <LeftBox>
-          <Image
-            src="https://i.pinimg.com/originals/7d/c9/93/7dc993c70d4adba215b87cafdc59d82d.png"
-            size="100"
-            shape="rectangle"
-          />
+          <img src={ArtubeLogo} style={{ width: "100%" }} />
         </LeftBox>
 
         <RightBox>
@@ -75,7 +77,11 @@ const SignIn = props => {
 
             <Grid>
               <Button>LOG IN</Button>
+<<<<<<< HEAD
               <Button _onClick={signin}>Sign Up</Button>
+=======
+              <NewUser>회원이 아니신가요? 회원가입하러 가기</NewUser>
+>>>>>>> 79fe40db68ae6c94d0bb82f79b247d627445fef2
             </Grid>
           </Grid>
         </RightBox>
@@ -127,4 +133,13 @@ const SignInText = styled.div`
   font-size: 25px;
   font-weight: bold;
   margin: 10px 0 20px 0px;
+`;
+const NewUser = styled.button`
+  border: none;
+  background-color: none;
+  color: black;
+  background-color: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 15px;
 `;
