@@ -1,12 +1,15 @@
 import React from "react";
 
-import Post from '../components/Post';
-import {Grid} from '../elements';
+import Post from "../components/Post";
+import { Grid } from "../elements";
+
+import Header from "../components/Header";
 
 const Main = () => {
   return (
     <>
-        <Post />
+      <Header />
+      <Post />
     </>
   );
 };

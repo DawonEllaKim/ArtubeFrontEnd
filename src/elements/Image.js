@@ -30,7 +30,7 @@ const Image = props => {
 
 Image.defaultProps = {
   shape: "circle",
-  src: "https://www.007.com/wp-content/uploads/2020/05/B25_11846_RC.jpg",
+  src: "https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg",
   size: 36,
 };
 
@@ -39,7 +39,7 @@ const ImageDefault = styled.div`
   width: var(--size);
   height: var(--size);
   background-image: url("${props => props.src}");
-  background-size: cover;
+  background-size: contain;
 `;
 
 const AspectOutter = styled.div`
