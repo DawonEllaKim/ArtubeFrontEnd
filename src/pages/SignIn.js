@@ -1,25 +1,43 @@
 import React from "react";
 import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
+import { Grid, Input, Button } from "../elements";
+import ArtubeLogo from "../Image/ArtubeLogo.png";
 
 const SignIn = props => {
   return (
     <>
       <Wrap>
-        <LeftBox>Image goes here</LeftBox>
+        <LeftBox>
+          <img
+            src={ArtubeLogo}
+            style={{
+              width: "100%",
+            }}
+          />
+        </LeftBox>
 
         <RightBox>
-          <IconWrap>
-            <MdLockOutline
-              style={{ width: "24px", height: "24px", color: "#000" }}
-            />
-          </IconWrap>
-          <div>Sign In</div>
-          <input text="회원가입하기" />
-          <button>로그인하기</button>
+          <Grid>
+            <Grid>
+              <IconWrap>
+                <MdLockOutline
+                  style={{ width: "28px", height: "28px", color: "#000" }}
+                />
+              </IconWrap>
+              <SignInText>Sign In</SignInText>
+            </Grid>
 
-          <button>Sign In</button>
-          <button>Don't have an account? Sign Up</button>
+            <Grid>
+              <Input label="" placeholder="Email Address*" />
+              <Input label="" placeholder="Password*" type="password" />
+            </Grid>
+
+            <Grid>
+              <Button>LOG IN</Button>
+              <Button>Sign Up</Button>
+            </Grid>
+          </Grid>
         </RightBox>
       </Wrap>
     </>
@@ -37,9 +55,12 @@ const Wrap = styled.div`
 `;
 
 const LeftBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 55%;
   height: 100%;
-  background-color: #f5df4d;
+  background-color: #fff;
 `;
 
 const RightBox = styled.div`
@@ -49,15 +70,21 @@ const RightBox = styled.div`
   align-items: center;
   width: 45%;
   height: 100%;
-  background-color: #fff;
+  background-color: #f5df4d;
 `;
 
 const IconWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
-  background-color: #f5df4d;
+  width: 45px;
+  height: 45px;
+  background-color: #fff;
   border-radius: 50%;
+`;
+
+const SignInText = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px 0 20px 0px;
 `;
