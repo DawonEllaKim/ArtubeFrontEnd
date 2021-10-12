@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "../components/Header";
 
 const Detail = () => {
-  return <>Detail</>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default Detail;

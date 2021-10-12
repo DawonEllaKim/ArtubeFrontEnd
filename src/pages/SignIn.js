@@ -13,15 +13,13 @@ const SignIn = (props) => {
         </LeftBox>
 
         <RightBox>
-          <Grid>
-            <Grid>
-              <IconWrap>
-                <MdLockOutline
-                  style={{ width: "28px", height: "28px", color: "#000" }}
-                />
-              </IconWrap>
-              <SignInText>Sign In</SignInText>
-            </Grid>
+          <RightWrap>
+            <IconWrap>
+              <MdLockOutline
+                style={{ width: "28px", height: "28px", color: "#000" }}
+              />
+            </IconWrap>
+            <SignInText>Sign In</SignInText>
 
             <Grid>
               <Input label="" placeholder="Email Address*" />
@@ -32,7 +30,7 @@ const SignIn = (props) => {
               <Button>LOG IN</Button>
               <NewUser>회원이 아니신가요? 회원가입하러 가기</NewUser>
             </Grid>
-          </Grid>
+          </RightWrap>
         </RightBox>
       </Wrap>
     </>
@@ -66,6 +64,15 @@ const RightBox = styled.div`
   width: 45%;
   height: 100%;
   background-color: #f5df4d;
+`;
+
+const RightWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 600px;
 `;
 
 const IconWrap = styled.div`

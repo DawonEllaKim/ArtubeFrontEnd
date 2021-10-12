@@ -1,44 +1,46 @@
 import React from "react";
 import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
-import { Grid, Input, Button } from "../elements";
+import { Input, Button } from "../elements";
 
 const SignUp = (props) => {
   return (
     <>
       <Wrap>
-        <Grid>
-          <Grid>
-            <IconWrap>
-              <MdLockOutline
-                style={{ width: "28px", height: "28px", color: "#000" }}
-              />
-            </IconWrap>
-            <SignInText>Sign Up</SignInText>
-          </Grid>
+        <div>
+          <IconWrap>
+            <MdLockOutline
+              style={{ width: "28px", height: "28px", color: "#000" }}
+            />
+          </IconWrap>
+          <SignInText>Sign Up</SignInText>
+        </div>
 
-          <Grid>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "left",
-                alignItems: "left",
-                width: "90%",
-              }}
-            >
-              <IdInput label="" placeholder="Id*" />
-              <PWcheck>중복확인</PWcheck>
-            </div>
+        <Body>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "left",
+              alignItems: "left",
+              width: "90%",
+              padding: "0 20px",
+            }}
+          >
+            <IdInput label="" placeholder="Id*" />
+            <PWcheck>중복확인</PWcheck>
+          </div>
+
+          <div>
             <Input label="" placeholder="Password*" type="password" />
             <Input label="" placeholder="Password Check*" type="password" />
-          </Grid>
+          </div>
+        </Body>
 
-          <Grid>
-            <Button>Sign Up</Button>
-            <UserExist>이미 회원이신가요? 로그인하러 가기</UserExist>
-          </Grid>
-        </Grid>
+        <div>
+          <Button>Sign Up</Button>
+          <UserExist>이미 회원이신가요? 로그인하러 가기</UserExist>
+        </div>
       </Wrap>
     </>
   );
@@ -52,7 +54,6 @@ const Wrap = styled.div`
   align-items: center;
   width: 500px;
   height: 600px;
-  /* height: 100vh; */
   margin: 5% auto;
   background-color: #f5df4d;
   border-radius: 5px;
@@ -67,6 +68,7 @@ const IconWrap = styled.div`
   height: 45px;
   background-color: #fff;
   border-radius: 50%;
+  margin: auto;
 `;
 
 const SignInText = styled.div`
@@ -75,11 +77,15 @@ const SignInText = styled.div`
   margin: 10px 0 20px 0px;
 `;
 
+const Body = styled.div`
+  width: 90%;
+`;
+
 const IdInput = styled.input`
   box-sizing: border-box;
   width: 190%;
   height: 45px;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
   padding: 15px 10px;
   border: 1px solid #939597;
   border-radius: 5px;
@@ -103,6 +109,17 @@ const PWcheck = styled.button`
   font-size: 15px;
 
   cursor: pointer;
+`;
+
+const PwInput = styled.input`
+  box-sizing: border-box;
+  width: 120%;
+  height: 45px;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  border: 1px solid #939597;
+  border-radius: 5px;
+  font-size: 16px;
 `;
 
 const UserExist = styled.button`
