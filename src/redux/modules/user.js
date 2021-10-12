@@ -3,11 +3,9 @@ import { produce } from "immer";
 import { apis } from "../../lib/axios";
 
 const SET_USER = "SET_USER";
-const GET_USER = "GET_USER";
-const LOG_OUT = "LOGOUT";
+const LOG_OUT = "LOG_OUT";
 
 const setUser = createAction(SET_USER, user => ({ user }));
-const getUser = createAction(GET_USER, user => ({ user }));
 const logout = createAction(LOG_OUT, user => ({ user }));
 
 const initialState = {
@@ -15,74 +13,54 @@ const initialState = {
   is_login: false,
 };
 
+const signupMilddleware = user => {
+  return function (dispatch) {
+    apis
+      .signin(user)
+      .then(res => {
+        if (res.result === "success") {
+          localStorage.setItem("token", res.token);
+          dispatch(setUser(user));
+        } else {
+          console.log(res.errorMessage);
+        }
+      })
+      .catch(err => {
+        console.log(err, "회원가입 안됨");
+      });
+  };
+};
+
 const loginMiddleware = (id, pwd) => {
-  // return function (dispatch, getState, { history }) {
-  //   auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(res => {
-  //     auth
-  //       .signInWithEmailAndPassword(id, pwd)
-  //       .then(user => {
-  //         console.log(user);
-  //         dispatch(
-  //           setUser({
-  //             user_name: user.user.displayName,
-  //             id: id,
-  //             user_profile: "",
-  //             uid: user.user.uid,
-  //           })
-  //         );
-  //         history.push("/");
-  //       })
-  //       .catch(error => {
-  //         var errorCode = error.code;
-  //         var errorMessage = error.message;
-  //         console.log(errorCode, errorMessage);
-  //       });
-  //   });
-  // };
+  return function (dispatch) {
+    apis
+      .login(id, pwd)
+      .then(res => {
+        if (res.result === "success") {
+          localStorage.setItem("token", res.token);
+          // dispatch(setUser(user));
+        } else {
+          console.log(res.errorMessage);
+        }
+      })
+      .catch(err => {
+        console.log(err, "로그인 안됨");
+      });
+  };
 };
 
 const logoutMiddleware = () => {
-  // return function (dispatch, getState, { history }) {
-  //   auth.signOut().then(() => {
-  //     dispatch(logOut());
-  //     history.replace("/");
-  //   });
-  // };
-};
-
-const signupMilddleware = (id, pwd, user_name) => {
-  // return function (dispatch, getState, { history }) {
-  //   auth
-  //     .createUserWithEmailAndPassword(id, pwd)
-  //     .then(user => {
-  //       auth.currentUser
-  //         .updateProfile({
-  //           displayName: user_name,
-  //         })
-  //         .then(() => {
-  //           dispatch(
-  //             setUser({
-  //               user_name: user_name,
-  //               id: id,
-  //               user_profile: "",
-  //               uid: user.user.uid,
-  //             })
-  //           );
-  //           history.push("/");
-  //         })
-  //         .catch(error => {
-  //           console.log(error);
-  //         });
-  //       // Signed in
-  //       // ...
-  //     })
-  //     .catch(error => {
-  //       var errorCode = error.code;
-  //       var errorMessage = error.message;
-  //       console.log(errorCode, errorMessage);
-  //       // ..
-  //     });
-  // };
+  return function (dispatch) {
+    apis
+      .logout()
+      .then(res => {
+        dispatch(logout());
+        localStorage.clear();
+      })
+      .catch(err => {
+        console.log(err, "로그아웃 안됨");
+      });
+  };
 };
 
 export default handleActions(
@@ -97,9 +75,6 @@ export default handleActions(
         draft.user = null;
         draft.is_login = false;
       });
-    },
-    [GET_USER]: (state, action) => {
-      produce(state, draft => {});
     },
   },
   initialState

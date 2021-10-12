@@ -10,6 +10,7 @@ const instance = axios.create({
 });
 
 export const apis = {
+  // 게시물 관련
   // 게시물 불러오기
   getPost: () => instance.get("/posts"),
   // 게시물 작성하기
@@ -18,4 +19,8 @@ export const apis = {
   editPost: (id, content) => instance.put(`/posts/${id}`, content),
   // 게시물 삭제하기
   delPost: id => instance.delete(`/posts/${id}`),
+
+  signin: user => instance.post("/login"),
+  login: (id, pwd) => instance.post("/login"),
+  logout: () => instance.get("/logout"),
 };
