@@ -20,7 +20,8 @@ export const apis = {
   // 게시물 삭제하기
   delPost: id => instance.delete(`/posts/${id}`),
 
-  signin: user => instance.post("/login"),
+  //로그인 관련
+  signup: user => instance.post("/signup", user),
   login: (id, pwd) => instance.post("/login"),
   logout: () => instance.get("/logout"),
 };

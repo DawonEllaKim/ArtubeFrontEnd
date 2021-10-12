@@ -1,8 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
-import produce from "immer";
+import { produce } from "immer";
 import { apis } from "../../lib/axios";
-
-console.log("사라인네");
 
 const GET_POST = "GET_POST";
 const ADD_POST = "ADD_POST";

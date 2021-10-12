@@ -17,21 +17,7 @@
       "insert_dt": "2021-10-01"
     }
   ],
-  "users": [
-    {
-      "id": 1,
-      "nickname": "Dawon",
-      "profile": ""
-    },
-    {
-      "id": 4,
-      "title": "세상에서 가장 쉬운 Git 강좌 (하)",
-      "url": "https://www.youtube.com/watch?v=GaKjTjwcKQo&t=492s",
-      "desc": "쉽겠지..?",
-      "author": "횻홍",
-      "insert_dt": "2021-10-01"
-    }
-  ],
+  "signup": [],
   "comments": [
     {
       "id": 1,

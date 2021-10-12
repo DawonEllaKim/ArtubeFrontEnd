@@ -14,16 +14,20 @@ const initialState = {
 };
 
 const signupMilddleware = user => {
-  return function (dispatch) {
+  return function (dispatch, getState, { history }) {
+    history.push("/signup");
+    console.log(user);
+
     apis
-      .signin(user)
+      .signup(user)
       .then(res => {
-        if (res.result === "success") {
-          localStorage.setItem("token", res.token);
-          dispatch(setUser(user));
-        } else {
-          console.log(res.errorMessage);
-        }
+        console.log(res);
+        // if (res.result === "success") {
+        //   localStorage.setItem("token", res.token);
+        //   dispatch(setUser(user));
+        // } else {
+        //   console.log(res.errorMessage);
+        // }
       })
       .catch(err => {
         console.log(err, "회원가입 안됨");
@@ -31,37 +35,37 @@ const signupMilddleware = user => {
   };
 };
 
-const loginMiddleware = (id, pwd) => {
-  return function (dispatch) {
-    apis
-      .login(id, pwd)
-      .then(res => {
-        if (res.result === "success") {
-          localStorage.setItem("token", res.token);
-          // dispatch(setUser(user));
-        } else {
-          console.log(res.errorMessage);
-        }
-      })
-      .catch(err => {
-        console.log(err, "로그인 안됨");
-      });
-  };
-};
+// const loginMiddleware = (id, pwd) => {
+//   return function (dispatch) {
+//     apis
+//       .login(id, pwd)
+//       .then(res => {
+//         if (res.result === "success") {
+//           localStorage.setItem("token", res.token);
+//           // dispatch(setUser(user));
+//         } else {
+//           console.log(res.errorMessage);
+//         }
+//       })
+//       .catch(err => {
+//         console.log(err, "로그인 안됨");
+//       });
+//   };
+// };
 
-const logoutMiddleware = () => {
-  return function (dispatch) {
-    apis
-      .logout()
-      .then(res => {
-        dispatch(logout());
-        localStorage.clear();
-      })
-      .catch(err => {
-        console.log(err, "로그아웃 안됨");
-      });
-  };
-};
+// const logoutMiddleware = () => {
+//   return function (dispatch) {
+//     apis
+//       .logout()
+//       .then(res => {
+//         dispatch(logout());
+//         localStorage.clear();
+//       })
+//       .catch(err => {
+//         console.log(err, "로그아웃 안됨");
+//       });
+//   };
+// };
 
 export default handleActions(
   {
@@ -81,8 +85,8 @@ export default handleActions(
 );
 
 const actionCreators = {
-  loginMiddleware,
-  logoutMiddleware,
+  // loginMiddleware,
+  // logoutMiddleware,
   signupMilddleware,
 };
 
