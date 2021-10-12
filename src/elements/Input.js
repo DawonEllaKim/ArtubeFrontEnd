@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Text, Grid } from ".";
 
-const Input = props => {
+const Input = (props) => {
   const {
     label,
     placeholder,
@@ -25,7 +25,7 @@ const Input = props => {
             placeholder={placeholder}
             onChange={_onChange}
             value={value}
-            onKeyPress={e => {
+            onKeyPress={(e) => {
               if (e.key === "Enter") {
                 onSubmit(e);
               }
@@ -64,24 +64,26 @@ Input.defaultProps = {
   placeholder: "텍스트를 입력해주세요.",
   type: "text",
   _onChange: () => {},
-  value: "",
   is_submit: false,
   onSubmit: () => {},
 };
 
 const ElTextarea = styled.textarea`
-  border: 1px solid #212121;
+  box-sizing: border-box;
   width: 100%;
   padding: 12px 4px;
-  box-sizing: border-box;
+  border: 1px solid #212121;
 `;
 
 const ElInput = styled.input`
-  border: 1px solid #212121;
-  width: 100%;
-  padding: 12px 4px;
   box-sizing: border-box;
-  border-radius: 7px;
+  width: 90%;
+  height: 45px;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  border: 1px solid #939597;
+  border-radius: 5px;
+  font-size: 16px;
 `;
 
 export default Input;
