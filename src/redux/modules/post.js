@@ -50,7 +50,7 @@ const addPostMiddleware = _post => {
   };
 };
 
-const editPostMiddleware = () => {
+const editPostMiddleware = (post_id, post) => {
   return function (dispatch, getState, { history }) {
     return null;
   };
