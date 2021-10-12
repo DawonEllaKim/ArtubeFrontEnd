@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // base url 정보 수정해야함
   baseURL: "3.34.90.85",
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -20,7 +19,7 @@ export const apis = {
   delPost: id => instance.delete(`/posts/${id}`),
 
   //로그인 관련
-  signup: user => instance.post("/api/signUp", user),
-  login: (id, pwd) => instance.post("/api/signin", { id, pwd }),
-  logout: () => instance.get("/logout"),
+  signup: user => instance.post("/user/signUp", user),
+  login: (id, pwd) => instance.post("/user/signIn", { id, pwd }),
+  logout: () => instance.get("/user/logout"),
 };

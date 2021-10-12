@@ -10,23 +10,23 @@ import { useDispatch } from "react-redux";
 const SignUp = props => {
   const dispatch = useDispatch();
 
-  const [id, setId] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [pwdCheck, setPwdCheck] = useState("");
+  const [userId, setId] = useState("");
+  const [password, setPwd] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   function TextInput(e, setState) {
     setState(e.target.value);
   }
 
   const signup = () => {
-    const user = {
-      id,
-      pwd,
-    };
-    pwd === pwdCheck
-      ? dispatch(userActions.signupMilddleware(user))
+    const user = {};
+    password === confirmPassword
+      ? dispatch(
+          userActions.signupMilddleware(userId, password, confirmPassword)
+        )
       : window.alert("잘보고치셈");
   };
+
   return (
     <>
       <Wrap>
@@ -45,21 +45,21 @@ const SignUp = props => {
               label=""
               placeholder="Email Address*"
               _onChange={e => TextInput(e, setId)}
-              value={id}
+              value={userId}
             />
             <Input
               placeholder="Password"
               type="password"
               _onChange={e => TextInput(e, setPwd)}
               label="password1"
-              value={pwd}
+              value={password}
             />
             <Input
               label="password2"
               placeholder="Password 확인"
               type="password"
-              _onChange={e => TextInput(e, setPwdCheck)}
-              value={pwdCheck}
+              _onChange={e => TextInput(e, setConfirmPassword)}
+              value={confirmPassword}
             />
           </Grid>
 
