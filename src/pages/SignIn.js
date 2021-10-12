@@ -30,7 +30,7 @@ const SignIn = (props) => {
 
             <Grid>
               <Button>LOG IN</Button>
-              <Button>Sign Up</Button>
+              <NewUser>회원이 아니신가요? 회원가입하러 가기</NewUser>
             </Grid>
           </Grid>
         </RightBox>
@@ -82,4 +82,13 @@ const SignInText = styled.div`
   font-size: 25px;
   font-weight: bold;
   margin: 10px 0 20px 0px;
+`;
+const NewUser = styled.button`
+  border: none;
+  background-color: none;
+  color: black;
+  background-color: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 15px;
 `;
