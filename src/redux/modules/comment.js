@@ -30,13 +30,6 @@ const getCommentMiddleware = (post_id) => {
   };
 };
 
-<<<<<<< HEAD
-const addCommentMiddleware = (comment) => {
-  return function (dispatch, getState, { history }) {
-    console.log(comment);
-    apis.addComment(comment).then((res) => {
-      console.log(res.data);
-=======
 const addCommentMiddleware = (post_id, commentDesc) => {
   return function (dispatch, getState, { history }) {
     const comment = {
@@ -46,14 +39,13 @@ const addCommentMiddleware = (post_id, commentDesc) => {
       commentUserId: "aslkdfjas",
       commentDate: "2021-10-12",
     };
-    apis.addComment(comment).then(res => {
+    apis.addComment(comment).then((res) => {
       dispatch(addComment(comment));
->>>>>>> c5dcc209cd7c228565f029fc5fba14def13917b1
     });
   };
 };
 
-const deleteCommentMiddleware = commentId => {
+const deleteCommentMiddleware = (commentId) => {
   return function (dispatch, getState, { history }) {
     return null;
   };
@@ -62,13 +54,8 @@ const deleteCommentMiddleware = commentId => {
 export default handleActions(
   {
     [ADD_COMMENT]: (state, action) =>
-<<<<<<< HEAD
       produce(state, (draft) => {
         draft.list.push(action.payload.comment);
-=======
-      produce(state, draft => {
-        draft.list.unshift(action.payload.comment);
->>>>>>> c5dcc209cd7c228565f029fc5fba14def13917b1
       }),
     [GET_COMMENT]: (state, action) =>
       produce(state, (draft) => {
