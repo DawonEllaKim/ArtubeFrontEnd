@@ -23,7 +23,6 @@ const getCommentMiddleware = post_id => {
   return function (dispatch, getState, { history }) {
     apis.getComment(post_id).then(res => {
       const comment_list = res.data;
-      console.log(comment_list);
       dispatch(getComment(post_id, comment_list));
     });
     return null;
@@ -59,7 +58,6 @@ export default handleActions(
       }),
     [GET_COMMENT]: (state, action) =>
       produce(state, draft => {
-        console.log(action.payload.comment_list);
         draft.list = action.payload.comment_list;
       }),
   },

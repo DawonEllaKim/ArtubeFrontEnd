@@ -36,10 +36,20 @@ const getPostMiddleware = () => {
 
 const addPostMiddleware = _post => {
   return function (dispatch, getState, { history }) {
+    const post = {
+      id: String(parseInt(getState().post.list.length) + 1),
+      userId: "나당",
+      title: _post.title,
+      url: _post.url,
+      desc: _post.desc,
+      date: "2021-10-11",
+    };
+
     apis
-      .createPost(_post)
+      .createPost(post)
       .then(() => {
-        // dispatch(AddPost(post));
+        dispatch(addPost(post));
+        history.push("/");
       })
       .catch(err => {
         console.error(err);
@@ -102,7 +112,7 @@ export default handleActions(
       }),
     [ADD_POST]: (state, action) =>
       produce(state, draft => {
-        draft.list.push(action.payload.post);
+        draft.list.unshift(action.payload.post);
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, draft => {
