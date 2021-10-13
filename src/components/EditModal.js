@@ -19,7 +19,6 @@ export const EditModal = props => {
 
   function TextInput(e, setState) {
     setState(e.target.value);
-    console.log(title, url, desc);
   }
 
   const _post = useSelector(state => state.post.list).filter(
@@ -31,8 +30,6 @@ export const EditModal = props => {
   const [desc, setDesc] = useState(_post.desc);
   const [preview, setPreview] = useState(_post.image_url);
 
-  console.log(_post);
-
   const dispatch = useDispatch();
 
   const deletePost = () => {
@@ -41,7 +38,6 @@ export const EditModal = props => {
 
   const getPreview = () => {
     const videoId = url.split("=")[1];
-    console.log(videoId);
     const image_url = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
     setPreview(image_url);
   };
@@ -115,7 +111,7 @@ export const EditModal = props => {
                 <PostWrap>
                   <p> 동영상 후기:</p>
                   <Input
-                    defaultValue={"aslkdfj"}
+                    defaultValue={_post.desc}
                     onChange={e => TextInput(e, setDesc)}
                   />
                 </PostWrap>

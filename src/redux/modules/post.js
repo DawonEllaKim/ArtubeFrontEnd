@@ -9,9 +9,9 @@ const DELETE_POST = "DELETE_POST";
 
 const getPost = createAction(GET_POST, post_list => ({ post_list }));
 const addPost = createAction(ADD_POST, post => ({ post }));
-const editPost = createAction(EDIT_POST, (postId, content) => ({
+const editPost = createAction(EDIT_POST, (postId, post) => ({
   postId,
-  content,
+  post,
 }));
 const deletePost = createAction(DELETE_POST, postId => ({ postId }));
 
@@ -79,8 +79,29 @@ const getOnePostMiddleware = () => {
 
 const editPostMiddleware = (postId, _post) => {
   return function (dispatch, getState, { history }) {
-    console.log(postId, _post);
-    return null;
+    const videoId = _post.url.split("=")[1];
+
+    const post = {
+      id: postId,
+      userId: "나당",
+      title: _post.title,
+      youtube_url: _post.url,
+      image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+      video_url: `https://www.youtube.com/embed/${videoId}`,
+      desc: _post.desc,
+      date: "2021-10-11",
+    };
+
+    apis
+      .editPost(postId, post)
+      .then(res => {
+        console.log(res);
+        dispatch(editPost(postId, post));
+        history.push(`/`);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 };
 
@@ -105,17 +126,16 @@ export default handleActions(
         // cur에 postlist값이 하나하나 들어올텐데
         // postlist id와 cur id가 같은게 없으면 -1
         // -1인 값만 acc에 넣어주기
-        // draft.list = draft.list.reduce((acc, cur) => {
+        draft.list = draft.list.reduce((acc, cur) => {
+          if (acc.findIndex(a => a.id === cur.id) === -1) {
+            return [...acc, cur];
+          } else {
+            acc[acc.findIndex(a => a.id === cur.id)] = cur;
+            return acc;
+          }
+        }, []);
 
-        //   if (acc.findIndex(a => a.id === cur.id) === -1) {
-        //     return [...acc, cur];
-        //   } else {
-        //     acc[acc.findIndex(a => a.id === cur.id)] = cur;
-        //     return acc;
-        //   }
-        // }, []);
-
-        // console.log(draft.list);
+        console.log(draft.list);
       }),
     [ADD_POST]: (state, action) =>
       produce(state, draft => {
