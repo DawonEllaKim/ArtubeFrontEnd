@@ -22,18 +22,16 @@ const Detail = props => {
   const [commentDesc, setComment] = useState("");
 
   const addComment = () => {
-    const comment = {
-      id: post_id,
-      commentUserId: "asdlfkjasdlfkj",
-      commentDesc: commentDesc,
-    };
-    dispatch(commentActions.addCommentMiddleware(comment));
+    dispatch(postActions.getPostMiddleware());
     setComment("");
   };
 
   useEffect(() => {
-    dispatch(commentActions.getCommentMiddleware(post_id));
+    if (post) {
+      return;
+    }
     dispatch(postActions.getPostMiddleware());
+    dispatch(commentActions.getCommentMiddleware(post_id));
   }, []);
 
   return (
