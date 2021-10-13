@@ -2,15 +2,41 @@ import React, { useRef, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { ImCancelCircle } from "react-icons/im";
 import { IoPersonOutline } from "react-icons/io5";
+import { useSelector, useDispatch } from "react-redux";
+import { postActions } from "../redux/modules/post";
 
-export const EditModal = ({ showModal, setShowModal }) => {
+export const EditModal = props => {
+  const { showModal, setShowModal, _postId } = props;
+  const _post = useSelector(state => state.post.list).filter(
+    p => p.postId === _postId
+  )[0];
+  console.log(_post);
+
+  const dispatch = useDispatch();
+
+  // const post = {
+  //   date: _post.date,
+  //   desc: _post.desc,
+  //   postId: _post.postId,
+  //   title: _post.title,
+  //   url: _post.url,
+  //   userId: _post.userId,
+  // };
+
+  const deletePost = () => {
+    dispatch(postActions.deletePostMiddleware(_postId));
+  };
+
+  const editPost = () => {};
+
   const modalRef = useRef();
 
-  const closemodal = (e) => {
+  const closemodal = e => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
   };
+
   return (
     <div>
       {showModal ? (
@@ -20,7 +46,7 @@ export const EditModal = ({ showModal, setShowModal }) => {
               <h2>Create Post</h2>
               <Cancel
                 onClick={() => {
-                  setShowModal((prev) => !prev);
+                  setShowModal(prev => !prev);
                 }}
               >
                 <ImCancelCircle
@@ -65,7 +91,7 @@ export const EditModal = ({ showModal, setShowModal }) => {
                 </PostWrap>
                 <Buttons>
                   <Submit>수정 완료</Submit>
-                  <Submit>게시물 삭제</Submit>
+                  <Submit onClick={deletePost}>게시물 삭제</Submit>
                 </Buttons>
               </PostInput>
             </Body>
