@@ -3,8 +3,13 @@ import MypagePost from "../components/MypagePost";
 import Header from "../components/Header";
 import styled from "styled-components";
 import { IoIosAddCircle } from "react-icons/io";
+import { AddModal } from "../components/AddModal";
 
 const MyPage = () => {
+  const [showModal, setShowModal] = React.useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
   return (
     <>
       <Wrap>
@@ -20,9 +25,11 @@ const MyPage = () => {
               color: "#f5df4d",
               cursor: "pointer",
             }}
+            onClick={openModal}
           />
         </AddButton>
       </Wrap>
+      <AddModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };

@@ -6,7 +6,7 @@ import { MdDateRange } from "react-icons/md";
 
 import { history } from "../redux/configuerStore";
 
-const Post = props => {
+const Post = (props) => {
   const { userId, title, url, date, postId } = props;
 
   return (

@@ -7,7 +7,7 @@ import { userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 import { history } from "../redux/configuerStore";
 
-const SignIn = props => {
+const SignIn = (props) => {
   const dispatch = useDispatch();
 
   const [id, setId] = useState("");
@@ -44,14 +44,14 @@ const SignIn = props => {
             <Grid>
               <Input
                 label=""
-                placeholder="Email Address*"
-                _onChange={e => TextInput(e, setId)}
+                placeholder="Id*"
+                _onChange={(e) => TextInput(e, setId)}
                 value={id}
               />
               <Input
                 placeholder="Password"
                 type="password"
-                _onChange={e => TextInput(e, setPwd)}
+                _onChange={(e) => TextInput(e, setPwd)}
                 label="password1"
                 value={pwd}
               />

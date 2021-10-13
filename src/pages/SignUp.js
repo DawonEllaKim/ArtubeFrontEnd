@@ -7,7 +7,7 @@ import { history } from "../redux/configuerStore";
 import { userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 
-const SignUp = props => {
+const SignUp = (props) => {
   const dispatch = useDispatch();
 
   const [userId, setId] = useState("");

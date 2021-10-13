@@ -4,7 +4,7 @@ import { IoHomeSharp } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import ArtubeLogo3 from "../Image/ArtubeLogo3.png";
 
-import { history } from '../redux/configuerStore'
+import { history } from "../redux/configuerStore";
 
 const Header = () => {
   return (
@@ -19,8 +19,8 @@ const Header = () => {
               cursor: "pointer",
               margin: "10px",
             }}
-            onClick={()=>{
-              history.push('/')
+            onClick={() => {
+              history.push("/");
             }}
           />
           {/* IoHomeOutline */}
@@ -29,8 +29,8 @@ const Header = () => {
           <Logo
             src={ArtubeLogo3}
             style={{ cursor: "pointer", margin: "10px" }}
-            onClick={()=>{
-              history.push('/')
+            onClick={() => {
+              history.push("/");
             }}
           />
 

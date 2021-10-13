@@ -11,10 +11,15 @@ import { history } from "../redux/configuerStore";
 import { useDispatch, useSelector } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 import { postActions } from "../redux/modules/post";
+import { EditModal } from "../components/EditModal";
 
-const Detail = props => {
+const Detail = (props) => {
+  const [showModal, setShowModal] = React.useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
   const dispatch = useDispatch();
-  const comment_list = useSelector(state => state.comment.list);
+  const comment_list = useSelector((state) => state.comment.list);
   const post_id = props.match.params.postId;
   console.log(comment_list);
 
@@ -47,6 +52,7 @@ const Detail = props => {
             >
               <Text bold>Hwang</Text>
             </UserLink>
+            <EditButton onClick={openModal}>Edit</EditButton>
           </User>
           <Comments>
             {comment_list.map((c, idx) => {
@@ -59,6 +65,8 @@ const Detail = props => {
           </InputWrap>
         </DetailWrap>
       </CommentWrap>
+
+      <EditModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };
@@ -85,6 +93,9 @@ const DetailWrap = styled.div`
 
 const User = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #dbdbdb;
   background-color: #fff;
   width: 100%;
@@ -95,6 +106,10 @@ const UserLink = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+`;
+const EditButton = styled.button`
+  width: 45px;
+  height: 30px;
 `;
 
 const Comments = styled.div`
