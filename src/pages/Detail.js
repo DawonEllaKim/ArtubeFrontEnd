@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -19,13 +19,24 @@ const Detail = (props) => {
     setShowModal((prev) => !prev);
   };
   const dispatch = useDispatch();
+  const post_list = useSelector((state) => state.post.list);
   const comment_list = useSelector((state) => state.comment.list);
   const post_id = props.match.params.postId;
-  console.log(comment_list);
+  const post = post_list.filter((p) => p.postId === post_id)[0];
+
+  const [commentDesc, setComment] = useState("");
+
+  const addComment = () => {
+    dispatch(postActions.getPostMiddleware());
+    setComment("");
+  };
 
   useEffect(() => {
+    if (post) {
+      return;
+    }
+    dispatch(postActions.getPostMiddleware());
     dispatch(commentActions.getCommentMiddleware(post_id));
-    dispatch(postActions.getOnePostMiddleware(post_id));
   }, []);
 
   return (
@@ -60,8 +71,11 @@ const Detail = (props) => {
             })}
           </Comments>
           <InputWrap>
-            <InputBox />
-            <AddButton>등록</AddButton>
+            <InputBox
+              onChange={(e) => setComment(e.target.value)}
+              value={commentDesc}
+            />
+            <AddButton onClick={addComment}>등록</AddButton>
           </InputWrap>
         </DetailWrap>
       </CommentWrap>
