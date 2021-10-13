@@ -19,9 +19,9 @@ const initialState = {
   is_loading: false,
 };
 
-const getCommentMiddleware = post_id => {
+const getCommentMiddleware = (post_id) => {
   return function (dispatch, getState, { history }) {
-    apis.getComment(post_id).then(res => {
+    apis.getComment(post_id).then((res) => {
       const comment_list = res.data;
       console.log(comment_list);
       dispatch(getComment(post_id, comment_list));
@@ -30,10 +30,10 @@ const getCommentMiddleware = post_id => {
   };
 };
 
-const addCommentMiddleware = comment => {
+const addCommentMiddleware = (comment) => {
   return function (dispatch, getState, { history }) {
     console.log(comment);
-    apis.addComment(comment).then(res => {
+    apis.addComment(comment).then((res) => {
       console.log(res.data);
     });
   };
@@ -42,11 +42,11 @@ const addCommentMiddleware = comment => {
 export default handleActions(
   {
     [ADD_COMMENT]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.list.push(action.payload.comment);
       }),
     [GET_COMMENT]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         console.log(action.payload.comment_list);
         draft.list = action.payload.comment_list;
       }),

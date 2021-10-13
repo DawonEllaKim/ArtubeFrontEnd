@@ -7,7 +7,7 @@ const baseURL = "http://3.34.90.85";
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 
-const logIn = createAction(LOG_IN, token => ({ token }));
+const logIn = createAction(LOG_IN, (token) => ({ token }));
 const logout = createAction(LOG_OUT);
 
 const initialState = {
@@ -33,12 +33,12 @@ const signupAPI = (userId, password, confirmPassword) => {
         confirmPassword: confirmPassword,
       },
     })
-      .then(res => {
+      .then((res) => {
         console.log(res); // signup 정보 확인
         window.alert("축하합니다");
         history.push("/signin");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("signupAPI에서 오류발생", err);
         window.alert("회원가입에 실패했습니다.");
       });
@@ -68,7 +68,7 @@ const signupAPI = (userId, password, confirmPassword) => {
         password: password,
         confirmPassword: confirmPassword,
       })
-      .then(res => console.log(res));
+      .then((res) => console.log(res));
   };
 };
 
@@ -79,12 +79,12 @@ const loginAPI = (username, password) => {
 export default handleActions(
   {
     [LOG_IN]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         localStorage.removeItem("user_name");
         draft.user = null;
         draft.is_login = false;
