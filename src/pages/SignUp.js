@@ -46,13 +46,13 @@ const SignUp = props => {
               padding: "0 20px",
             }}
           >
-            <IdInput label="" placeholder="Id*" />
+            <IdInput label="" placeholder="Id*" _onChange={(e)=>{setId(e.target.value)}}/>
             <PWcheck>중복확인</PWcheck>
           </div>
 
           <div>
-            <Input label="" placeholder="Password*" type="password" />
-            <Input label="" placeholder="Password Check*" type="password" />
+            <Input label="" placeholder="Password*" type="password" _onChange={(e)=>{setPwd(e.target.value)}}/>
+            <Input label="" placeholder="Password Check*" type="password" _onChange={(e)=>{setConfirmPassword(e.target.value)}}/>
           </div>
         </Body>
 

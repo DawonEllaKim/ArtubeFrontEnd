@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import axios from "axios";
 
-const baseURL = "http://3.34.90.85";
+// const baseURL = "http://3.34.90.85";
 
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
@@ -21,11 +21,11 @@ const signupAPI = (userId, password, confirmPassword) => {
     //수창님 버전
     axios({
       method: "post",
-      url: "http://3.34.90.85/user/signUp",
+      url: "http://3.34.90.85:3000/user/signUp",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": true,
+        // "Access-Control-Allow-Origin": true,
       },
       data: {
         userId: userId,
