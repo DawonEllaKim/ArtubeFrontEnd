@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Comment from "../components/Comment";
 
 import { Grid, Input, Text, Button, Image } from "../elements";
+import { history } from '../redux/configuerStore'
 
 const Detail = () => {
   return (
@@ -25,7 +26,11 @@ const Detail = () => {
                 margin: "10px",
               }}
             />
-            <Text bold>Hwang</Text>
+            <UserLink onClick={() =>{
+              history.push('/mypage')
+            }}>
+              <Text bold>Hwang</Text>
+            </UserLink>
           </User>
           <Comments>
             <Comment />
@@ -68,6 +73,12 @@ const User = styled.div`
   position: absolute;
   top: 0;
 `;
+const UserLink = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`
+
 const Comments = styled.div`
   padding-top: 50px;
 `;
@@ -93,6 +104,7 @@ const AddButton = styled.button`
   color: #fff;
   width: 20%;
   padding: 8px 0;
+  cursor: pointer;
 `;
 
 export default Detail;

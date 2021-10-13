@@ -1,11 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 
+import { history } from '../redux/configuerStore'; 
+
 const MypagePost = () => {
   return (
     <>
       <Container>
-        <Post>Click </Post>
+        <PostLink onClick={()=>{
+          history.push('/detail')
+        }}>
+          <Post>Click </Post>
+        </PostLink>
+        <PostLink onClick={()=>{
+          history.push('/detail')
+        }}>
+          <Post>Click </Post>
+        </PostLink>
+        <PostLink onClick={()=>{
+          history.push('/detail')
+        }}>
+          <Post>Click </Post>
+        </PostLink>
         <Post>Click </Post>
         <Post>Click </Post>
         <Post>Click </Post>
@@ -28,8 +44,13 @@ const Container = styled.div`
   gap: 3%;
 `;
 
+const PostLink = styled.a`
+
+`
+
 const Post = styled.div`
   display: flex;
+  height: 100%;
   background-color: pink;
   background-image: url("https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg");
   background-size: cover;

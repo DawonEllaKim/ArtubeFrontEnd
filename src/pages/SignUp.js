@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
 import { Input, Button } from "../elements";
 
+import { history } from '../redux/configuerStore';
+
 const SignUp = (props) => {
   return (
     <>
@@ -39,7 +41,9 @@ const SignUp = (props) => {
 
         <div>
           <Button>Sign Up</Button>
-          <UserExist>이미 회원이신가요? 로그인하러 가기</UserExist>
+          <UserExist onClick={()=>{
+            history.push('/signin')
+          }}>이미 회원이신가요? 로그인하러 가기</UserExist>
         </div>
       </Wrap>
     </>
