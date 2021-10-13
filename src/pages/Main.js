@@ -9,7 +9,6 @@ import { postActions } from "../redux/modules/post";
 const Main = () => {
   const dispatch = useDispatch();
   const post_list = useSelector(state => state.post.list);
-  console.log(post_list);
 
   useEffect(() => {
     dispatch(postActions.getPostMiddleware());

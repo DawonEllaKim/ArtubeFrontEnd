@@ -26,7 +26,6 @@ const getPostMiddleware = () => {
       .getPost()
       .then(res => {
         const post_list = res.data;
-        console.log(post_list);
         dispatch(getPost(post_list));
       })
       .catch(err => {
@@ -41,6 +40,20 @@ const addPostMiddleware = _post => {
       .createPost(_post)
       .then(() => {
         // dispatch(AddPost(post));
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+};
+
+const getOnePostMiddleware = () => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .getPost()
+      .then(res => {
+        const post_list = res.data;
+        dispatch(getPost(post_list));
       })
       .catch(err => {
         console.error(err);
@@ -64,8 +77,23 @@ export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, draft => {
-        console.log(action.payload.post_list);
-        draft.list = action.payload.post_list;
+        draft.list.push(...action.payload.post_list);
+
+        // 중복 post가 있다면 제거
+        // cur에 postlist값이 하나하나 들어올텐데
+        // postlist id와 cur id가 같은게 없으면 -1
+        // -1인 값만 acc에 넣어주기
+        // draft.list = draft.list.reduce((acc, cur) => {
+
+        //   if (acc.findIndex(a => a.id === cur.id) === -1) {
+        //     return [...acc, cur];
+        //   } else {
+        //     acc[acc.findIndex(a => a.id === cur.id)] = cur;
+        //     return acc;
+        //   }
+        // }, []);
+
+        // console.log(draft.list);
       }),
     [ADD_POST]: (state, action) =>
       produce(state, draft => {
@@ -92,6 +120,7 @@ const postActions = {
   addPostMiddleware,
   editPostMiddleware,
   deletePostMiddleware,
+  getOnePostMiddleware,
 };
 
 export { postActions };

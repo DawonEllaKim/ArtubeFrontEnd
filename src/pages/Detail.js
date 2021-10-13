@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -8,7 +8,21 @@ import Comment from "../components/Comment";
 import { Grid, Input, Text, Button, Image } from "../elements";
 import { history } from "../redux/configuerStore";
 
-const Detail = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { commentActions } from "../redux/modules/comment";
+import { postActions } from "../redux/modules/post";
+
+const Detail = props => {
+  const dispatch = useDispatch();
+  const comment_list = useSelector(state => state.comment.list);
+  const post_id = props.match.params.postId;
+  console.log(comment_list);
+
+  useEffect(() => {
+    dispatch(commentActions.getCommentMiddleware(post_id));
+    dispatch(postActions.getOnePostMiddleware(post_id));
+  }, []);
+
   return (
     <>
       <Header />
@@ -35,7 +49,9 @@ const Detail = () => {
             </UserLink>
           </User>
           <Comments>
-            <Comment />
+            {comment_list.map((c, idx) => {
+              return <Comment {...c} key={idx} />;
+            })}
           </Comments>
           <InputWrap>
             <InputBox />

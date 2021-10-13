@@ -18,7 +18,7 @@ function App() {
         <Route path="/" exact component={Main} />
         <Route path="/signin" exact component={SignIn} />
         <Route path="/signup" exact component={SignUp} />
-        <Route path="/detail" exact component={Detail} />
+        <Route path="/detail/:postId" exact component={Detail} />
         <Route path="/mypage" exact component={MyPage} />
       </ConnectedRouter>
     </div>

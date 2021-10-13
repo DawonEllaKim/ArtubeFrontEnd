@@ -1,8 +1,6 @@
-// AXIOS
-import axios from "axios";
-
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
+import axios from "axios";
 
 const baseURL = "http://3.34.90.85";
 

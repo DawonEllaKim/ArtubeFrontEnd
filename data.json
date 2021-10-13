@@ -59,11 +59,18 @@
   ],
   "comments": [
     {
-      "commentId": 1,
-      "postId": "123123",
+      "commentId": "1asldkfjasdfsa",
+      "postId": "1asldkfj",
       "commentUserId": "abc123",
       "commentDesc": "오 추천 감사합니다",
       "commentDate": "2021-10-11"
+    },
+    {
+      "commentId": "2alsdkfjasdfa",
+      "postId": "2alsdkfj",
+      "commentUserId": "훌룰루",
+      "commentDesc": "감4",
+      "commentDate": "2021-10-12"
     }
   ],
   "user": [

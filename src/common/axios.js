@@ -12,10 +12,17 @@ const instance = axios.create({
 export const apis = {
   // 게시물 불러오기
   getPost: () => instance.get("/posts"),
-  // 게시물 작성하기
+  // 하나의 게시물 불러오기
+  getOnePost: postId => instance.get("/posts", postId),
+  //게시물 생성
   createPost: content => instance.post("/posts", content),
-  // 게시물 수정하기
-  editPost: (post_id, content) => instance.put(`/posts/${post_id}`, content),
-  // 게시물 삭제하기
-  delPost: post_id => instance.delete(`/posts/${post_id}`),
+  // 게시물 수정
+  editPost: (postId, content) => instance.put(`/posts/${postId}`, content),
+  // 게시물 삭제
+  delPost: postId => instance.delete(`/posts/${postId}`),
+
+  // comment
+  getComment: postId => instance.get("/comments", postId),
+  addComment: (postId, commentUserId, commentDesc) =>
+    instance.get("/addcomments", { postId, commentUserId, commentDesc }),
 };
