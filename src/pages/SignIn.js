@@ -5,6 +5,7 @@ import ArtubeLogo from "../Image/ArtubeLogo.png";
 import { Grid, Input, Button, Image } from "../elements";
 import { userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
+import { history } from "../redux/configuerStore";
 
 const SignIn = props => {
   const dispatch = useDispatch();
@@ -22,19 +23,23 @@ const SignIn = props => {
     <>
       <Wrap>
         <LeftBox>
-          <img src={ArtubeLogo} style={{ width: "100%" }} />
+          <MainBtn
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            <img src={ArtubeLogo} style={{ width: "100%" }} />
+          </MainBtn>
         </LeftBox>
 
         <RightBox>
-          <Grid>
-            <Grid>
-              <IconWrap>
-                <MdLockOutline
-                  style={{ width: "28px", height: "28px", color: "#000" }}
-                />
-              </IconWrap>
-              <SignInText>Sign In</SignInText>
-            </Grid>
+          <RightWrap>
+            <IconWrap>
+              <MdLockOutline
+                style={{ width: "28px", height: "28px", color: "#000" }}
+              />
+            </IconWrap>
+            <SignInText>Sign In</SignInText>
 
             <Grid>
               <Input
@@ -53,11 +58,16 @@ const SignIn = props => {
             </Grid>
 
             <Grid>
-              <Button _onClick={login}>LOG IN</Button>
-              <Button _onClick={() => {}}>Sign Up</Button>
+              <Button>LOG IN</Button>
+              <NewUser
+                onClick={() => {
+                  history.push("/signup");
+                }}
+              >
+                회원이 아니신가요? 회원가입하러 가기
+              </NewUser>
             </Grid>
-            <NewUser>회원이 아니신가요? 회원가입하러 가기</NewUser>
-          </Grid>
+          </RightWrap>
         </RightBox>
       </Wrap>
     </>
@@ -82,6 +92,13 @@ const LeftBox = styled.div`
   background-color: #fff;
 `;
 
+const MainBtn = styled.button`
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
 const RightBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -90,6 +107,15 @@ const RightBox = styled.div`
   width: 45%;
   height: 100%;
   background-color: #f5df4d;
+`;
+
+const RightWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 600px;
 `;
 
 const IconWrap = styled.div`

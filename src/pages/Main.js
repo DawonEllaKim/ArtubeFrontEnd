@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 
+import Header from "../components/Header";
 import Post from "../components/Post";
 import { Grid } from "../elements";
-
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
-
-import Header from "../components/Header";
 
 const Main = () => {
   const dispatch = useDispatch();

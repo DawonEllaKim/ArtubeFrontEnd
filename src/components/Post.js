@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { Grid, Image, Text } from "../elements";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
@@ -27,9 +28,16 @@ const Post = props => {
                 margin: "0 10px",
               }}
             />
-            <Text color="#939597" bold size="16px">
-              {userId}
-            </Text>
+
+            <UserLink
+              onClick={() => {
+                history.push("/mypage");
+              }}
+            >
+              <Text color="#939597" bold size="16px">
+                {userId}
+              </Text>
+            </UserLink>
           </Grid>
           <Grid is_flex width="auto">
             <Text color="#939597" size="16px">
@@ -46,22 +54,49 @@ const Post = props => {
           </Grid>
         </Grid>
 
-        <Grid padding="0">
-          <Image
-            shape="rectangle"
-            src={`https://img.youtube.com/vi/${url}/sddefault.jpg`}
-          />
+        <Grid>
+          <ImageLink
+            onClick={() => {
+              history.push("/detail");
+            }}
+          >
+            <Image
+              shape="rectangle"
+              src={`https://img.youtube.com/vi/${url}/sddefault.jpg`}
+            />
+          </ImageLink>
         </Grid>
-        <Grid is_flex>
-          <Grid is_flex>
+        <Grid>
+          <TitleLink
+            onClick={() => {
+              history.push("/detail");
+            }}
+          >
             <Text color="#939597" bold size="24px" margin=" 20px auto">
               {title}
             </Text>
-          </Grid>
+          </TitleLink>
         </Grid>
       </Grid>
     </>
   );
 };
+
+const UserLink = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+const ImageLink = styled.button`
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+const TitleLink = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
 
 export default Post;
