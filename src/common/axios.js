@@ -18,7 +18,7 @@ export const apis = {
   // 게시물 수정하기
   editPost: (id, content) => instance.put(`/posts/${id}`, content),
   // 게시물 삭제하기
-  delPost: id => instance.delete(`/posts/${id}`),
+  deletePost: id => instance.delete(`/posts/${id}`),
 
   // comment
   getComment: () => instance.get("/comments"),

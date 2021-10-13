@@ -30,12 +30,24 @@ const getCommentMiddleware = post_id => {
   };
 };
 
-const addCommentMiddleware = comment => {
+const addCommentMiddleware = (post_id, commentDesc) => {
   return function (dispatch, getState, { history }) {
-    console.log(comment);
+    const comment = {
+      id: parseInt(getState().comment.list.length) + 1,
+      postId: post_id,
+      commentDesc: commentDesc,
+      commentUserId: "aslkdfjas",
+      commentDate: "2021-10-12",
+    };
     apis.addComment(comment).then(res => {
-      console.log(res.data);
+      dispatch(addComment(comment));
     });
+  };
+};
+
+const deleteCommentMiddleware = id => {
+  return function (dispatch, getState, { history }) {
+    return null;
   };
 };
 
@@ -43,7 +55,7 @@ export default handleActions(
   {
     [ADD_COMMENT]: (state, action) =>
       produce(state, draft => {
-        draft.list.push(action.payload.comment);
+        draft.list.unshift(action.payload.comment);
       }),
     [GET_COMMENT]: (state, action) =>
       produce(state, draft => {

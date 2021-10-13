@@ -22,11 +22,11 @@ const signupAPI = (userId, password, confirmPassword) => {
     axios({
       method: "post",
       url: "http://3.34.90.85/user/signUp",
-      // headers: {
-      //   Accept: "application/json",
-      //   "Content-Type": "application/json;charset=UTF-8",
-      //   "Access-Control-Allow-Origin": "*",
-      // },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": true,
+      },
       data: {
         userId: userId,
         password: password,
@@ -62,13 +62,16 @@ const signupAPI = (userId, password, confirmPassword) => {
     //   });
 
     // 일반버전
-    axios
-      .post("http://3.34.90.85/user/signUp", {
-        userId: userId,
-        password: password,
-        confirmPassword: confirmPassword,
-      })
-      .then(res => console.log(res));
+    // axios
+    //   .post("http://3.34.90.85/user/signUp", {
+    //     userId: userId,
+    //     password: password,
+    //     confirmPassword: confirmPassword,
+    //   })
+    //   .then(res => console.log(res))
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 };
 

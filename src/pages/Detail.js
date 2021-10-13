@@ -13,21 +13,21 @@ import { commentActions } from "../redux/modules/comment";
 import { postActions } from "../redux/modules/post";
 import { EditModal } from "../components/EditModal";
 
-const Detail = (props) => {
+const Detail = props => {
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
-  const comment_list = useSelector((state) => state.comment.list);
-  const post_id = props.match.params.postId;
-  const post = post_list.filter((p) => p.postId === post_id)[0];
+  const post_list = useSelector(state => state.post.list);
+  const comment_list = useSelector(state => state.comment.list);
+  const postId = props.match.params.postId;
+  const post = post_list.filter(p => p.postId === postId)[0];
 
   const [commentDesc, setComment] = useState("");
 
   const addComment = () => {
-    dispatch(postActions.getPostMiddleware());
+    dispatch(commentActions.addCommentMiddleware(postId, commentDesc));
     setComment("");
   };
 
@@ -36,7 +36,7 @@ const Detail = (props) => {
       return;
     }
     dispatch(postActions.getPostMiddleware());
-    dispatch(commentActions.getCommentMiddleware(post_id));
+    dispatch(commentActions.getCommentMiddleware(postId));
   }, []);
 
   return (
@@ -72,7 +72,7 @@ const Detail = (props) => {
           </Comments>
           <InputWrap>
             <InputBox
-              onChange={(e) => setComment(e.target.value)}
+              onChange={e => setComment(e.target.value)}
               value={commentDesc}
             />
             <AddButton onClick={addComment}>등록</AddButton>
@@ -80,7 +80,11 @@ const Detail = (props) => {
         </DetailWrap>
       </CommentWrap>
 
-      <EditModal showModal={showModal} setShowModal={setShowModal} />
+      <EditModal
+        _postId={postId}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
     </>
   );
 };
