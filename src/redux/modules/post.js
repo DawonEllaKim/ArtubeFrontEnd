@@ -39,7 +39,7 @@ const addPostMiddleware = _post => {
     console.log(_post);
     const videoId = _post.url.split("=")[1];
 
-    const post = {
+    const _post = {
       id: String(parseInt(getState().post.list.length) + 1),
       userId: "나당",
       title: _post.title,
@@ -50,9 +50,10 @@ const addPostMiddleware = _post => {
     };
 
     apis
-      .createPost(post)
-      .then(() => {
-        dispatch(addPost(post));
+      .createPost(_post)
+      .then(res => {
+        // const post = res.data
+        // dispatch(addPost(post));
         history.push("/");
       })
       .catch(err => {

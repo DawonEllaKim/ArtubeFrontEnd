@@ -26,9 +26,8 @@ export const EditModal = props => {
   }
 
   const _post = useSelector(state => state.post.list).filter(
-    p => p.postId === _postId
-  )[0];
-  console.log(_post);
+    p => p.id === _postId
+  );
 
   const dispatch = useDispatch();
 
