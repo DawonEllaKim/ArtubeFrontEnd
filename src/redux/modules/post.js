@@ -9,11 +9,11 @@ const DELETE_POST = "DELETE_POST";
 
 const getPost = createAction(GET_POST, post_list => ({ post_list }));
 const addPost = createAction(ADD_POST, post => ({ post }));
-const editPost = createAction(EDIT_POST, (post_id, content) => ({
-  post_id,
+const editPost = createAction(EDIT_POST, (postId, content) => ({
+  postId,
   content,
 }));
-const deletePost = createAction(DELETE_POST, post_id => ({ post_id }));
+const deletePost = createAction(DELETE_POST, postId => ({ postId }));
 
 const initialState = {
   list: [],
@@ -61,14 +61,19 @@ const getOnePostMiddleware = () => {
   };
 };
 
-const editPostMiddleware = (post_id, post) => {
+const editPostMiddleware = (postId, post) => {
   return function (dispatch, getState, { history }) {
     return null;
   };
 };
 
-const deletePostMiddleware = post_id => {
+const deletePostMiddleware = postId => {
   return function (dispatch, getState, { history }) {
+    apis.deletePost(postId).then(res => {
+      console.log(res);
+      dispatch(deletePost(postId));
+      history.push("/");
+    });
     return null;
   };
 };
@@ -101,11 +106,11 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, draft => {
-        draft.list.filter(p => p.id !== action.payload.post_id);
+        draft.list.filter(p => p.id !== action.payload.postId);
       }),
     [EDIT_POST]: (state, action) =>
       produce(state, draft => {
-        let idx = draft.list.findIndex(p => p.id === action.payload.post_id);
+        let idx = draft.list.findIndex(p => p.id === action.payload.postId);
         draft.list[idx] = {
           ...draft.list[idx],
           ...action.payload.post,

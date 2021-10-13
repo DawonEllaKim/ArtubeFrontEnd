@@ -2,7 +2,8 @@ import React, { useRef, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { ImCancelCircle } from "react-icons/im";
 import { IoPersonOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { postActions } from "../redux/modules/post";
 
 export const EditModal = props => {
   const { showModal, setShowModal, _postId } = props;
@@ -10,6 +11,8 @@ export const EditModal = props => {
     p => p.postId === _postId
   )[0];
   console.log(_post);
+
+  const dispatch = useDispatch();
 
   // const post = {
   //   date: _post.date,
@@ -19,6 +22,12 @@ export const EditModal = props => {
   //   url: _post.url,
   //   userId: _post.userId,
   // };
+
+  const deletePost = () => {
+    dispatch(postActions.deletePostMiddleware(_postId));
+  };
+
+  const editPost = () => {};
 
   const modalRef = useRef();
 
@@ -82,7 +91,7 @@ export const EditModal = props => {
                 </PostWrap>
                 <Buttons>
                   <Submit>수정 완료</Submit>
-                  <Submit>게시물 삭제</Submit>
+                  <Submit onClick={deletePost}>게시물 삭제</Submit>
                 </Buttons>
               </PostInput>
             </Body>

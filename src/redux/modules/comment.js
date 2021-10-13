@@ -45,7 +45,7 @@ const addCommentMiddleware = (post_id, commentDesc) => {
   };
 };
 
-const deleteCommentMiddleware = id => {
+const deleteCommentMiddleware = commentId => {
   return function (dispatch, getState, { history }) {
     return null;
   };
