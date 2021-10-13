@@ -36,11 +36,15 @@ const getPostMiddleware = () => {
 
 const addPostMiddleware = _post => {
   return function (dispatch, getState, { history }) {
+    console.log(_post);
+    const videoId = _post.url.split("=")[1];
+
     const post = {
       id: String(parseInt(getState().post.list.length) + 1),
       userId: "나당",
       title: _post.title,
-      url: _post.url,
+      image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+      video_url: `https://www.youtube.com/embed/${videoId}`,
       desc: _post.desc,
       date: "2021-10-11",
     };
