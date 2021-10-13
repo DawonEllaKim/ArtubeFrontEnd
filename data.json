@@ -71,6 +71,48 @@
       "commentUserId": "훌룰루",
       "commentDesc": "감4",
       "commentDate": "2021-10-12"
+    },
+    {
+      "id": 1,
+      "postId": "1asldkfj",
+      "commentDesc": "안녕",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 2,
+      "postId": "1asldkfj",
+      "commentDesc": "",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 3,
+      "postId": "1asldkfj",
+      "commentDesc": "안녕",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 6,
+      "postId": "1asldkfj",
+      "commentDesc": "이게 된다공",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 7,
+      "postId": "1asldkfj",
+      "commentDesc": "우와",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 8,
+      "postId": "1asldkfj",
+      "commentDesc": "work",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
     }
   ],
   "user": [
