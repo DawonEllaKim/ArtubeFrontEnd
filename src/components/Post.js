@@ -35,7 +35,7 @@ const Post = props => {
             {/* user id */}
             <UserLink
               onClick={() => {
-                history.push("/mypage");
+                history.push(`/mypage/${userId}`);
               }}
             >
               <Text color="#939597" bold size="16px">

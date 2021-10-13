@@ -39,10 +39,11 @@ const addPostMiddleware = _post => {
     console.log(_post);
     const videoId = _post.url.split("=")[1];
 
-    const _post = {
+    const post = {
       id: String(parseInt(getState().post.list.length) + 1),
       userId: "나당",
       title: _post.title,
+      youtube_url: _post.url,
       image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
       video_url: `https://www.youtube.com/embed/${videoId}`,
       desc: _post.desc,
@@ -50,10 +51,10 @@ const addPostMiddleware = _post => {
     };
 
     apis
-      .createPost(_post)
+      .createPost(post)
       .then(res => {
         // const post = res.data
-        // dispatch(addPost(post));
+        dispatch(addPost(post));
         history.push("/");
       })
       .catch(err => {
@@ -76,8 +77,9 @@ const getOnePostMiddleware = () => {
   };
 };
 
-const editPostMiddleware = (postId, post) => {
+const editPostMiddleware = (postId, _post) => {
   return function (dispatch, getState, { history }) {
+    console.log(postId, _post);
     return null;
   };
 };
