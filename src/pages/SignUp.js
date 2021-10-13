@@ -19,7 +19,7 @@ const SignUp = props => {
   }
 
   const signup = () => {
-    console.log("클릭");
+    console.log(userId, password, confirmPassword);
     dispatch(userActions.signupAPI(userId, password, confirmPassword));
   };
 
@@ -46,13 +46,30 @@ const SignUp = props => {
               padding: "0 20px",
             }}
           >
-            <IdInput label="" placeholder="Id*" />
+            <IdInput
+              label=""
+              placeholder="Id*"
+              onChange={e => TextInput(e, setId)}
+              value={userId}
+            />
             <PWcheck>중복확인</PWcheck>
           </div>
 
           <div>
-            <Input label="" placeholder="Password*" type="password" />
-            <Input label="" placeholder="Password Check*" type="password" />
+            <Input
+              label=""
+              placeholder="Password*"
+              type="password"
+              _onChange={e => TextInput(e, setPwd)}
+              value={password}
+            />
+            <Input
+              label=""
+              placeholder="Password Check*"
+              type="password"
+              _onChange={e => TextInput(e, setConfirmPassword)}
+              value={confirmPassword}
+            />
           </div>
         </Body>
 

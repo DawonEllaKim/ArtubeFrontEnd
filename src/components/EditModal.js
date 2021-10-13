@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 import { ImCancelCircle } from "react-icons/im";
 import { IoPersonOutline } from "react-icons/io5";
@@ -6,29 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { postActions } from "../redux/modules/post";
 
 export const EditModal = props => {
-  const { showModal, setShowModal, _postId } = props;
-  const _post = useSelector(state => state.post.list).filter(
-    p => p.postId === _postId
-  )[0];
-  console.log(_post);
-
-  const dispatch = useDispatch();
-
-  // const post = {
-  //   date: _post.date,
-  //   desc: _post.desc,
-  //   postId: _post.postId,
-  //   title: _post.title,
-  //   url: _post.url,
-  //   userId: _post.userId,
-  // };
-
-  const deletePost = () => {
-    dispatch(postActions.deletePostMiddleware(_postId));
-  };
-
-  const editPost = () => {};
-
   const modalRef = useRef();
 
   const closemodal = e => {
@@ -37,9 +14,33 @@ export const EditModal = props => {
     }
   };
 
+  const { showModal, setShowModal, _postId } = props;
+
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [desc, setDesc] = useState("");
+
+  function TextInput(e, setState) {
+    setState(e.target.value);
+    console.log(title, url, desc);
+  }
+
+  const _post = useSelector(state => state.post.list).filter(
+    p => p.postId === _postId
+  )[0];
+  console.log(_post);
+
+  const dispatch = useDispatch();
+
+  const deletePost = () => {
+    dispatch(postActions.deletePostMiddleware(_postId));
+  };
+
+  const editPost = () => {};
+
   return (
     <div>
-      {showModal ? (
+      {showModal && _post ? (
         <Wrap ref={modalRef} onClick={closemodal}>
           <ModalContent showModal={showModal}>
             <Head>
@@ -75,19 +76,35 @@ export const EditModal = props => {
               <PostInput>
                 <PostWrap>
                   <p style={{ textAlign: "left" }}> 동영상 제목:</p>
-                  <Input />
+                  <Input
+                    defaultValue={_post.title}
+                    _onChange={e => TextInput(e, setTitle)}
+                    value={title}
+                  />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 url:</p>
-                  <Input />
+                  <Input
+                    defaultValue={`https://www.youtube.com/embed/${_post.url}`}
+                    _onChange={e => TextInput(e, setUrl)}
+                    value={url}
+                  />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 썸네일:</p>
-                  <Input />
+                  <Input
+                    defaultValue={`https://img.youtube.com/vi/${_post.url}/sddefault.jpg`}
+                    _onChange={e => TextInput(e, setUrl)}
+                    value={url}
+                  />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 후기:</p>
-                  <Input />
+                  <Input
+                    defaultValue={_post.desc}
+                    _onChange={e => TextInput(e, setDesc)}
+                    value={desc}
+                  />
                 </PostWrap>
                 <Buttons>
                   <Submit>수정 완료</Submit>

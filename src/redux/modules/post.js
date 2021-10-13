@@ -7,13 +7,13 @@ const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
 
-const getPost = createAction(GET_POST, (post_list) => ({ post_list }));
-const addPost = createAction(ADD_POST, (post) => ({ post }));
+const getPost = createAction(GET_POST, post_list => ({ post_list }));
+const addPost = createAction(ADD_POST, post => ({ post }));
 const editPost = createAction(EDIT_POST, (postId, content) => ({
   postId,
   content,
 }));
-const deletePost = createAction(DELETE_POST, (postId) => ({ postId }));
+const deletePost = createAction(DELETE_POST, postId => ({ postId }));
 
 const initialState = {
   list: [],
@@ -24,24 +24,34 @@ const getPostMiddleware = () => {
   return function (dispatch, getState, { history }) {
     apis
       .getPost()
-      .then((res) => {
+      .then(res => {
         const post_list = res.data;
         dispatch(getPost(post_list));
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   };
 };
 
-const addPostMiddleware = (_post) => {
+const addPostMiddleware = _post => {
   return function (dispatch, getState, { history }) {
+    const post = {
+      id: String(parseInt(getState().post.list.length) + 1),
+      userId: "나당",
+      title: _post.title,
+      url: _post.url,
+      desc: _post.desc,
+      date: "2021-10-11",
+    };
+
     apis
-      .createPost(_post)
+      .createPost(post)
       .then(() => {
-        // dispatch(AddPost(post));
+        dispatch(addPost(post));
+        history.push("/");
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   };
@@ -51,11 +61,11 @@ const getOnePostMiddleware = () => {
   return function (dispatch, getState, { history }) {
     apis
       .getPost()
-      .then((res) => {
+      .then(res => {
         const post_list = res.data;
         dispatch(getPost(post_list));
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   };
@@ -67,9 +77,9 @@ const editPostMiddleware = (postId, post) => {
   };
 };
 
-const deletePostMiddleware = (postId) => {
+const deletePostMiddleware = postId => {
   return function (dispatch, getState, { history }) {
-    apis.deletePost(postId).then((res) => {
+    apis.deletePost(postId).then(res => {
       console.log(res);
       dispatch(deletePost(postId));
       history.push("/");
@@ -81,7 +91,7 @@ const deletePostMiddleware = (postId) => {
 export default handleActions(
   {
     [GET_POST]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.list.push(...action.payload.post_list);
 
         // 중복 post가 있다면 제거
@@ -101,16 +111,16 @@ export default handleActions(
         // console.log(draft.list);
       }),
     [ADD_POST]: (state, action) =>
-      produce(state, (draft) => {
-        draft.list.push(action.payload.post);
+      produce(state, draft => {
+        draft.list.unshift(action.payload.post);
       }),
     [DELETE_POST]: (state, action) =>
-      produce(state, (draft) => {
-        draft.list.filter((p) => p.id !== action.payload.postId);
+      produce(state, draft => {
+        draft.list.filter(p => p.id !== action.payload.postId);
       }),
     [EDIT_POST]: (state, action) =>
-      produce(state, (draft) => {
-        let idx = draft.list.findIndex((p) => p.id === action.payload.postId);
+      produce(state, draft => {
+        let idx = draft.list.findIndex(p => p.id === action.payload.postId);
         draft.list[idx] = {
           ...draft.list[idx],
           ...action.payload.post,

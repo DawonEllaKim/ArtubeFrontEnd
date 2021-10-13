@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 // import Box from "@mui/material/Box";
 // import Button from "@mui/material/Button";
 // import Typography from "@mui/material/Typography";
@@ -6,16 +6,42 @@ import React, { useRef, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { ImCancelCircle } from "react-icons/im";
 import { IoPersonOutline } from "react-icons/io5";
-import { Button } from "../elements";
+import { useDispatch } from "react-redux";
+import { postActions } from "../redux/modules/post";
 
 export const AddModal = ({ showModal, setShowModal }) => {
   const modalRef = useRef();
 
-  const closemodal = (e) => {
+  const closemodal = e => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
   };
+
+  const dispatch = useDispatch();
+
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [desc, setDesc] = useState("");
+
+  function TextInput(e, setState) {
+    setState(e.target.value);
+    console.log(title, url, desc);
+  }
+
+  const addPost = () => {
+    const post = {
+      title,
+      url,
+      desc,
+    };
+    dispatch(postActions.addPostMiddleware(post));
+    setShowModal(false);
+    setTitle("");
+    setUrl("");
+    setDesc("");
+  };
+
   return (
     <div>
       {showModal ? (
@@ -25,7 +51,7 @@ export const AddModal = ({ showModal, setShowModal }) => {
               <h2>Create Post</h2>
               <Cancel
                 onClick={() => {
-                  setShowModal((prev) => !prev);
+                  setShowModal(prev => !prev);
                 }}
               >
                 <ImCancelCircle
@@ -54,21 +80,17 @@ export const AddModal = ({ showModal, setShowModal }) => {
               <PostInput>
                 <PostWrap>
                   <p style={{ textAlign: "left" }}> 동영상 제목:</p>
-                  <Input />
+                  <Input onChange={e => TextInput(e, setTitle)} value={title} />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 url:</p>
-                  <Input />
-                </PostWrap>
-                <PostWrap>
-                  <p> 동영상 썸네일:</p>
-                  <Input />
+                  <Input onChange={e => TextInput(e, setUrl)} value={url} />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 후기:</p>
-                  <Input />
+                  <Input onChange={e => TextInput(e, setDesc)} value={desc} />
                 </PostWrap>
-                <Submit>게시물 추가</Submit>
+                <Submit onClick={addPost}>게시물 추가</Submit>
               </PostInput>
             </Body>
           </ModalContent>
