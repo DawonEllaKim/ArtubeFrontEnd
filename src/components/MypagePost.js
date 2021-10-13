@@ -20,7 +20,7 @@ const MypagePost = () => {
         <PostLink onClick={()=>{
           history.push('/detail')
         }}>
-          <Post>Click </Post>
+          <Post>Clickkk </Post>
         </PostLink>
         <Post>Click </Post>
         <Post>Click </Post>
