@@ -26,7 +26,6 @@ export const AddModal = ({ showModal, setShowModal }) => {
 
   function TextInput(e, setState) {
     setState(e.target.value);
-    console.log(title, url, desc);
   }
 
   const addPost = () => {
