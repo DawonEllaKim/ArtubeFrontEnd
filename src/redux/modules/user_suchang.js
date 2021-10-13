@@ -1,13 +1,13 @@
-import { createAction, handleActions } from 'redux-actions';
-import { produce } from 'immer';
-import axios from 'axios';
-import { setCookie, deleteCookie, getCookie } from '../../shared/Cookie';
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
+import axios from "axios";
+import { setCookie, deleteCookie, getCookie } from "../../shared/Cookie";
 
-const LOG_IN = 'LOG_IN';
-const LOG_OUT = 'LOG_OUT';
-const LOGIN_CHECK = 'LOGIN_CHECK';
-const GET_USER = 'GET_USER';
-const SET_USER = 'SET_USER';
+const LOG_IN = "LOG_IN";
+const LOG_OUT = "LOG_OUT";
+const LOGIN_CHECK = "LOGIN_CHECK";
+const GET_USER = "GET_USER";
+const SET_USER = "SET_USER";
 
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -22,8 +22,8 @@ const initialState = {
 const loginAPI = (username, password) => {
   return function (dispatch, getState, { history }) {
     axios({
-      method: 'POST',
-      url: 'user/signIn',
+      method: "POST",
+      url: "user/signIn",
       data: {
         userId: username,
         password: password,
@@ -35,8 +35,8 @@ const loginAPI = (username, password) => {
         const jwtToken = res.data.token;
         const _id = res.data.userId;
         console.log(res.data.userId);
-        setCookie('user_login', jwtToken);
-        localStorage.setItem('user_name', _id);
+        setCookie("user_login", jwtToken);
+        localStorage.setItem("user_name", _id);
         // axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
         dispatch(
           logIn({
@@ -44,15 +44,15 @@ const loginAPI = (username, password) => {
             password: password,
           })
         );
-        window.alert('로그인 되었습니다!');
-        history.push('/');
+        window.alert("로그인 되었습니다!");
+        history.push("/");
         // }
         // else {
         //   window.alert('ID를 다시 확인해주세요');
         // }
       })
       .catch((err) => {
-        console.log('loginAPI에서 오류 발생', err);
+        console.log("loginAPI에서 오류 발생", err);
       });
   };
 };
@@ -128,12 +128,12 @@ const loginAPI = (username, password) => {
 const signupAPI = (userId, password, confirmPassword) => {
   return function (dispatch, getState, { history }) {
     axios({
-      method: 'POST',
-      url: '/user/signUp',
+      method: "POST",
+      url: "/user/signUp",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Access-Control-Allow-Origin': '*',
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
       },
       data: {
         userId: userId,
@@ -143,12 +143,12 @@ const signupAPI = (userId, password, confirmPassword) => {
     })
       .then((res) => {
         console.log(res); // signup 정보 확인
-        window.alert('축하합니다');
-        history.push('/login');
+        window.alert("축하합니다");
+        history.push("/login");
       })
       .catch((err) => {
-        console.log('signupAPI에서 오류발생', err);
-        window.alert('회원가입에 실패했습니다.');
+        console.log("signupAPI에서 오류발생", err);
+        window.alert("회원가입에 실패했습니다.");
       });
   };
 };
@@ -156,8 +156,8 @@ const signupAPI = (userId, password, confirmPassword) => {
 const IDCheckAPI = (username) => {
   return function (dispatch, getState, { history }) {
     axios({
-      method: 'POST',
-      url: 'http://localhost:3001/user',
+      method: "POST",
+      url: "http://localhost:3001/user",
       data: {
         id: id,
       },
@@ -167,7 +167,7 @@ const IDCheckAPI = (username) => {
         dispatch(getUser(res.data.ok));
       })
       .catch((err) => {
-        console.log('IDCheckAPI에서 오류 발생', err);
+        console.log("IDCheckAPI에서 오류 발생", err);
       });
   };
 };
@@ -181,8 +181,8 @@ export default handleActions(
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        deleteCookie('user_login');
-        localStorage.removeItem('user_name');
+        deleteCookie("user_login");
+        localStorage.removeItem("user_name");
         draft.user = null;
         draft.is_login = false;
       }),
@@ -198,7 +198,7 @@ export default handleActions(
       }),
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        setCookie('is_login', 'success');
+        setCookie("is_login", "success");
         draft.user = action.payload.user;
         draft.is_login = true;
       }),

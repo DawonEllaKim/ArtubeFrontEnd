@@ -62,15 +62,7 @@ const signupAPI = (userId, password, confirmPassword) => {
     //   });
 
     // 일반버전
-<<<<<<< HEAD
-    axios
-      .post("http://3.34.90.85/user/signUp", {
-        userId: userId,
-        password: password,
-        confirmPassword: confirmPassword,
-      })
-      .then((res) => console.log(res));
-=======
+
     // axios
     //   .post("http://3.34.90.85/user/signUp", {
     //     userId: userId,
@@ -81,7 +73,6 @@ const signupAPI = (userId, password, confirmPassword) => {
     //   .catch(err => {
     //     console.log(err);
     //   });
->>>>>>> c5dcc209cd7c228565f029fc5fba14def13917b1
   };
 };
 
