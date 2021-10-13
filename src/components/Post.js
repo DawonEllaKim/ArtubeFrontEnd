@@ -1,5 +1,5 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Grid, Image, Text } from "../elements";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
@@ -26,9 +26,11 @@ const Post = () => {
                 margin: "0 10px",
               }}
             />
-            <UserLink onClick={()=>{
-              history.push('/mypage')
-            }}>
+            <UserLink
+              onClick={() => {
+                history.push("/mypage");
+              }}
+            >
               <Text color="#939597" bold size="16px">
                 Hwang
               </Text>
@@ -50,16 +52,20 @@ const Post = () => {
         </Grid>
 
         <Grid>
-          <ImageLink onClick={()=>{
-            history.push('/detail')
-          }}>
+          <ImageLink
+            onClick={() => {
+              history.push("/detail");
+            }}
+          >
             <Image shape="rectangle" />
           </ImageLink>
         </Grid>
         <Grid>
-          <TitleLink onClick={()=>{
-            history.push('/detail')
-          }}>
+          <TitleLink
+            onClick={() => {
+              history.push("/detail");
+            }}
+          >
             <Text color="#939597" bold size="24px" margin=" 20px auto">
               폰트를 바꿔보자~
             </Text>
@@ -74,17 +80,17 @@ const UserLink = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-`
+`;
 const ImageLink = styled.button`
   width: 100%;
   border: none;
   background-color: transparent;
   cursor: pointer;
-`
+`;
 const TitleLink = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-`
+`;
 
 export default Post;

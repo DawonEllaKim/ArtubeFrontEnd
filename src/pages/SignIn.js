@@ -4,16 +4,18 @@ import { MdLockOutline } from "react-icons/md";
 import { Grid, Input, Button, Image } from "../elements";
 import ArtubeLogo from "../Image/ArtubeLogo.png";
 
-import { history } from '../redux/configuerStore';
+import { history } from "../redux/configuerStore";
 
 const SignIn = (props) => {
   return (
     <>
       <Wrap>
         <LeftBox>
-          <MainBtn onClick={()=>{
-            history.push('/')
-          }}>
+          <MainBtn
+            onClick={() => {
+              history.push("/");
+            }}
+          >
             <img src={ArtubeLogo} style={{ width: "100%" }} />
           </MainBtn>
         </LeftBox>
@@ -28,15 +30,19 @@ const SignIn = (props) => {
             <SignInText>Sign In</SignInText>
 
             <Grid>
-              <Input label="" placeholder="Email Address*" />
+              <Input label="" placeholder="Id*" />
               <Input label="" placeholder="Password*" type="password" />
             </Grid>
 
             <Grid>
               <Button>LOG IN</Button>
-              <NewUser onClick={() =>{
-                history.push('/signup')
-              }}>회원이 아니신가요? 회원가입하러 가기</NewUser>
+              <NewUser
+                onClick={() => {
+                  history.push("/signup");
+                }}
+              >
+                회원이 아니신가요? 회원가입하러 가기
+              </NewUser>
             </Grid>
           </RightWrap>
         </RightBox>
@@ -69,7 +75,7 @@ const MainBtn = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-`
+`;
 
 const RightBox = styled.div`
   display: flex;

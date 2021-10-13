@@ -6,9 +6,15 @@ import Header from "../components/Header";
 import Comment from "../components/Comment";
 
 import { Grid, Input, Text, Button, Image } from "../elements";
-import { history } from '../redux/configuerStore'
+import { history } from "../redux/configuerStore";
+
+import { EditModal } from "../components/EditModal";
 
 const Detail = () => {
+  const [showModal, setShowModal] = React.useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
   return (
     <>
       <Header />
@@ -26,11 +32,14 @@ const Detail = () => {
                 margin: "10px",
               }}
             />
-            <UserLink onClick={() =>{
-              history.push('/mypage')
-            }}>
+            <UserLink
+              onClick={() => {
+                history.push("/mypage");
+              }}
+            >
               <Text bold>Hwang</Text>
             </UserLink>
+            <EditButton onClick={openModal}>Edit</EditButton>
           </User>
           <Comments>
             <Comment />
@@ -41,6 +50,8 @@ const Detail = () => {
           </InputWrap>
         </DetailWrap>
       </CommentWrap>
+
+      <EditModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };
@@ -67,6 +78,9 @@ const DetailWrap = styled.div`
 
 const User = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #dbdbdb;
   background-color: #fff;
   width: 100%;
@@ -77,7 +91,11 @@ const UserLink = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-`
+`;
+const EditButton = styled.button`
+  width: 45px;
+  height: 30px;
+`;
 
 const Comments = styled.div`
   padding-top: 50px;
