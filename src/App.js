@@ -19,7 +19,7 @@ function App() {
         <Route path="/signin" exact component={SignIn} />
         <Route path="/signup" exact component={SignUp} />
         <Route path="/detail/:postId" exact component={Detail} />
-        <Route path="/mypage" exact component={MyPage} />
+        <Route path="/mypage/:userId" exact component={MyPage} />
       </ConnectedRouter>
     </div>
   );

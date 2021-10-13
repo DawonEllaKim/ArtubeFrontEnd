@@ -3,30 +3,42 @@
 import React from "react";
 import styled from "styled-components";
 
+<<<<<<< HEAD
 // import { Image } from "../elements";
+=======
+import { Image, Grid } from "../elements";
+>>>>>>> 987bb8ff4c7c1070ff34502065250c6e510414d9
 import { history } from "../redux/configuerStore";
 
-const MypagePost = (props) => {
-  const { url, postId } = props;
+const MypagePost = props => {
+  console.log(props);
+  const { id, image_url } = props;
 
   return (
     <>
-      <Container>
+      <Grid is_flex margin="20px" width="auto">
         <Post>
           <PostLink
             onClick={() => {
-              history.push(`/detail/${postId}`);
+              history.push(`/detail/${id}`);
             }}
           >
+<<<<<<< HEAD
             <PostImage
               src={`https://img.youtube.com/vi/${url}/sddefault.jpg`}
+=======
+            <Image
+              shape="rectangle"
+              src={image_url}
+              style={{ width: "250px", height: "250px" }}
+>>>>>>> 987bb8ff4c7c1070ff34502065250c6e510414d9
             />
             <TitleWrap>
               <Title>hover</Title>
             </TitleWrap>
           </PostLink>
         </Post>
-      </Container>
+      </Grid>
     </>
   );
 };

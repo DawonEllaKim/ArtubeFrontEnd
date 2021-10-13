@@ -1,75 +1,53 @@
 {
   "posts": [
     {
-      "postId": "1asldkfj",
-      "userId": "코딩애플",
-      "title": "초보 개발자를 위한 웹 신기술",
-      "url": "VJag_H2Cosc",
-      "desc": "코딩애플 개꿀잼",
-      "date": "2021-10-01"
+      "id": "1",
+      "userId": "나당",
+      "title": "공유다",
+      "youtube_url": "https://www.youtube.com/watch?v=lRfYapz62Lg",
+      "image_url": "https://img.youtube.com/vi/lRfYapz62Lg/sddefault.jpg",
+      "video_url": "https://www.youtube.com/embed/lRfYapz62Lg",
+      "desc": "공유다2",
+      "date": "2021-10-11"
     },
     {
-      "postId": "2alsdkfj",
-      "userId": "더들리",
-      "title": "20만원 호텔식당 이용권이 포함된 포시즌스서울 호캉스",
-      "url": "vuJDN5izjxE",
-      "desc": "광화문이 짱이디",
-      "date": "2021-10-02"
-    },
-    {
-      "postId": "3asldkfj",
-      "userId": "abc123",
-      "title": "조승우의 이병헌 저격? 세대가 안맞아요",
-      "url": "gd4zwjMN4ig",
-      "desc": "조승우 머시쩡",
-      "date": "2021-10-03"
-    },
-    {
-      "postId": "4aslkdjf",
-      "userId": "얄팍한 코딩사전",
-      "title": "마우스 없이 코딩한다구요?",
-      "url": "qn1soztN7k4",
-      "desc": "얄코횻통",
-      "date": "2021-10-04"
-    },
-    {
-      "postId": "5alsdkfj",
-      "userId": "SORA LOG",
-      "title": "최고의 개발 습관",
-      "url": "FwNp__Dx0vA",
-      "desc": "the BEST habit for develper",
-      "date": "2021-10-05"
-    },
-    {
-      "postId": "6aslkdjf",
-      "userId": "비밀이야",
-      "title": "일반인은 잘 모르는 내추럴 와인",
-      "url": "7jlXimFUKF0",
-      "desc": "생긴 건 이런데 어쩜 저렇게 잘알지",
-      "date": "2021-10-06"
-    },
-    {
-      "postId": "7alskdjfaskjfaaa",
-      "userId": "eo",
-      "title": "퇴근 후 딴짓의 나비효과",
-      "url": "gl1ScePCAf8",
-      "desc": "사이드 프로젝트 = 적극적 딴짓",
-      "date": "2021-10-07"
+      "id": "2",
+      "userId": "나당",
+      "title": "수정점 되라",
+      "youtube_url": "https://www.youtube.com/watch?v=ohCIv3pYCFc",
+      "image_url": "https://img.youtube.com/vi/ohCIv3pYCFc/sddefault.jpg",
+      "video_url": "https://www.youtube.com/embed/ohCIv3pYCFc",
+      "desc": "되게찌?",
+      "date": "2021-10-11"
     }
   ],
   "comments": [
     {
-      "id": "1asldkfjasdfsa",
+      "id": 1,
       "postId": "1asldkfj",
-      "commentUserId": "abc123",
-      "commentDesc": "오 추천 감사합니다",
-      "commentDate": "2021-10-11"
+      "commentDesc": "dddd",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
     },
     {
-      "id": "2alsdkfjasdfa",
-      "postId": "2alsdkfj",
-      "commentUserId": "훌룰루",
-      "commentDesc": "감4",
+      "id": 2,
+      "postId": "1asldkfj",
+      "commentDesc": "ddddd",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 3,
+      "postId": "1asldkfj",
+      "commentDesc": "ddddddd",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 4,
+      "postId": "1asldkfj",
+      "commentDesc": "asdfsffs",
+      "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
     },
     {

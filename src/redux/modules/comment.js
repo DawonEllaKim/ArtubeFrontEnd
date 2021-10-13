@@ -19,11 +19,10 @@ const initialState = {
   is_loading: false,
 };
 
-const getCommentMiddleware = (post_id) => {
+const getCommentMiddleware = post_id => {
   return function (dispatch, getState, { history }) {
-    apis.getComment(post_id).then((res) => {
+    apis.getComment(post_id).then(res => {
       const comment_list = res.data;
-      console.log(comment_list);
       dispatch(getComment(post_id, comment_list));
     });
     return null;
@@ -39,13 +38,13 @@ const addCommentMiddleware = (post_id, commentDesc) => {
       commentUserId: "aslkdfjas",
       commentDate: "2021-10-12",
     };
-    apis.addComment(comment).then((res) => {
+    apis.addComment(comment).then(res => {
       dispatch(addComment(comment));
     });
   };
 };
 
-const deleteCommentMiddleware = (commentId) => {
+const deleteCommentMiddleware = commentId => {
   return function (dispatch, getState, { history }) {
     return null;
   };
@@ -54,12 +53,11 @@ const deleteCommentMiddleware = (commentId) => {
 export default handleActions(
   {
     [ADD_COMMENT]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.list.push(action.payload.comment);
       }),
     [GET_COMMENT]: (state, action) =>
-      produce(state, (draft) => {
-        console.log(action.payload.comment_list);
+      produce(state, draft => {
         draft.list = action.payload.comment_list;
       }),
   },

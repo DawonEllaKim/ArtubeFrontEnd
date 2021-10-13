@@ -1,34 +1,12 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 import { ImCancelCircle } from "react-icons/im";
 import { IoPersonOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { postActions } from "../redux/modules/post";
+import { Image } from "../elements";
 
 export const EditModal = props => {
-  const { showModal, setShowModal, _postId } = props;
-  const _post = useSelector(state => state.post.list).filter(
-    p => p.postId === _postId
-  )[0];
-  console.log(_post);
-
-  const dispatch = useDispatch();
-
-  // const post = {
-  //   date: _post.date,
-  //   desc: _post.desc,
-  //   postId: _post.postId,
-  //   title: _post.title,
-  //   url: _post.url,
-  //   userId: _post.userId,
-  // };
-
-  const deletePost = () => {
-    dispatch(postActions.deletePostMiddleware(_postId));
-  };
-
-  const editPost = () => {};
-
   const modalRef = useRef();
 
   const closemodal = e => {
@@ -37,9 +15,48 @@ export const EditModal = props => {
     }
   };
 
+  const { showModal, setShowModal, _postId } = props;
+
+  function TextInput(e, setState) {
+    setState(e.target.value);
+  }
+
+  const _post = useSelector(state => state.post.list).filter(
+    p => p.id === _postId
+  )[0];
+
+  const [title, setTitle] = useState(_post.title);
+  const [url, setUrl] = useState(_post.youtube_url);
+  const [desc, setDesc] = useState(_post.desc);
+  const [preview, setPreview] = useState(_post.image_url);
+
+  const dispatch = useDispatch();
+
+  const deletePost = () => {
+    dispatch(postActions.deletePostMiddleware(_postId));
+  };
+
+  const getPreview = () => {
+    const videoId = url.split("=")[1];
+    const image_url = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
+    setPreview(image_url);
+  };
+
+  const editPost = () => {
+    const post = {
+      title,
+      url,
+      desc,
+    };
+    setTitle("");
+    setUrl("");
+    setDesc("");
+    dispatch(postActions.editPostMiddleware(_post.id, post));
+  };
+
   return (
     <div>
-      {showModal ? (
+      {showModal && _post ? (
         <Wrap ref={modalRef} onClick={closemodal}>
           <ModalContent showModal={showModal}>
             <Head>
@@ -75,22 +92,31 @@ export const EditModal = props => {
               <PostInput>
                 <PostWrap>
                   <p style={{ textAlign: "left" }}> 동영상 제목:</p>
-                  <Input />
+                  <Input
+                    defaultValue={_post.title}
+                    onChange={e => TextInput(e, setTitle)}
+                  />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 url:</p>
-                  <Input />
+                  <Input
+                    defaultValue={_post.youtube_url}
+                    onChange={e => TextInput(e, setUrl)}
+                  />
+                  <Submit onClick={getPreview}>이미지</Submit>
                 </PostWrap>
                 <PostWrap>
-                  <p> 동영상 썸네일:</p>
-                  <Input />
+                  <Image shape="rectangle" src={preview} />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 후기:</p>
-                  <Input />
+                  <Input
+                    defaultValue={_post.desc}
+                    onChange={e => TextInput(e, setDesc)}
+                  />
                 </PostWrap>
                 <Buttons>
-                  <Submit>수정 완료</Submit>
+                  <Submit onClick={editPost}>수정 완료</Submit>
                   <Submit onClick={deletePost}>게시물 삭제</Submit>
                 </Buttons>
               </PostInput>

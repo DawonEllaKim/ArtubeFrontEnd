@@ -22,7 +22,7 @@ const Detail = props => {
   const post_list = useSelector(state => state.post.list);
   const comment_list = useSelector(state => state.comment.list);
   const postId = props.match.params.postId;
-  const post = post_list.filter(p => p.postId === postId)[0];
+  const post = post_list.filter(p => p.id === postId)[0];
 
   const [commentDesc, setComment] = useState("");
 
@@ -32,59 +32,60 @@ const Detail = props => {
   };
 
   useEffect(() => {
-    if (post) {
-      return;
-    }
     dispatch(postActions.getPostMiddleware());
     dispatch(commentActions.getCommentMiddleware(postId));
   }, []);
 
   return (
     <>
-      <Header />
-      <CommentWrap>
-        <ImageWrap>
-          <Image shape="rectangle" />
-        </ImageWrap>
-        <DetailWrap>
-          <User>
-            <FaUserCircle
-              style={{
-                width: "24px",
-                height: "24px",
-                color: "#939597",
-                margin: "10px",
-              }}
-            />
-            <UserLink
-              onClick={() => {
-                history.push("/mypage");
-              }}
-            >
-              <Text bold>Hwang</Text>
-            </UserLink>
-            <EditButton onClick={openModal}>Edit</EditButton>
-          </User>
-          <Comments>
-            {comment_list.map((c, idx) => {
-              return <Comment {...c} key={idx} />;
-            })}
-          </Comments>
-          <InputWrap>
-            <InputBox
-              onChange={e => setComment(e.target.value)}
-              value={commentDesc}
-            />
-            <AddButton onClick={addComment}>등록</AddButton>
-          </InputWrap>
-        </DetailWrap>
-      </CommentWrap>
+      {post && (
+        <>
+          <Header />
+          <CommentWrap>
+            <ImageWrap>
+              <Image shape="rectangle" src={post.image_url} />
+            </ImageWrap>
+            <DetailWrap>
+              <User>
+                <FaUserCircle
+                  style={{
+                    width: "24px",
+                    height: "24px",
+                    color: "#939597",
+                    margin: "10px",
+                  }}
+                />
+                <UserLink
+                  onClick={() => {
+                    history.push("/mypage");
+                  }}
+                >
+                  <Text bold>Hwang</Text>
+                </UserLink>
+                <EditButton onClick={openModal}>Edit</EditButton>
+              </User>
+              <Comments>
+                {comment_list.map((c, idx) => {
+                  return <Comment {...c} key={idx} />;
+                })}
+              </Comments>
+              <InputWrap>
+                <InputBox
+                  onChange={e => setComment(e.target.value)}
+                  value={commentDesc}
+                />
+                <AddButton onClick={addComment}>등록</AddButton>
+              </InputWrap>
+            </DetailWrap>
+          </CommentWrap>
 
-      <EditModal
-        _postId={postId}
-        showModal={showModal}
-        setShowModal={setShowModal}
-      />
+          <EditModal
+            _postId={postId}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        </>
+      )}
     </>
   );
 };
