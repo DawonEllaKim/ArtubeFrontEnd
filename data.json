@@ -1,35 +1,50 @@
 {
   "posts": [
     {
-      "_id": "60eb9a3b606aa4add9d7aebc",
-      "postId": "123",
+      "postId": "60eb9a3b606aa4add9d7aebc",
       "userId": "abc123",
       "title": "모가디슈",
-      "img": "~~~~",
-      "url": "www.mogadishu.com",
+      "url": "nveDBTXW_iM",
       "desc": "모가디슈 꿀잼입니다. 꼭 보세요",
       "date": "2021-07-10"
     },
     {
-      "_id": "60eb9a3b606aa4add9d7aebc",
-      "postId": "123",
+      "postId": "60eb9a3b606aa4add9d7aebc",
       "userId": "abc123",
       "title": "모가디슈",
-      "img": "~~~~",
-      "url": "www.mogadishu.com",
+      "url": "nveDBTXW_iM",
+      "desc": "모가디슈 꿀잼입니다. 꼭 보세요",
+      "date": "2021-07-10"
+    },
+    {
+      "postId": "60eb9a3b606aa4add9d7aebc",
+      "userId": "abc123",
+      "title": "모가디슈",
+      "url": "nveDBTXW_iM",
+      "desc": "모가디슈 꿀잼입니다. 꼭 보세요",
+      "date": "2021-07-10"
+    },
+    {
+      "postId": "60eb9a3b606aa4add9d7aebc",
+      "userId": "abc123",
+      "title": "모가디슈",
+      "url": "nveDBTXW_iM",
       "desc": "모가디슈 꿀잼입니다. 꼭 보세요",
       "date": "2021-07-10"
     }
   ],
-  "users": [],
   "comments": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "commentId": 1,
+      "postId": "123123",
+      "commentUserId": "abc123",
+      "commentDesc": "오 추천 감사합니다",
+      "commentDate": "2021-10-11"
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "user": [
+    {
+      "userId": "123123123"
+    }
+  ]
 }

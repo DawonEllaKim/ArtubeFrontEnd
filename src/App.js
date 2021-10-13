@@ -16,8 +16,8 @@ function App() {
     <div className="App">
       <ConnectedRouter history={history}>
         <Route path="/" exact component={Main} />
-        <Route path="/user/signin" exact component={SignIn} />
-        <Route path="/user/signup" exact component={SignUp} />
+        <Route path="/signin" exact component={SignIn} />
+        <Route path="/signup" exact component={SignUp} />
         <Route path="/detail" exact component={Detail} />
         <Route path="/mypage" exact component={MyPage} />
       </ConnectedRouter>

@@ -4,7 +4,7 @@ import { MdLockOutline } from "react-icons/md";
 import { Grid, Input, Button } from "../elements";
 // import ArtubeLogo from "../Image/ArtubeLogo.png";
 import { history } from "../redux/configuerStore";
-import { actionCreators as userActions } from "../redux/modules/user";
+import { userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 
 const SignUp = props => {
@@ -19,12 +19,8 @@ const SignUp = props => {
   }
 
   const signup = () => {
-    const user = {};
-    password === confirmPassword
-      ? dispatch(
-          userActions.signupMilddleware(userId, password, confirmPassword)
-        )
-      : window.alert("잘보고치셈");
+    console.log("클릭");
+    dispatch(userActions.signupAPI(userId, password, confirmPassword));
   };
 
   return (

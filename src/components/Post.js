@@ -5,7 +5,9 @@ import { MdDateRange } from "react-icons/md";
 
 import { history } from "../redux/configuerStore";
 
-const Post = () => {
+const Post = props => {
+  const { userId, title, url, date } = props;
+
   return (
     <>
       <Grid
@@ -26,12 +28,12 @@ const Post = () => {
               }}
             />
             <Text color="#939597" bold size="16px">
-              Hwang
+              {userId}
             </Text>
           </Grid>
           <Grid is_flex width="auto">
             <Text color="#939597" size="16px">
-              2021.10.10
+              {date}
             </Text>
             <MdDateRange
               style={{
@@ -45,12 +47,15 @@ const Post = () => {
         </Grid>
 
         <Grid padding="0">
-          <Image shape="rectangle" />
+          <Image
+            shape="rectangle"
+            src={`https://img.youtube.com/vi/${url}/sddefault.jpg`}
+          />
         </Grid>
         <Grid is_flex>
           <Grid is_flex>
             <Text color="#939597" bold size="24px" margin=" 20px auto">
-              폰트를 바꿔보자~
+              {title}
             </Text>
           </Grid>
         </Grid>

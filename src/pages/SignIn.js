@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdLockOutline } from "react-icons/md";
 import ArtubeLogo from "../Image/ArtubeLogo.png";
 import { Grid, Input, Button, Image } from "../elements";
-import { actionCreators as userActions } from "../redux/modules/user";
+import { userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 
 const SignIn = props => {
@@ -16,9 +16,7 @@ const SignIn = props => {
     setState(e.target.value);
   }
 
-  const login = () => {
-    dispatch(userActions.loginMiddleware(id, pwd));
-  };
+  const login = () => {};
 
   return (
     <>
