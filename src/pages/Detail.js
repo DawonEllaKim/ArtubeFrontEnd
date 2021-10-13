@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -14,13 +14,26 @@ import { postActions } from "../redux/modules/post";
 
 const Detail = props => {
   const dispatch = useDispatch();
+  const post_list = useSelector(state => state.post.list);
   const comment_list = useSelector(state => state.comment.list);
   const post_id = props.match.params.postId;
-  console.log(comment_list);
+  const post = post_list.filter(p => p.postId === post_id)[0];
+
+  const [commentDesc, setComment] = useState("");
+
+  const addComment = () => {
+    const comment = {
+      id: post_id,
+      commentUserId: "asdlfkjasdlfkj",
+      commentDesc: commentDesc,
+    };
+    dispatch(commentActions.addCommentMiddleware(comment));
+    setComment("");
+  };
 
   useEffect(() => {
     dispatch(commentActions.getCommentMiddleware(post_id));
-    dispatch(postActions.getOnePostMiddleware(post_id));
+    dispatch(postActions.getPostMiddleware());
   }, []);
 
   return (
@@ -54,8 +67,11 @@ const Detail = props => {
             })}
           </Comments>
           <InputWrap>
-            <InputBox />
-            <AddButton>등록</AddButton>
+            <InputBox
+              onChange={e => setComment(e.target.value)}
+              value={commentDesc}
+            />
+            <AddButton onClick={addComment}>등록</AddButton>
           </InputWrap>
         </DetailWrap>
       </CommentWrap>

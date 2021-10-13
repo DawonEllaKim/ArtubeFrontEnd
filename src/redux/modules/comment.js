@@ -30,12 +30,12 @@ const getCommentMiddleware = post_id => {
   };
 };
 
-const addCommentMiddleware = (postId, commentUserId, commentDesc) => {
+const addCommentMiddleware = comment => {
   return function (dispatch, getState, { history }) {
-    apis.addComment(postId, commentUserId, commentDesc).then(res => {
-      console.log(res);
+    console.log(comment);
+    apis.addComment(comment).then(res => {
+      console.log(res.data);
     });
-    return null;
   };
 };
 
