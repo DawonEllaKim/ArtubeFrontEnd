@@ -18,8 +18,10 @@ const Post = (props) => {
         margin="70px auto"
         shadow=" 2px 2px 2px #dbdbdb"
       >
+        {/* 프로필 아이콘 + 유저아이디 + 데이트*/}
         <Grid is_flex>
           <Grid is_flex width="auto">
+            {/* 프로필 아이콘 */}
             <FaUserCircle
               style={{
                 width: "24px",
@@ -29,6 +31,7 @@ const Post = (props) => {
               }}
             />
 
+            {/* user id */}
             <UserLink
               onClick={() => {
                 history.push("/mypage");
@@ -39,7 +42,9 @@ const Post = (props) => {
               </Text>
             </UserLink>
           </Grid>
+
           <Grid is_flex width="auto">
+            {/* 데이트*/}
             <Text color="#939597" size="16px">
               {date}
             </Text>
@@ -54,6 +59,7 @@ const Post = (props) => {
           </Grid>
         </Grid>
 
+        {/* 포스트 임베드  */}
         <Grid>
           <ImageLink
             onClick={() => {
@@ -66,6 +72,8 @@ const Post = (props) => {
             />
           </ImageLink>
         </Grid>
+
+        {/* 밑에 타이틀 */}
         <Grid>
           <TitleLink
             onClick={() => {

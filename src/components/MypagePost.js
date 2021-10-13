@@ -1,41 +1,34 @@
+// 마이페이지에서 내가 올린 게시물 하나하나
+
 import React from "react";
 import styled from "styled-components";
 
-import { history } from '../redux/configuerStore'; 
+import { Image } from "../elements";
+import { history } from "../redux/configuerStore";
 
-const MypagePost = () => {
+const MypagePost = (props) => {
+  const { url, postId } = props;
+
   return (
     <>
       <Container>
-        <PostLink onClick={()=>{
-          history.push('/detail')
-        }}>
-          <Post>Click </Post>
-        </PostLink>
-        <PostLink onClick={()=>{
-          history.push('/detail')
-        }}>
-          <Post>Click </Post>
-        </PostLink>
-        <PostLink onClick={()=>{
-          history.push('/detail')
-        }}>
-          <Post>Clickkk </Post>
-        </PostLink>
-        <Post>Click </Post>
-        <Post>Click </Post>
-        <Post>Click </Post>
-        <Post>Click </Post>
-        <Post>Click </Post>
-        <Post>Click </Post>
-        <Post>Click </Post>
-        <Post>Click </Post>
+        <Post>
+          <PostLink
+            onClick={() => {
+              history.push(`/detail/${postId}`);
+            }}
+          >
+            <Image
+              shape="rectangle"
+              src={`https://img.youtube.com/vi/${url}/sddefault.jpg`}
+              style={{ width: "250px", height: "250px" }}
+            />
+          </PostLink>
+        </Post>
       </Container>
     </>
   );
 };
-
-export default MypagePost;
 
 const Container = styled.div`
   display: grid;
@@ -44,15 +37,13 @@ const Container = styled.div`
   gap: 3%;
 `;
 
-const PostLink = styled.a`
-
-`
+const PostLink = styled.a``;
 
 const Post = styled.div`
   display: flex;
   height: 100%;
   background-color: pink;
-  background-image: url("https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg");
+  /* background-image: url("https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg"); */
   background-size: cover;
   cursor: pointer;
   &:hover {
@@ -67,3 +58,5 @@ const Post = styled.div`
     transform: scale(1.03);
   }
 `;
+
+export default MypagePost;

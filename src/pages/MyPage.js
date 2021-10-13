@@ -1,22 +1,44 @@
-import React from "react";
+// 내 프로필 페이지 - 내가 올린 게시물들을 볼 수 있음
+
+import React, { useEffect } from "react";
+import styled from "styled-components";
+
 import MypagePost from "../components/MypagePost";
 import Header from "../components/Header";
-import styled from "styled-components";
-import { IoIosAddCircle } from "react-icons/io";
 import { AddModal } from "../components/AddModal";
+import { useDispatch, useSelector } from "react-redux";
+import { postActions } from "../redux/modules/post";
+
+import { IoIosAddCircle } from "react-icons/io";
 
 const MyPage = () => {
+  const dispatch = useDispatch();
+  const post_list = useSelector((state) => state.post.list);
+
+  // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
+
+  useEffect(() => {
+    dispatch(postActions.getPostMiddleware());
+  }, []);
+
   return (
     <>
       <Wrap>
+        {/* 고정된 헤더 */}
         <Header />
+
+        {/* 내가 올린 동영상 모음 */}
         <PostWrap>
-          <MypagePost />
+          {post_list.map((p, idx) => {
+            return <MypagePost {...p} key={idx} />;
+          })}
         </PostWrap>
+
+        {/* 게시물 추가 모달창 여는 버튼 */}
         <AddButton>
           <IoIosAddCircle
             style={{
@@ -29,12 +51,12 @@ const MyPage = () => {
           />
         </AddButton>
       </Wrap>
+
+      {/* 게시물 추가 모달창 */}
       <AddModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };
-
-export default MyPage;
 
 const Wrap = styled.div`
   display: flex;
@@ -64,3 +86,5 @@ const AddButton = styled.div`
     cursor: pointer;
   }
 `;
+
+export default MyPage;

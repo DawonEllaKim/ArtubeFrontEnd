@@ -46,6 +46,9 @@ const Header = () => {
               zIndex: "10000",
               margin: "10px",
             }}
+            onClick={() => {
+              history.push("/mypage");
+            }}
           />
         </Box>
       </Wrap>

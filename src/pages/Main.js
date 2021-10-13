@@ -9,6 +9,7 @@ import { AddModal } from "../components/AddModal";
 import { Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
+import { history } from "../redux/configuerStore";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Main = () => {
       <Header />
       {post_list.map((p, idx) => {
         return <Post {...p} key={idx} />;
-      })}{" "}
+      })}
       <AddButton>
         <IoIosAddCircle
           style={{
