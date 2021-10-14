@@ -7,8 +7,7 @@ import { MdDateRange } from "react-icons/md";
 import { history } from "../redux/configuerStore";
 
 const Post = props => {
-  console.log(props);
-  const { userId, title, date, id, image_url } = props;
+  const { userId, title, date, postId, image_url } = props;
 
   return (
     <>
@@ -64,7 +63,7 @@ const Post = props => {
         <Grid>
           <ImageLink
             onClick={() => {
-              history.push(`/detail/${id}`);
+              history.push(`/detail/${postId}`);
             }}
           >
             <Image shape="rectangle" src={image_url} />

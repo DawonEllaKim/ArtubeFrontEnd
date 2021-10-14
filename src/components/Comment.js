@@ -6,11 +6,13 @@ import { useDispatch } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
 const Comment = props => {
-  const { commentUserId, commentDesc, id, postId } = props;
+  console.log(props);
+  const { commentUserId, commentDesc, commentId, postId } = props;
+
   const dispatch = useDispatch();
 
   const deleteComment = () => {
-    dispatch(commentActions.deleteCommentMiddleware(id));
+    dispatch(commentActions.deleteCommentMiddleware(commentId));
   };
 
   useEffect(() => {

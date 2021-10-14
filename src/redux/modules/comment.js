@@ -23,26 +23,28 @@ const initialState = {
 
 const getCommentMiddleware = postId => {
   return function (dispatch, getState, { history }) {
-    console.log(typeof postId, postId);
     apis.getComment(postId).then(res => {
-      const _comment_list = res.data;
+      const _comment_list = res.data.comment;
       const comment_list = _comment_list.filter(c => c.postId === postId);
       dispatch(getComment(comment_list));
     });
   };
 };
 
-const addCommentMiddleware = (post_id, commentDesc) => {
+const addCommentMiddleware = (commentUserId, commentDesc, postId) => {
   return function (dispatch, getState, { history }) {
-    const comment = {
-      id: String(parseInt(getState().comment.list.length) + 5),
-      postId: post_id,
-      commentDesc: commentDesc,
-      commentUserId: "aslkdfjas",
-      commentDate: "2021-10-12",
-    };
-    console.log(comment);
-    apis.addComment(comment).then(res => {
+    // (commentUserId, commentDesc, postId)
+
+    console.log(commentUserId, commentDesc, postId);
+
+    apis.addComment(commentUserId, commentDesc, postId).then(res => {
+      console.log(res);
+      const comment = {
+        commentId: res.data.commentId,
+        commentUserId: commentUserId,
+        commentDesc: commentDesc,
+        postId,
+      };
       dispatch(addComment(comment));
     });
   };
@@ -50,7 +52,9 @@ const addCommentMiddleware = (post_id, commentDesc) => {
 
 const deleteCommentMiddleware = commentId => {
   return function (dispatch, getState, { history }) {
+    console.log(commentId);
     apis.deleteComment(commentId).then(res => {
+      console.log(res);
       dispatch(deleteComment(commentId));
     });
   };

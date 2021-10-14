@@ -5,11 +5,11 @@ import { apis } from "../../common/axios";
 
 // const baseURL = "http://3.34.90.85:3000/";
 
-const LOG_IN = "LOG_IN";
-const LOG_OUT = "LOG_OUT";
+const SIGN_IN = "SIGN_IN";
+const SIGN_OUT = "SIGN_OUT";
 
-const signIn = createAction(LOG_IN, token => ({ token }));
-const signOut = createAction(LOG_OUT);
+const signIn = createAction(SIGN_IN, token => ({ token }));
+const signOut = createAction(SIGN_OUT);
 
 const initialState = {
   token: null,
@@ -59,15 +59,15 @@ const signInAPI = (userId, password) => {
       userId,
       password,
     };
-    console.log(data);
 
     apis
       .signIn(data)
       .then(res => {
         console.log(res);
-        // const token = res.data.token
-        // localStorage.setItem("token", token)
-        // dispatch(signIn(uid))
+        const token = res.data.token;
+        localStorage.setItem("token", token);
+        history.push("/");
+        dispatch(signIn(token));
       })
       .catch(err => {
         console.log(err);
@@ -77,21 +77,27 @@ const signInAPI = (userId, password) => {
 
 const signOutAPI = () => {
   return function (dispatch, getState, { history }) {
-    // localStorage.removeItem("token");
-    // localStorage.clear();
-    // history.push("/");
+    localStorage.removeItem("token");
+    localStorage.clear();
+    history.push("/signin");
     dispatch(signOut());
+  };
+};
+
+const userCheckAPI = token => {
+  return function (dispatch, getState, { history }) {
+    dispatch(signIn(token));
   };
 };
 
 export default handleActions(
   {
-    [LOG_IN]: (state, action) =>
+    [SIGN_IN]: (state, action) =>
       produce(state, draft => {
-        draft.user = action.payload.user;
+        draft.token = action.payload.token;
         draft.is_login = true;
       }),
-    [LOG_OUT]: (state, action) =>
+    [SIGN_OUT]: (state, action) =>
       produce(state, draft => {
         draft.user = null;
         draft.is_login = false;
@@ -104,6 +110,7 @@ const userActions = {
   signInAPI,
   signUpAPI,
   signOutAPI,
+  userCheckAPI,
 };
 
 export { userActions };

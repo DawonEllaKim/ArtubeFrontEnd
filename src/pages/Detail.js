@@ -27,7 +27,10 @@ const Detail = props => {
   const [commentDesc, setComment] = useState("");
 
   const addComment = () => {
-    dispatch(commentActions.addCommentMiddleware(postId, commentDesc));
+    const commentUserId = "나다요";
+    dispatch(
+      commentActions.addCommentMiddleware(commentUserId, commentDesc, postId)
+    );
     setComment("");
   };
 
@@ -57,7 +60,7 @@ const Detail = props => {
                 />
                 <UserLink
                   onClick={() => {
-                    history.push("/mypage");
+                    history.push(`/myPage/${post.userId}`);
                   }}
                 >
                   <Text bold>Hwang</Text>
