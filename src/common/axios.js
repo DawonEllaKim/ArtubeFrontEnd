@@ -23,7 +23,7 @@ export const apis = {
   delPost: id => instance.delete(`/posts/${id}`),
 
   // comment
-  getComment: () => instance.get("/comments"),
+  getComment: postId => instance.get("/comments", postId),
   addComment: comment => instance.post("/comments", comment),
 
   signUp: data => instance.post("/user/signUp", data),

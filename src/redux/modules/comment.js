@@ -6,7 +6,6 @@ const GET_COMMENT = "GET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
 
 const getComment = createAction(GET_COMMENT, (post_id, comment_list) => ({
-  post_id,
   comment_list,
 }));
 const addComment = createAction(ADD_COMMENT, (post_id, comment) => ({
@@ -19,11 +18,12 @@ const initialState = {
   is_loading: false,
 };
 
-const getCommentMiddleware = post_id => {
+const getCommentMiddleware = postId => {
   return function (dispatch, getState, { history }) {
-    apis.getComment(post_id).then(res => {
-      const comment_list = res.data;
-      dispatch(getComment(post_id, comment_list));
+    apis.getComment(postId).then(res => {
+      const _comment_list = res.data;
+      const comment_list = _comment_list.filter(c => c.posdId === postId);
+      dispatch(getComment(comment_list));
     });
     return null;
   };
@@ -54,7 +54,7 @@ export default handleActions(
   {
     [ADD_COMMENT]: (state, action) =>
       produce(state, draft => {
-        draft.list.push(action.payload.comment);
+        draft.list.unshift(action.payload.comment);
       }),
     [GET_COMMENT]: (state, action) =>
       produce(state, draft => {
