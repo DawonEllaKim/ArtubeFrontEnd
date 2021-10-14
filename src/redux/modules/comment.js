@@ -51,7 +51,7 @@ const addCommentMiddleware = (post_id, commentDesc) => {
 const deleteCommentMiddleware = commentId => {
   return function (dispatch, getState, { history }) {
     apis.deleteComment(commentId).then(res => {
-      dispatch(deleteComment);
+      dispatch(deleteComment(commentId));
     });
 
     return null;
