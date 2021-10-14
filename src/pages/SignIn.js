@@ -55,7 +55,7 @@ const SignIn = (props) => {
                 placeholder="Password"
                 type="password"
                 _onChange={(e) => TextInput(e, setPwd)}
-                label="password1"
+                label=""
                 value={pwd}
               />
             </Grid>

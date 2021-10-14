@@ -1,11 +1,13 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
+// import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import post, { postActions } from "../redux/modules/post";
 import { ImCancelCircle } from "react-icons/im";
 import { IoPersonOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
-import { postActions } from "../redux/modules/post";
+import { Image } from "../elements";
 
-export const AddModal = ({ showModal, setShowModal }) => {
+export const AddModal = (props) => {
   const modalRef = useRef();
   const dispatch = useDispatch();
 
@@ -15,14 +17,45 @@ export const AddModal = ({ showModal, setShowModal }) => {
     }
   };
 
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [desc, setDesc] = useState("");
-  console.log("it works");
+  const { showModal, setShowModal, _postId } = props;
 
   function TextInput(e, setState) {
     setState(e.target.value);
   }
+  const _post = useSelector((state) => {
+    console.log("스테이트포스트", state.post);
+    return state.post.list;
+  });
+  // console.log("스테이트포스트", state.post);
+
+  // // .filter(
+  // // 	(p) => p.id === _postId
+  // // 	)[0];
+  console.log("언더바포스트", _post);
+  // // const post_list = useSelector((state) => state.post.list);
+  // const _post.id = props.match.params.id;
+  // console.log("파람즈", props.match.params.id);
+  console.log("프롭스", props);
+  // // return;
+  const is_edit = _post.id ? true : false;
+  console.log("이즈에딧", is_edit);
+
+  // const _post = is_edit ? post.find((p) => p.id === post_id) : null;
+
+  const [title, setTitle] = useState(is_edit ? _post.title : "");
+  const [url, setUrl] = useState(is_edit ? _post.youtube_url : "");
+  const [desc, setDesc] = useState(is_edit ? _post.desc : "");
+  const [preview, setPreview] = useState(is_edit ? _post.image_url : "");
+
+  const getPreview = () => {
+    const videoId = url.split("=")[1];
+    const image_url = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
+    setPreview(image_url);
+  };
+
+  const deletePost = () => {
+    dispatch(postActions.deletePostMiddleware(_postId));
+  };
 
   const addPost = () => {
     const post = {
@@ -30,15 +63,25 @@ export const AddModal = ({ showModal, setShowModal }) => {
       url,
       desc,
     };
-    dispatch(postActions.addPostMiddleware(post));
-    setShowModal(false);
+    // setShowModal(false);
     setTitle("");
     setUrl("");
     setDesc("");
+    dispatch(postActions.addPostMiddleware(post));
   };
 
-  // const
-  // if (is_addModal) {
+  const editPost = () => {
+    const post = {
+      title,
+      url,
+      desc,
+    };
+    setTitle("");
+    setUrl("");
+    setDesc("");
+    dispatch(postActions.editPostMiddleware(_post.id, post));
+  };
+
   return (
     <div>
       {showModal ? (
@@ -78,19 +121,35 @@ export const AddModal = ({ showModal, setShowModal }) => {
                 <PostWrap>
                   <p style={{ textAlign: "left" }}> 동영상 제목:</p>
                   <Input
+                    // defaultValue={is_edit ? title : _post.title}
                     onChange={(e) => TextInput(e, setTitle)}
                     value={title}
                   />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 url:</p>
-                  <Input onChange={(e) => TextInput(e, setUrl)} value={url} />
+
+                  <Input
+                    // defaultValue={is_edit ? url : _post.youtube_url}
+                    onChange={(e) => TextInput(e, setUrl)}
+                    value={url}
+                  />
+                  <Submit onClick={getPreview}>이미지</Submit>
+                </PostWrap>
+                <PostWrap>
+                  <Image shape="rectangle" src={preview} />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 후기:</p>
-                  <Input onChange={(e) => TextInput(e, setDesc)} value={desc} />
+                  <Input
+                    onChange={(e) => TextInput(e, setDesc)}
+                    value={desc}
+                    // defaultValue={is_edit ? desc : _post.desc}
+                  />
                 </PostWrap>
                 <Submit onClick={addPost}>게시물 추가</Submit>
+                <Submit onClick={editPost}>수정 완료</Submit>
+                <Submit onClick={deletePost}>게시물 삭제</Submit>
               </PostInput>
             </Body>
           </ModalContent>
@@ -99,7 +158,6 @@ export const AddModal = ({ showModal, setShowModal }) => {
     </div>
   );
 };
-// };
 
 const Wrap = styled.div`
   width: 100vw;

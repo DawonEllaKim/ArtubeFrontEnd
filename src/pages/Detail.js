@@ -11,7 +11,7 @@ import { history } from "../redux/configuerStore";
 import { useDispatch, useSelector } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 import { postActions } from "../redux/modules/post";
-import { EditModal } from "../components/EditModal";
+import { AddModal } from "../components/AddModal";
 
 const Detail = (props) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -80,7 +80,7 @@ const Detail = (props) => {
             </DetailWrap>
           </CommentWrap>
 
-          <EditModal
+          <AddModal
             _postId={postId}
             showModal={showModal}
             setShowModal={setShowModal}
