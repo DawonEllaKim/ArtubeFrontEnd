@@ -6,9 +6,11 @@ import { IoIosArrowForward } from "react-icons/io";
 
 import { history } from "../redux/configuerStore";
 
+
 const MypagePost = props => {
   console.log(props);
   const { id, image_url, title } = props;
+
 
   return (
     <>

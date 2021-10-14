@@ -73,6 +73,11 @@ const Wrap = styled.div`
 const PostWrap = styled.div`
   width: 900px;
   margin: 80px 0 0 10%;
+
+  display: grid;
+  grid-template-columns: 250px 250px 250px;
+  grid-template-rows: 250px 250px 250px;
+  gap: 3%;
 `;
 
 const AddButton = styled.div`
