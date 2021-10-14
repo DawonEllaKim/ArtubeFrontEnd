@@ -21,6 +21,7 @@ const Detail = (props) => {
   const dispatch = useDispatch();
   const post_list = useSelector((state) => state.post.list);
   const comment_list = useSelector((state) => state.comment.list);
+  console.log(comment_list);
   const postId = props.match.params.postId;
   const post = post_list.filter((p) => p.id === postId)[0];
 

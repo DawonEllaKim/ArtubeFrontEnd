@@ -2,30 +2,31 @@
 
 import React from "react";
 import styled from "styled-components";
-import { IoIosArrowForward } from "react-icons/io"; 
+import { IoIosArrowForward } from "react-icons/io";
 
 import { history } from "../redux/configuerStore";
 
-const MypagePost = (props) => {
-  const { url, postId, title } = props;
+const MypagePost = props => {
+  console.log(props);
+  const { id, image_url, title } = props;
 
   return (
     <>
       <Post>
         <PostLink
           onClick={() => {
-            history.push(`/detail/${postId}`);
+            history.push(`/detail/${id}`);
           }}
         >
-          <PostImage
-            src={`https://img.youtube.com/vi/${url}/sddefault.jpg`}
-          />
+          <PostImage src={image_url} />
           <TitleWrap>
             <Title>
               {title}
               <Link>
-                <span style={{fontSize: '16px', verticalAlign:'top'}}>바로가기</span> 
-                <IoIosArrowForward style={{ marginLeft: '8px'}}/>
+                <span style={{ fontSize: "16px", verticalAlign: "top" }}>
+                  바로가기
+                </span>
+                <IoIosArrowForward style={{ marginLeft: "8px" }} />
               </Link>
             </Title>
           </TitleWrap>
@@ -34,7 +35,6 @@ const MypagePost = (props) => {
     </>
   );
 };
-
 
 const Post = styled.div`
   display: flex;
@@ -60,7 +60,7 @@ const PostLink = styled.a`
   position: relative;
   overflow: hidden;
   width: 100%;
-  color:#fff;
+  color: #fff;
   font-size: 20px;
   font-weight: bold;
   background-color: #000;
@@ -68,19 +68,19 @@ const PostLink = styled.a`
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
 
-  &:after{
+  &:after {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    content: '';
+    content: "";
     background-color: rgba(0, 0, 0, 0.65);
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
     opacity: 0;
   }
-  &:hover:after{
+  &:hover:after {
     opacity: 1;
     position: absolute;
     /* top: 10px;
@@ -91,45 +91,45 @@ const PostLink = styled.a`
 `;
 
 const PostImage = styled.img`
-  src: url(${(props) => props.src});
+  src: url(${props => props.src});
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   vertical-align: top;
 
-  &:hover{
+  &:hover {
     zoom: 1;
     filter: alpha(opacity=50);
     -webkit-opacity: 0.5;
     opacity: 0.5;
   }
-`
+`;
 
 const TitleWrap = styled.div`
- position: absolute;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
   text-align: center;
-`
+`;
 const Title = styled.p`
-  width:90%;
+  width: 90%;
   height: 100%;
   padding-top: 70px;
   margin: 0 5%;
   word-break: keep-all;
   opacity: 0;
 
-  &:hover{
+  &:hover {
     -webkit-transform: translate(0px, 0px);
     transform: translate(0px, 0px);
     opacity: 1;
   }
-`
+`;
 const Link = styled.p`
   padding-top: 20px;
-`
+`;
 
 export default MypagePost;
