@@ -7,18 +7,18 @@ import { IoIosArrowForward } from "react-icons/io";
 import { history } from "../redux/configuerStore";
 
 const MypagePost = (props) => {
-  const { url, postId, title } = props;
+  const { image_url, id, title } = props;
 
   return (
     <>
       <Post>
         <PostLink
           onClick={() => {
-            history.push(`/detail/${postId}`);
+            history.push(`/detail/${id}`);
           }}
         >
           <PostImage
-            src={`https://img.youtube.com/vi/${url}/sddefault.jpg`}
+            src={image_url}
           />
           <TitleWrap>
             <Title>
