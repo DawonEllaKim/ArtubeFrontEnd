@@ -93,7 +93,7 @@ const Detail = props => {
 
 const CommentWrap = styled.div`
   display: flex;
-  width: 65%;
+  width: 900px;
   border: 1px solid #f5df4d;
   border-radius: 2px;
   padding: 5px 0;
@@ -102,11 +102,11 @@ const CommentWrap = styled.div`
 `;
 
 const ImageWrap = styled.div`
-  width: 70%;
+  width: 600px;
 `;
 const DetailWrap = styled.div`
   position: relative;
-  width: 30%;
+  width: 295px;
   margin-right: 5px;
   box-sizing: border-box;
 `;
@@ -130,10 +130,15 @@ const UserLink = styled.button`
 const EditButton = styled.button`
   width: 45px;
   height: 30px;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  color: #939597;
+  background-color: #fff;
+  cursor: pointer;
 `;
 
 const Comments = styled.div`
-  padding-top: 50px;
+  padding: 50px 5px 0 0;
 `;
 const InputWrap = styled.div`
   display: flex;
@@ -149,14 +154,15 @@ const InputBox = styled.input`
   border: none;
   border-bottom: 1px solid #939597;
   padding: 4px;
-  width: 75%;
+  width: 235px;
 `;
 const AddButton = styled.button`
   border: none;
   background-color: #939597;
   color: #fff;
-  width: 20%;
+  width: 45px;
   padding: 8px 0;
+  border-radius: 5px;
   cursor: pointer;
 `;
 

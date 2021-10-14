@@ -25,14 +25,49 @@
     {
       "id": "2",
       "postId": "2",
-      "commentDesc": "2번댓글",
+      "commentDesc": "2번 댓글이다요",
       "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
     },
     {
-      "id": "2",
-      "postId": "2",
-      "commentDesc": "2번 댓글이다요",
+      "id": "5",
+      "postId": "1",
+      "commentDesc": "dㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "6",
+      "postId": "1",
+      "commentDesc": "ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "7",
+      "postId": "1",
+      "commentDesc": "ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "8",
+      "postId": "1",
+      "commentDesc": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "9",
+      "postId": "1",
+      "commentDesc": "ㄴㄴㄴㄴ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "10",
+      "postId": "1",
+      "commentDesc": "ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ",
       "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
     }
