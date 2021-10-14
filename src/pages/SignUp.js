@@ -7,7 +7,7 @@ import { history } from "../redux/configuerStore";
 import { userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 
-const SignUp = props => {
+const SignUp = (props) => {
   const dispatch = useDispatch();
 
   const [userId, setId] = useState("");
@@ -49,26 +49,25 @@ const SignUp = props => {
             <IdInput
               label=""
               placeholder="Id*"
-              onChange={e => TextInput(e, setId)}
+              onChange={(e) => TextInput(e, setId)}
               value={userId}
             />
             <PWcheck>중복확인</PWcheck>
           </div>
 
           <div>
-
             <Input
               label=""
               placeholder="Password*"
               type="password"
-              _onChange={e => TextInput(e, setPwd)}
+              _onChange={(e) => TextInput(e, setPwd)}
               value={password}
             />
             <Input
               label=""
               placeholder="Password Check*"
               type="password"
-              _onChange={e => TextInput(e, setConfirmPassword)}
+              _onChange={(e) => TextInput(e, setConfirmPassword)}
               value={confirmPassword}
             />
           </div>
@@ -78,7 +77,7 @@ const SignUp = props => {
           <Button _onClick={signup}>Sign Up</Button>
           <UserExist
             onClick={() => {
-              history.push("/signin");
+              history.push("/signIn");
             }}
           >
             이미 회원이신가요? 로그인하러 가기

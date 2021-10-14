@@ -13,17 +13,17 @@ import { IoIosAddCircle } from "react-icons/io";
 
 const MyPage = () => {
   const dispatch = useDispatch();
-  const post_list = useSelector(state => state.post.list);
+  const post_list = useSelector((state) => state.post.list);
   const userId = "나당";
 
-  const myPostList = post_list.filter(p => p.userId === userId);
+  const myPostList = post_list.filter((p) => p.userId === userId);
   // console.log(userId);
   console.log(myPostList);
 
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal(prev => !prev);
+    setShowModal((prev) => !prev);
   };
 
   useEffect(() => {
@@ -73,7 +73,6 @@ const Wrap = styled.div`
 const PostWrap = styled.div`
   width: 900px;
   margin: 80px 0 0 10%;
-
   display: grid;
   grid-template-columns: 250px 250px 250px;
   grid-template-rows: 250px 250px 250px;

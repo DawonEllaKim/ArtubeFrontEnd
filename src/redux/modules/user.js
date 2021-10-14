@@ -8,7 +8,7 @@ import { apis } from "../../common/axios";
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 
-const signIn = createAction(LOG_IN, token => ({ token }));
+const signIn = createAction(LOG_IN, (token) => ({ token }));
 const signOut = createAction(LOG_OUT);
 
 const initialState = {
@@ -28,13 +28,13 @@ const signUpAPI = (userId, password, confirmPassword) => {
 
     apis
       .signUp(data)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         // const token = res.data.token;
         // localStorage.setItem("token", token);
-        history.push("/user/signIn");
+        history.push("/signIn");
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
 
     // axios({
     //   method: "POST",
@@ -63,13 +63,14 @@ const signInAPI = (userId, password) => {
 
     apis
       .signIn(data)
-      .then(res => {
+      .then((res) => {
         console.log(res);
-        // const token = res.data.token
+        alert("로그인되었습니다."); // const token = res.data.token
+        history.push("/");
         // localStorage.setItem("token", token)
         // dispatch(signIn(uid))
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -87,12 +88,12 @@ const signOutAPI = () => {
 export default handleActions(
   {
     [LOG_IN]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.user = null;
         draft.is_login = false;
       }),

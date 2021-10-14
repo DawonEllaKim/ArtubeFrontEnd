@@ -35,13 +35,6 @@
       "commentDesc": "2번 댓글이다요",
       "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
-    },
-    {
-      "id": "3",
-      "postId": "1",
-      "commentDesc": "dddd",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
     }
   ],
   "user": [

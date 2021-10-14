@@ -16,17 +16,17 @@ export const apis = {
   // 게시물 불러오기
   getPost: () => instance.get("/posts"),
   // 게시물 작성하기
-  createPost: contents => instance.post("/posts", contents),
+  createPost: (contents) => instance.post("/posts", contents),
   // 게시물 수정하기
   editPost: (id, content) => instance.put(`/posts/${id}`, content),
   // 게시물 삭제하기
-  delPost: id => instance.delete(`/posts/${id}`),
+  delPost: (id) => instance.delete(`/posts/${id}`),
 
   // comment
-  getComment: postId => instance.get("/comments", postId),
-  addComment: comment => instance.post("/comments", comment),
-  deleteComment: id => instance.delete(`/comments/${id}`, id),
+  getComment: (postId) => instance.get("/comments", postId),
+  addComment: (comment) => instance.post("/comments", comment),
+  deleteComment: (id) => instance.delete(`/comments/${id}`, id),
 
-  signUp: data => instance.post("/user/signUp", data),
-  signIn: data => instance.post("/user/logIn", data),
+  signUp: (data) => instance.post("/user/signUp", data),
+  signIn: (data) => instance.post("/user/logIn", data),
 };

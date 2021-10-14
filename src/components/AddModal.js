@@ -1,8 +1,4 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-// import Box from "@mui/material/Box";
-// import Button from "@mui/material/Button";
-// import Typography from "@mui/material/Typography";
-// import Modal from "@mui/material/Modal";
 import styled from "styled-components";
 import { ImCancelCircle } from "react-icons/im";
 import { IoPersonOutline } from "react-icons/io5";
@@ -11,18 +7,18 @@ import { postActions } from "../redux/modules/post";
 
 export const AddModal = ({ showModal, setShowModal }) => {
   const modalRef = useRef();
+  const dispatch = useDispatch();
 
-  const closemodal = e => {
+  const closemodal = (e) => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
   };
 
-  const dispatch = useDispatch();
-
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [desc, setDesc] = useState("");
+  console.log("it works");
 
   function TextInput(e, setState) {
     setState(e.target.value);
@@ -41,6 +37,8 @@ export const AddModal = ({ showModal, setShowModal }) => {
     setDesc("");
   };
 
+  // const
+  // if (is_addModal) {
   return (
     <div>
       {showModal ? (
@@ -50,7 +48,7 @@ export const AddModal = ({ showModal, setShowModal }) => {
               <h2>Create Post</h2>
               <Cancel
                 onClick={() => {
-                  setShowModal(prev => !prev);
+                  setShowModal((prev) => !prev);
                 }}
               >
                 <ImCancelCircle
@@ -79,15 +77,18 @@ export const AddModal = ({ showModal, setShowModal }) => {
               <PostInput>
                 <PostWrap>
                   <p style={{ textAlign: "left" }}> 동영상 제목:</p>
-                  <Input onChange={e => TextInput(e, setTitle)} value={title} />
+                  <Input
+                    onChange={(e) => TextInput(e, setTitle)}
+                    value={title}
+                  />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 url:</p>
-                  <Input onChange={e => TextInput(e, setUrl)} value={url} />
+                  <Input onChange={(e) => TextInput(e, setUrl)} value={url} />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 후기:</p>
-                  <Input onChange={e => TextInput(e, setDesc)} value={desc} />
+                  <Input onChange={(e) => TextInput(e, setDesc)} value={desc} />
                 </PostWrap>
                 <Submit onClick={addPost}>게시물 추가</Submit>
               </PostInput>
@@ -98,6 +99,7 @@ export const AddModal = ({ showModal, setShowModal }) => {
     </div>
   );
 };
+// };
 
 const Wrap = styled.div`
   width: 100vw;
@@ -109,7 +111,6 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 const Head = styled.div`
   display: flex;
   flex-direction: row;
@@ -118,7 +119,6 @@ const Head = styled.div`
   position: relative;
   border-bottom: 1.5px solid #e5e5e5;
 `;
-
 const Cancel = styled.div`
   width: 40px;
   height: 40px;
@@ -136,7 +136,6 @@ const ModalContent = styled.div`
   height: 800px;
   background-color: white;
 `;
-
 const Body = styled.div`
   width: 100%;
   margin: auto;
@@ -148,7 +147,6 @@ const UserInfo = styled.div`
   align-items: center;
   justify-self: left;
 `;
-
 const PostInput = styled.div`
   display: flex;
   flex-direction: column;
@@ -164,7 +162,6 @@ const PostWrap = styled.div`
   justify-self: center;
   width: 100%;
 `;
-
 const Input = styled.input`
   box-sizing: border-box;
   width: 80%;
@@ -176,7 +173,6 @@ const Input = styled.input`
   border-radius: 5px;
   font-size: 16px;
 `;
-
 const Submit = styled.button`
   /* box-sizing: border-box; */
   width: 80%;
