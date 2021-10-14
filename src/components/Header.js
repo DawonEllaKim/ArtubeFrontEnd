@@ -47,7 +47,7 @@ const Header = () => {
               margin: "10px",
             }}
             onClick={() => {
-              history.push("/mypage");
+              history.push("/mypage/:userID");
             }}
           />
         </Box>

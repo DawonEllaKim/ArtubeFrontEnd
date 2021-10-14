@@ -35,30 +35,6 @@
       "commentDesc": "2번 댓글이다요",
       "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
-    },
-    {
-      "id": "3",
-      "postId": "1",
-      "commentDesc": "dddd",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-<<<<<<< HEAD
-    },
-    {
-      "id": 6,
-      "postId": "1asldkfj",
-      "commentDesc": "fff",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-    },
-    {
-      "id": 9,
-      "postId": "2",
-      "commentDesc": "ㄴㅇ",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-=======
->>>>>>> dev
     }
   ],
   "user": [

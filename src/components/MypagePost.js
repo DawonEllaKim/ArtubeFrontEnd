@@ -6,7 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 import { history } from "../redux/configuerStore";
 
-const MypagePost = props => {
+const MypagePost = (props) => {
   console.log(props);
   const { id, image_url, title } = props;
 
@@ -91,7 +91,7 @@ const PostLink = styled.a`
 `;
 
 const PostImage = styled.img`
-  src: url(${props => props.src});
+  src: url(${(props) => props.src});
   width: 100%;
   height: 100%;
   backface-visibility: hidden;

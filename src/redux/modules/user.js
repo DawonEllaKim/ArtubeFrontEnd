@@ -32,7 +32,7 @@ const signUpAPI = (userId, password, confirmPassword) => {
         console.log(res);
         // const token = res.data.token;
         // localStorage.setItem("token", token);
-        history.push("/user/signIn");
+        history.push("/signIn");
       })
       .catch((err) => console.log(err));
 
@@ -65,7 +65,8 @@ const signInAPI = (userId, password) => {
       .signIn(data)
       .then((res) => {
         console.log(res);
-        // const token = res.data.token
+        alert("로그인되었습니다."); // const token = res.data.token
+        history.push("/");
         // localStorage.setItem("token", token)
         // dispatch(signIn(uid))
       })

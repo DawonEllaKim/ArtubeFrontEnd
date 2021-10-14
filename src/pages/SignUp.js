@@ -56,7 +56,6 @@ const SignUp = (props) => {
           </div>
 
           <div>
-
             <Input
               label=""
               placeholder="Password*"
@@ -78,7 +77,7 @@ const SignUp = (props) => {
           <Button _onClick={signup}>Sign Up</Button>
           <UserExist
             onClick={() => {
-              history.push("/signin");
+              history.push("/signIn");
             }}
           >
             이미 회원이신가요? 로그인하러 가기
