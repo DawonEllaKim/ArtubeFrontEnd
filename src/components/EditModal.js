@@ -5,10 +5,10 @@ import { IoPersonOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { postActions } from "../redux/modules/post";
 
-export const EditModal = props => {
+export const EditModal = (props) => {
   const modalRef = useRef();
 
-  const closemodal = e => {
+  const closemodal = (e) => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
@@ -25,8 +25,8 @@ export const EditModal = props => {
     console.log(title, url, desc);
   }
 
-  const _post = useSelector(state => state.post.list).filter(
-    p => p.postId === _postId
+  const _post = useSelector((state) => state.post.list).filter(
+    (p) => p.postId === _postId
   )[0];
   console.log(_post);
 
@@ -47,7 +47,7 @@ export const EditModal = props => {
               <h2>Create Post</h2>
               <Cancel
                 onClick={() => {
-                  setShowModal(prev => !prev);
+                  setShowModal((prev) => !prev);
                 }}
               >
                 <ImCancelCircle
@@ -78,7 +78,7 @@ export const EditModal = props => {
                   <p style={{ textAlign: "left" }}> 동영상 제목:</p>
                   <Input
                     defaultValue={_post.title}
-                    _onChange={e => TextInput(e, setTitle)}
+                    _onChange={(e) => TextInput(e, setTitle)}
                     value={title}
                   />
                 </PostWrap>
@@ -86,7 +86,7 @@ export const EditModal = props => {
                   <p> 동영상 url:</p>
                   <Input
                     defaultValue={`https://www.youtube.com/embed/${_post.url}`}
-                    _onChange={e => TextInput(e, setUrl)}
+                    _onChange={(e) => TextInput(e, setUrl)}
                     value={url}
                   />
                 </PostWrap>
@@ -94,7 +94,7 @@ export const EditModal = props => {
                   <p> 동영상 썸네일:</p>
                   <Input
                     defaultValue={`https://img.youtube.com/vi/${_post.url}/sddefault.jpg`}
-                    _onChange={e => TextInput(e, setUrl)}
+                    _onChange={(e) => TextInput(e, setUrl)}
                     value={url}
                   />
                 </PostWrap>
@@ -102,7 +102,7 @@ export const EditModal = props => {
                   <p> 동영상 후기:</p>
                   <Input
                     defaultValue={_post.desc}
-                    _onChange={e => TextInput(e, setDesc)}
+                    _onChange={(e) => TextInput(e, setDesc)}
                     value={desc}
                   />
                 </PostWrap>
