@@ -23,58 +23,23 @@
   ],
   "comments": [
     {
-      "id": 1,
-      "postId": "1asldkfj",
+      "id": "2",
+      "postId": "2",
+      "commentDesc": "2번댓글",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "2",
+      "postId": "2",
+      "commentDesc": "2번 댓글이다요",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "3",
+      "postId": "1",
       "commentDesc": "dddd",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-    },
-    {
-      "id": 2,
-      "postId": "1asldkfj",
-      "commentDesc": "ddddd",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-    },
-    {
-      "id": 3,
-      "postId": "1asldkfj",
-      "commentDesc": "ddddddd",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-    },
-    {
-      "id": 4,
-      "postId": "1asldkfj",
-      "commentDesc": "asdfsffs",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-    },
-    {
-      "id": 1,
-      "postId": "1asldkfj",
-      "commentDesc": "ccc",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-    },
-    {
-      "id": 4,
-      "postId": "1asldkfj",
-      "commentDesc": "sss",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-    },
-    {
-      "id": 5,
-      "postId": "1asldkfj",
-      "commentDesc": "dddd",
-      "commentUserId": "aslkdfjas",
-      "commentDate": "2021-10-12"
-    },
-    {
-      "id": 6,
-      "postId": "1asldkfj",
-      "commentDesc": "fff",
       "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
     }
