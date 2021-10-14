@@ -17,27 +17,47 @@
       "youtube_url": "https://www.youtube.com/watch?v=ohCIv3pYCFc",
       "image_url": "https://img.youtube.com/vi/ohCIv3pYCFc/sddefault.jpg",
       "video_url": "https://www.youtube.com/embed/ohCIv3pYCFc",
+<<<<<<< HEAD
       "desc": "DDD되게찌?",
+=======
+      "desc": "됩니다~",
+>>>>>>> 68fbc678c132672538e22b0af3415b0c6bfdc114
       "date": "2021-10-11"
     },
     {
       "id": "3",
       "userId": "나당",
+<<<<<<< HEAD
       "title": "수정점 되라",
       "youtube_url": "https://www.youtube.com/watch?v=ohCIv3pYCFc",
       "image_url": "https://img.youtube.com/vi/ohCIv3pYCFc/sddefault.jpg",
       "video_url": "https://www.youtube.com/embed/ohCIv3pYCFc",
       "desc": "되게찌?RGGGGGG",
+=======
+      "title": "헤이 모두들 안녕~",
+      "youtube_url": "https://www.youtube.com/watch?v=F9sno8pB6pE",
+      "image_url": "https://img.youtube.com/vi/F9sno8pB6pE/sddefault.jpg",
+      "video_url": "https://www.youtube.com/embed/F9sno8pB6pE",
+      "desc": "헤이~ 모두들 안녕~",
+>>>>>>> 68fbc678c132672538e22b0af3415b0c6bfdc114
       "date": "2021-10-11"
     },
     {
       "id": "4",
       "userId": "나당",
+<<<<<<< HEAD
       "title": "수정점 되라",
       "youtube_url": "https://www.youtube.com/watch?v=ohCIv3pYCFc",
       "image_url": "https://img.youtube.com/vi/ohCIv3pYCFc/sddefault.jpg",
       "video_url": "https://www.youtube.com/embed/ohCIv3pYCFc",
       "desc": "되게찌?",
+=======
+      "title": "헤이마마~",
+      "youtube_url": "https://www.youtube.com/watch?v=ydT4rAMGg3U",
+      "image_url": "https://img.youtube.com/vi/ydT4rAMGg3U/sddefault.jpg",
+      "video_url": "https://www.youtube.com/embed/ydT4rAMGg3U",
+      "desc": "춤 짱 잘춤 스우파 완전 재미따요~ 근데 항해 때문에 못봄",
+>>>>>>> 68fbc678c132672538e22b0af3415b0c6bfdc114
       "date": "2021-10-11"
     },
     {
@@ -105,14 +125,49 @@
     {
       "id": "2",
       "postId": "2",
-      "commentDesc": "2번댓글",
+      "commentDesc": "2번 댓글이다요",
       "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
     },
     {
-      "id": "2",
-      "postId": "2",
-      "commentDesc": "2번 댓글이다요",
+      "id": "5",
+      "postId": "1",
+      "commentDesc": "dㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "6",
+      "postId": "1",
+      "commentDesc": "ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "8",
+      "postId": "1",
+      "commentDesc": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "9",
+      "postId": "1",
+      "commentDesc": "ㄴㄴㄴㄴ",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "11",
+      "postId": "1",
+      "commentDesc": "ddd",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": "12",
+      "postId": "1",
+      "commentDesc": "ㄴㄴㄴ",
       "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
     }

@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IoHomeSharp } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import ArtubeLogo3 from "../Image/ArtubeLogo3.png";
 
 import { history } from "../redux/configuerStore";
+import { Button } from "../elements";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../redux/modules/user";
 
 const Header = () => {
+  const token = localStorage.getItem("token");
+  const is_signin = token ? true : false;
+  const dispatch = useDispatch();
+  const signOut = () => {
+    dispatch(userActions.signOutAPI());
+  };
   return (
     <>
       <Wrap>
@@ -50,6 +59,7 @@ const Header = () => {
               history.push("/mypage/:userID");
             }}
           />
+          {is_signin && <Button _onClick={signOut}>로그아웃</Button>}
         </Box>
       </Wrap>
     </>

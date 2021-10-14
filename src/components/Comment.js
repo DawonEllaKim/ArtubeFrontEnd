@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { IoMdClose } from "react-icons/io";
 
 import { Grid, Input, Button, Text } from "../elements";
 import { useDispatch } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
-const Comment = props => {
-  const { commentUserId, commentDesc, id } = props;
+const Comment = (props) => {
+  const { commentUserId, commentDesc, commentId, postId } = props;
+
   const dispatch = useDispatch();
 
   const deleteComment = () => {
-    dispatch(commentActions.deleteCommentMiddleware(id));
+    dispatch(commentActions.deleteCommentMiddleware(commentId));
   };
+
+  useEffect(() => {
+    dispatch(commentActions.getCommentMiddleware(postId));
+  }, []);
+
   return (
     <>
       <Grid>
         <CommentWrap>
           <User>{commentUserId}</User>
           <UserComment>{commentDesc}</UserComment>
+          <DeleteBtn onClick={deleteComment}>
+            <IoMdClose />
+          </DeleteBtn>
         </CommentWrap>
-        <Button _onClick={deleteComment}>삭제</Button>
       </Grid>
     </>
   );
@@ -31,15 +40,20 @@ const CommentWrap = styled.div`
   margin: 10px 0;
 `;
 const User = styled.div`
-  width: 25%;
+  width: 77px;
   font-weight: bold;
   font-size: 14px;
 `;
 const UserComment = styled.div`
-  width: 73%;
+  width: 190px;
   text-align: left;
-  margin: 0 1%;
   font-size: 14px;
+  word-break: break-all;
+`;
+const DeleteBtn = styled.div`
+  width: 23px;
+  color: #939597;
+  cursor: pointer;
 `;
 
 export default Comment;
