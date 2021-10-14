@@ -3,11 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 
-<<<<<<< HEAD
-// import { Image } from "../elements";
-=======
 import { Image, Grid } from "../elements";
->>>>>>> 987bb8ff4c7c1070ff34502065250c6e510414d9
 import { history } from "../redux/configuerStore";
 
 const MypagePost = props => {
@@ -23,15 +19,10 @@ const MypagePost = props => {
               history.push(`/detail/${id}`);
             }}
           >
-<<<<<<< HEAD
-            <PostImage
-              src={`https://img.youtube.com/vi/${url}/sddefault.jpg`}
-=======
             <Image
               shape="rectangle"
               src={image_url}
               style={{ width: "250px", height: "250px" }}
->>>>>>> 987bb8ff4c7c1070ff34502065250c6e510414d9
             />
             <TitleWrap>
               <Title>hover</Title>
@@ -69,7 +60,6 @@ const Post = styled.div`
 
   /* background-color: pink; */
   /* background-image: url("https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg"); */
-
 
   /* &:after{
     position: absolute;
@@ -135,29 +125,29 @@ const PostLink = styled.a`
 `;
 
 const PostImage = styled.img`
-  src: url(${(props) => props.src});
+  src: url(${props => props.src});
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   vertical-align: top;
 
-  &:hover{
+  &:hover {
     zoom: 1;
     filter: alpha(opacity=50);
     -webkit-opacity: 0.5;
     opacity: 0.5;
   }
-`
+`;
 
 const TitleWrap = styled.div`
- position: absolute;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
   padding: 40px;
-`
+`;
 const Title = styled.p`
   /* width:100%;
   height: 100%; */
@@ -166,6 +156,6 @@ const Title = styled.p`
     transform: translate(0px, 0px);
     opacity: 1;
   } */
-`
+`;
 
 export default MypagePost;

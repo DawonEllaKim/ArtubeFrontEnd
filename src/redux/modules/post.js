@@ -134,8 +134,6 @@ export default handleActions(
             return acc;
           }
         }, []);
-
-        console.log(draft.list);
       }),
     [ADD_POST]: (state, action) =>
       produce(state, draft => {

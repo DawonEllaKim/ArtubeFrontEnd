@@ -2,8 +2,8 @@ import axios from "axios";
 
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
-  baseURL: "http://3.35.141.41",
-  // baseURL: "http://localhost:4000",
+  // baseURL: "http://3.35.141.41",
+  baseURL: "http://localhost:4000",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -25,6 +25,7 @@ export const apis = {
   // comment
   getComment: postId => instance.get("/comments", postId),
   addComment: comment => instance.post("/comments", comment),
+  deleteComment: id => instance.delete(`/comments/${id}`, id),
 
   signUp: data => instance.post("/user/signUp", data),
   signIn: data => instance.post("/user/logIn", data),
