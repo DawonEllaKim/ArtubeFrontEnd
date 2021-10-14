@@ -13,10 +13,11 @@ import { history } from "../redux/configuerStore";
 
 const Main = () => {
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
+  const post_list = useSelector(state => state.post.list);
+  console.log(post_list);
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
 
   useEffect(() => {
@@ -25,22 +26,26 @@ const Main = () => {
 
   return (
     <>
-      <Header />
-      {post_list.map((p, idx) => {
-        return <Post {...p} key={idx} />;
-      })}
-      <AddButton>
-        <IoIosAddCircle
-          style={{
-            width: "50px",
-            height: "50px",
-            color: "#f5df4d",
-            cursor: "pointer",
-          }}
-          onClick={openModal}
-        />
-      </AddButton>
-      <AddModal showModal={showModal} setShowModal={setShowModal} />
+      {post_list && (
+        <>
+          <Header />
+          {post_list.map((p, idx) => {
+            return <Post {...p} key={idx} />;
+          })}
+          <AddButton>
+            <IoIosAddCircle
+              style={{
+                width: "50px",
+                height: "50px",
+                color: "#f5df4d",
+                cursor: "pointer",
+              }}
+              onClick={openModal}
+            />
+          </AddButton>
+          <AddModal showModal={showModal} setShowModal={setShowModal} />
+        </>
+      )}
     </>
   );
 };

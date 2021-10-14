@@ -25,7 +25,7 @@ const getPostMiddleware = () => {
     apis
       .getPost()
       .then(res => {
-        const post_list = res.data;
+        const post_list = res.data.post;
         dispatch(getPost(post_list));
       })
       .catch(err => {
@@ -40,14 +40,11 @@ const addPostMiddleware = _post => {
     const videoId = _post.url.split("=")[1];
 
     const post = {
-      id: String(parseInt(getState().post.list.length) + 1),
-      userId: "나당",
       title: _post.title,
       youtube_url: _post.url,
       image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
       video_url: `https://www.youtube.com/embed/${videoId}`,
       desc: _post.desc,
-      date: "2021-10-11",
     };
 
     apis
@@ -63,41 +60,39 @@ const addPostMiddleware = _post => {
   };
 };
 
-const getOnePostMiddleware = () => {
-  return function (dispatch, getState, { history }) {
-    apis
-      .getPost()
-      .then(res => {
-        const post_list = res.data;
-        dispatch(getPost(post_list));
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
-};
-
 const editPostMiddleware = (postId, _post) => {
   return function (dispatch, getState, { history }) {
-    const videoId = _post.url.split("=")[1];
+    const videoId = _post.youtube_url.split("=")[1];
 
     const post = {
-      id: postId,
-      userId: "나당",
       title: _post.title,
       youtube_url: _post.url,
       image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
       video_url: `https://www.youtube.com/embed/${videoId}`,
       desc: _post.desc,
-      date: "2021-10-11",
     };
 
+    //id, title, youtube_url, desc
+    // const {}
+    // title, youtube_url, desc
+
+    // const post = {
+    //   id: postId,
+    //   userId: "나당",
+    //   title: _post.title,
+    //   youtube_url: _post.url,
+    //   image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+    //   video_url: `https://www.youtube.com/embed/${videoId}`,
+    //   desc: _post.desc,
+    //   date: "2021-10-11",
+    // };
+
     apis
-      .editPost(postId, post)
+      .editPost(post)
       .then(res => {
         console.log(res);
-        dispatch(editPost(postId, post));
-        history.goBack();
+        // dispatch(editPost(postId, post));
+        history.push(`/`);
       })
       .catch(err => {
         console.error(err);
@@ -141,7 +136,7 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, draft => {
-        draft.list.filter(p => p.id !== action.payload.postId);
+        draft.list = draft.list.filter(p => p.id !== action.payload.postId);
       }),
     [EDIT_POST]: (state, action) =>
       produce(state, draft => {
@@ -160,7 +155,6 @@ const postActions = {
   addPostMiddleware,
   editPostMiddleware,
   deletePostMiddleware,
-  getOnePostMiddleware,
 };
 
 export { postActions };

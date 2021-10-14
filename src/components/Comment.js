@@ -7,11 +7,12 @@ import { useDispatch } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
 const Comment = props => {
-  const { commentUserId, commentDesc, id, postId, desc } = props;
+  const { commentUserId, commentDesc, commentId, postId } = props;
+
   const dispatch = useDispatch();
 
   const deleteComment = () => {
-    dispatch(commentActions.deleteCommentMiddleware(id));
+    dispatch(commentActions.deleteCommentMiddleware(commentId));
   };
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const Comment = props => {
       <Grid>
         <CommentWrap>
           <User>{commentUserId}</User>
-          <UserComment>{commentDesc}{desc}</UserComment>
+          <UserComment>{commentDesc}</UserComment>
           <DeleteBtn onClick={deleteComment}>
             <IoMdClose />
           </DeleteBtn>
@@ -53,6 +54,6 @@ const DeleteBtn = styled.div`
   width: 23px;
   color: #939597;
   cursor: pointer;
-`
+`;
 
 export default Comment;

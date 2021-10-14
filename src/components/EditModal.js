@@ -45,7 +45,7 @@ export const EditModal = (props) => {
   const editPost = () => {
     const post = {
       title,
-      url,
+      youtube_url: url,
       desc,
     };
     setTitle("");

@@ -5,11 +5,11 @@ import { apis } from "../../common/axios";
 
 // const baseURL = "http://3.34.90.85:3000/";
 
-const LOG_IN = "LOG_IN";
-const LOG_OUT = "LOG_OUT";
+const SIGN_IN = "SIGN_IN";
+const SIGN_OUT = "SIGN_OUT";
 
-const signIn = createAction(LOG_IN, (token) => ({ token }));
-const signOut = createAction(LOG_OUT);
+const signIn = createAction(SIGN_IN, token => ({ token }));
+const signOut = createAction(SIGN_OUT);
 
 const initialState = {
   token: null,
@@ -28,13 +28,13 @@ const signUpAPI = (userId, password, confirmPassword) => {
 
     apis
       .signUp(data)
-      .then((res) => {
+      .then(res => {
         console.log(res);
         // const token = res.data.token;
         // localStorage.setItem("token", token);
         history.push("/signIn");
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
 
     // axios({
     //   method: "POST",
@@ -59,18 +59,17 @@ const signInAPI = (userId, password) => {
       userId,
       password,
     };
-    console.log(data);
 
     apis
       .signIn(data)
-      .then((res) => {
+      .then(res => {
         console.log(res);
-        alert("로그인되었습니다."); // const token = res.data.token
+        const token = res.data.token;
+        localStorage.setItem("token", token);
         history.push("/");
-        // localStorage.setItem("token", token)
-        // dispatch(signIn(uid))
+        dispatch(signIn(token));
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };
@@ -78,22 +77,28 @@ const signInAPI = (userId, password) => {
 
 const signOutAPI = () => {
   return function (dispatch, getState, { history }) {
-    // localStorage.removeItem("token");
-    // localStorage.clear();
-    // history.push("/");
+    localStorage.removeItem("token");
+    localStorage.clear();
+    history.push("/signin");
     dispatch(signOut());
+  };
+};
+
+const userCheckAPI = token => {
+  return function (dispatch, getState, { history }) {
+    dispatch(signIn(token));
   };
 };
 
 export default handleActions(
   {
-    [LOG_IN]: (state, action) =>
-      produce(state, (draft) => {
-        draft.user = action.payload.user;
+    [SIGN_IN]: (state, action) =>
+      produce(state, draft => {
+        draft.token = action.payload.token;
         draft.is_login = true;
       }),
-    [LOG_OUT]: (state, action) =>
-      produce(state, (draft) => {
+    [SIGN_OUT]: (state, action) =>
+      produce(state, draft => {
         draft.user = null;
         draft.is_login = false;
       }),
@@ -105,6 +110,7 @@ const userActions = {
   signInAPI,
   signUpAPI,
   signOutAPI,
+  userCheckAPI,
 };
 
 export { userActions };
