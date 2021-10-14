@@ -3,6 +3,7 @@ import { produce } from "immer";
 import axios from "axios";
 import { apis } from "../../common/axios";
 
+
 // const baseURL = "http://3.34.90.85:3000/";
 
 const LOG_IN = "LOG_IN";
@@ -19,6 +20,7 @@ const initialState = {
 const signUpAPI = (userId, password, confirmPassword) => {
   return function (dispatch, getState, { history }) {
     console.log(userId, password, confirmPassword);
+
     const data = {
       userId: userId,
       password: password,

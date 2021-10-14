@@ -49,6 +49,34 @@
       "commentDesc": "asdfsffs",
       "commentUserId": "aslkdfjas",
       "commentDate": "2021-10-12"
+    },
+    {
+      "id": 1,
+      "postId": "1asldkfj",
+      "commentDesc": "ccc",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 4,
+      "postId": "1asldkfj",
+      "commentDesc": "sss",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 5,
+      "postId": "1asldkfj",
+      "commentDesc": "dddd",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
+    },
+    {
+      "id": 6,
+      "postId": "1asldkfj",
+      "commentDesc": "fff",
+      "commentUserId": "aslkdfjas",
+      "commentDate": "2021-10-12"
     }
   ],
   "user": [

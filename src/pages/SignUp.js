@@ -56,6 +56,7 @@ const SignUp = props => {
           </div>
 
           <div>
+
             <Input
               label=""
               placeholder="Password*"
