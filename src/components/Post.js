@@ -75,7 +75,7 @@ const Post = (props) => {
         <Grid>
           <TitleLink
             onClick={() => {
-              history.push("/detail");
+              history.push(`/detail/${id}`);
             }}
           >
             <Text color="#939597" bold size="24px" margin=" 20px auto">

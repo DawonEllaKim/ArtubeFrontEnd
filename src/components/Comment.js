@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
 const Comment = props => {
-  const { commentUserId, commentDesc, id, postId } = props;
+  const { commentUserId, commentDesc, id, postId, desc } = props;
   const dispatch = useDispatch();
 
   const deleteComment = () => {
@@ -23,7 +23,7 @@ const Comment = props => {
       <Grid>
         <CommentWrap>
           <User>{commentUserId}</User>
-          <UserComment>{commentDesc}</UserComment>
+          <UserComment>{commentDesc}{desc}</UserComment>
           <DeleteBtn onClick={deleteComment}>
             <IoMdClose />
           </DeleteBtn>

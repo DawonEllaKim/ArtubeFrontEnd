@@ -97,7 +97,7 @@ const editPostMiddleware = (postId, _post) => {
       .then(res => {
         console.log(res);
         dispatch(editPost(postId, post));
-        history.push(`/`);
+        history.goBack();
       })
       .catch(err => {
         console.error(err);

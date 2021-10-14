@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
+import {IoArrowBackCircleOutline} from 'react-icons/io5'
 
 import Header from "../components/Header";
 import Comment from "../components/Comment";
@@ -14,6 +15,7 @@ import { postActions } from "../redux/modules/post";
 import { EditModal } from "../components/EditModal";
 
 const Detail = props => {
+
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
     setShowModal(prev => !prev);
@@ -43,9 +45,19 @@ const Detail = props => {
         <>
           <Header />
           <CommentWrap>
+            <Left>
+              <BtnWrap>
+                <IoArrowBackCircleOutline onClick={() =>{
+                  history.goBack();
+                }} style={{fontSize: '28px'}}/>
+              </BtnWrap>
+            <TitleWrap>
+              {post.title}
+            </TitleWrap>
             <ImageWrap>
               <Image shape="rectangle" src={post.image_url} />
             </ImageWrap>
+            </Left>
             <DetailWrap>
               <User>
                 <FaUserCircle
@@ -61,10 +73,13 @@ const Detail = props => {
                     history.push("/mypage");
                   }}
                 >
-                  <Text bold>Hwang</Text>
+                  <Text bold>{post.userId}</Text>
                 </UserLink>
                 <EditButton onClick={openModal}>Edit</EditButton>
               </User>
+              <Description>
+                  {post.desc}
+              </Description>
               <Comments>
                 {comment_list.map((c, idx) => {
                   return <Comment {...c} key={idx} />;
@@ -101,6 +116,22 @@ const CommentWrap = styled.div`
   box-shadow: 2px 2px 2px #dbdbdb;
 `;
 
+const Left = styled.div`
+  position: relative;
+`
+const BtnWrap = styled.div`
+  position : absolute;
+  top: 10px;
+  left: 12px;
+  color: #939597;
+  cursor: pointer;
+`
+const TitleWrap = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  color: #939597;
+  padding: 11px 0;
+`
 const ImageWrap = styled.div`
   width: 600px;
 `;
@@ -137,8 +168,16 @@ const EditButton = styled.button`
   cursor: pointer;
 `;
 
+const Description = styled.div`
+  font-size: 14px;
+  text-align: left;
+  padding: 58px 5px 10px 10px ;
+  border-bottom: 1px solid #dbdbdb;
+  box-sizing: border-box;
+`
+
 const Comments = styled.div`
-  padding: 50px 5px 0 0;
+  padding-right: 5px;
 `;
 const InputWrap = styled.div`
   display: flex;
