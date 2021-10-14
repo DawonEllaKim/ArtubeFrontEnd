@@ -8,15 +8,15 @@ import { apis } from "../../common/axios";
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 
-const logIn = createAction(LOG_IN, token => ({ token }));
-const logout = createAction(LOG_OUT);
+const signIn = createAction(LOG_IN, token => ({ token }));
+const signOut = createAction(LOG_OUT);
 
 const initialState = {
   token: null,
   is_login: false,
 };
 
-const signupAPI = (userId, password, confirmPassword) => {
+const signUpAPI = (userId, password, confirmPassword) => {
   return function (dispatch, getState, { history }) {
     console.log(userId, password, confirmPassword);
     const data = {
@@ -25,16 +25,15 @@ const signupAPI = (userId, password, confirmPassword) => {
       confirmPassword: confirmPassword,
     };
 
-    // axios
-    //   .post("/user/signUp", {
-    //     data,
-    //   })
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    apis
+      .signUp(data)
+      .then(res => {
+        console.log(res);
+        // const token = res.data.token;
+        // localStorage.setItem("token", token);
+        history.push("/user/signIn");
+      })
+      .catch(err => console.log(err));
 
     // axios({
     //   method: "POST",
@@ -50,16 +49,38 @@ const signupAPI = (userId, password, confirmPassword) => {
     //     console.log("signupAPI에서 오류발생", err);
     //     window.alert("회원가입에 실패했습니다.");
     //   });
-
-    apis
-      .signup(data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
   };
 };
 
-const loginAPI = (username, password) => {
-  return function (dispatch, getState, { history }) {};
+const signInAPI = (userId, password) => {
+  return function (dispatch, getState, { history }) {
+    const data = {
+      userId,
+      password,
+    };
+    console.log(data);
+
+    apis
+      .signIn(data)
+      .then(res => {
+        console.log(res);
+        // const token = res.data.token
+        // localStorage.setItem("token", token)
+        // dispatch(signIn(uid))
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+const signOutAPI = () => {
+  return function (dispatch, getState, { history }) {
+    // localStorage.removeItem("token");
+    // localStorage.clear();
+    // history.push("/");
+    dispatch(signOut());
+  };
 };
 
 export default handleActions(
@@ -71,7 +92,6 @@ export default handleActions(
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {
-        localStorage.removeItem("user_name");
         draft.user = null;
         draft.is_login = false;
       }),
@@ -80,9 +100,9 @@ export default handleActions(
 );
 
 const userActions = {
-  loginAPI,
-  signupAPI,
-  logout,
+  signInAPI,
+  signUpAPI,
+  signOutAPI,
 };
 
 export { userActions };
