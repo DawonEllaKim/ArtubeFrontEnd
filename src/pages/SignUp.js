@@ -20,7 +20,7 @@ const SignUp = (props) => {
 
   const signup = () => {
     console.log(userId, password, confirmPassword);
-    dispatch(userActions.signupAPI(userId, password, confirmPassword));
+    dispatch(userActions.signUpAPI(userId, password, confirmPassword));
   };
 
   return (
@@ -56,6 +56,7 @@ const SignUp = (props) => {
           </div>
 
           <div>
+
             <Input
               label=""
               placeholder="Password*"
