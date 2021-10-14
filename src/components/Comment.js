@@ -2,9 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 import { Grid, Input, Button, Text } from "../elements";
+import { useDispatch } from "react-redux";
+import { commentActions } from "../redux/modules/comment";
 
 const Comment = props => {
-  const { commentUserId, commentDesc } = props;
+  const { commentUserId, commentDesc, id } = props;
+  const dispatch = useDispatch();
+
+  const deleteComment = () => {
+    dispatch(commentActions.deleteCommentMiddleware(id));
+  };
   return (
     <>
       <Grid>
@@ -12,6 +19,7 @@ const Comment = props => {
           <User>{commentUserId}</User>
           <UserComment>{commentDesc}</UserComment>
         </CommentWrap>
+        <Button _onClick={deleteComment}>삭제</Button>
       </Grid>
     </>
   );
