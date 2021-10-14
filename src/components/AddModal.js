@@ -18,6 +18,7 @@ export const AddModal = ({ showModal, setShowModal }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [desc, setDesc] = useState("");
+  console.log("it works");
 
   function TextInput(e, setState) {
     setState(e.target.value);
