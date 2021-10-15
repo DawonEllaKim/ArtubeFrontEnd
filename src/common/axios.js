@@ -23,7 +23,11 @@ export const apis = {
   // 게시물 불러오기
   // 게시물 불러오기
   getPost: () => instance.get("/post/main"),
+<<<<<<< HEAD
   
+=======
+  // 유저에게 맞는 게시물 불러오기
+>>>>>>> ade072d20fb5b65423b5b9c05133019aefe94b14
   getMyPost: (userId) => instance.get(`/post/myPage/${userId}`),
   // 게시물 작성하기
   createPost: (contents) => instance.post("/post", contents),
@@ -40,6 +44,7 @@ export const apis = {
   deletePost: (id) => instance.delete(`/post/detail/${id}`),
 
   // comment
+<<<<<<< HEAD
 
   getComment: postId => instance.get(`/comment/comment/${postId}`),
   deleteComment: (commentId, commentUserId) =>
@@ -51,4 +56,14 @@ export const apis = {
   signIn: data => instance.post("/user/signIn", data),
   userCheck: () => instance.get("/user/me"),
   editUserProfile: (userPic, userIntro) => instance.put('/user/me',{userPic, userIntro})
+=======
+  getComment: (postId) => instance.get(`/comment/comment/${postId}`),
+  deleteComment: (commentId) => instance.delete(`/comment/comment`, commentId),
+  addComment: (commentUserId, commentDesc, postId) =>
+    instance.post("/comment/comment", { commentUserId, commentDesc, postId }),
+
+  signUp: (data) => instance.post("/user/signUp", data),
+  signIn: (data) => instance.post("/user/signIn", data),
+  userCheck: (token) => instance.get("/user/me", token),
+>>>>>>> ade072d20fb5b65423b5b9c05133019aefe94b14
 };
