@@ -12,15 +12,15 @@ const Post = (props) => {
   return (
     <>
       <Grid
-        width="65%"
+        width="600px"
         border=" 1px solid #f5df4d"
         borderRadius="2px"
-        margin="70px auto"
+        margin="100px auto"
         shadow=" 2px 2px 2px #dbdbdb"
       >
         {/* 프로필 아이콘 + 유저아이디 + 데이트*/}
         <Grid is_flex>
-          <Grid is_flex width="auto">
+          <Top>
             {/* 프로필 아이콘 */}
             <FaUserCircle
               style={{
@@ -41,9 +41,9 @@ const Post = (props) => {
                 {userId}
               </Text>
             </UserLink>
-          </Grid>
+          </Top>
 
-          <Grid is_flex width="auto">
+          <Grid is_flex>
             {/* 데이트*/}
             <Text color="#939597" size="16px">
               {date}
@@ -86,6 +86,12 @@ const Post = (props) => {
     </>
   );
 };
+
+const Top = styled.div`
+  display: flex;
+  border: 1px solid blue;
+  box-sizing: border-box;
+`
 
 const UserLink = styled.button`
   border: none;

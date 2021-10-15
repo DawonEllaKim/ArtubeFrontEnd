@@ -118,15 +118,10 @@ const ProfileRight = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
-  text-align: left;
-  /* border: 1px solid red;
-  box-sizing: border-box; */
 `;
 const UserWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 1px solid blue;
-  box-sizing: border-box; */
 `;
 const UserId = styled.div`
   font-size: 24px;
@@ -140,8 +135,6 @@ const EditBtn = styled.button`
   margin-top: 30px;
 `;
 const Introduction = styled.div`
-  /* border: 1px solid red;
-  box-sizing: border-box; */
 `;
 const WriteTintro = styled.textarea`
   width: 400px;
@@ -163,7 +156,6 @@ const PostWrap = styled.div`
   grid-template-columns: 250px 250px 250px;
   grid-template-rows: 250px 250px 250px;
   gap: 3%;
-  background-color: pink;
 `;
 const AddButton = styled.div`
   position: fixed;

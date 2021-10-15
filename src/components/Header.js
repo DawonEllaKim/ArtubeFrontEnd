@@ -18,7 +18,12 @@ const Header = () => {
 
   const signOut = () => {
     dispatch(userActions.signOutAPI());
+    history.replace('/')
   };
+  const signIn = () =>{
+    history.push('/signin')
+  }
+
   return (
     <>
       <Wrap>
@@ -29,7 +34,7 @@ const Header = () => {
               width: "26px",
               height: "26px",
               cursor: "pointer",
-              margin: "10px",
+              marginLeft: "30px",
             }}
             onClick={() => {
               window.location.replace('/')
@@ -40,13 +45,14 @@ const Header = () => {
           {/* 로고: 이거 눌러도 "/"로 이동*/}
           <Logo
             src={ArtubeLogo3}
-            style={{ cursor: "pointer", margin: "10px" }}
+            style={{ cursor: "pointer", margin:'10px 0 0 50px' }}
             onClick={() => {
               window.location.replace('/')
             }}
           />
 
           {/* My Profile 버튼: 이거 누르면 "/mypage"로 이동*/}
+          {is_signin ?
           <IoPersonOutline
             style={{
               width: "25px",
@@ -56,13 +62,20 @@ const Header = () => {
               padding: "2px",
               cursor: "pointer",
               zIndex: "10000",
-              margin: "10px",
+              marginLeft: '80px',
             }}
             onClick={() => {
               history.push(`/mypage/${userId}`);
             }}
           />
-          {is_signin && <Button _onClick={signOut}>로그아웃</Button>}
+          : null
+          }
+
+          {/* 로그인/로그아웃 버튼 */}
+          {is_signin ? 
+            <LogInOut onClick={signOut}>로그아웃</LogInOut>
+          : <LogInOut onClick={signIn}>로그인</LogInOut>
+          }
         </Box>
       </Wrap>
     </>
@@ -78,7 +91,7 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 54px;
+  height: 80px;
   background-color: #f5df4d;
   border-bottom: 1px solid #9e9e9e;
   z-index: 100;
@@ -89,12 +102,21 @@ const Box = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 70%;
-  height: 54px;
+  width: 700px;
+  height: 80px;
   margin: auto;
-  /* padding: 0 40px; */
 `;
 
 const Logo = styled.img`
   height: 80%;
+  width: 300px;
 `;
+
+const LogInOut = styled.button`
+  border: 2px solid #000;
+  border-radius: 3px;
+  background-color: transparent;
+  color: #000;
+  height: 34px;
+  margin-right: 30px;
+`
