@@ -10,18 +10,21 @@ import { Grid } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
 import { history } from "../redux/configuerStore";
+import { userActions } from "../redux/modules/user";
 
 const Main = () => {
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
-  console.log(post_list);
+  const post_list = useSelector(state => state.post.list);
+
+  const token = localStorage.getItem("token");
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
 
   useEffect(() => {
     dispatch(postActions.getPostMiddleware());
+    dispatch(userActions.userCheckAPI());
   }, []);
 
   return (

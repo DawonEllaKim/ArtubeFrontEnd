@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { IoIosArrowForward } from "react-icons/io";
 import { history } from "../redux/configuerStore";
 
-const MypagePost = (props) => {
-  console.log(props);
+const MypagePost = props => {
   const { id, image_url, title } = props;
 
   return (
@@ -87,7 +86,7 @@ const PostLink = styled.a`
   }
 `;
 const PostImage = styled.img`
-  src: url(${(props) => props.src});
+  src: url(${props => props.src});
   width: 100%;
   height: 100%;
   backface-visibility: hidden;

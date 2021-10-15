@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IoHomeSharp } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
@@ -13,8 +13,7 @@ const Header = () => {
   const token = localStorage.getItem("token");
   const is_signin = token ? true : false;
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.user);
-  console.log(userId);
+  const userId = useSelector(state => state.user.user);
 
   const signOut = () => {
     dispatch(userActions.signOutAPI());
@@ -23,6 +22,13 @@ const Header = () => {
   const signIn = () =>{
     history.push('/signin')
   }
+
+
+  useEffect(() => {
+    if (token) {
+      dispatch(userActions.userCheckAPI());
+    }
+  }, []);
 
   return (
     <>
@@ -37,7 +43,7 @@ const Header = () => {
               marginLeft: "30px",
             }}
             onClick={() => {
-              window.location.replace('/')
+              window.location.replace("/");
             }}
           />
           {/* IoHomeOutline */}
@@ -47,7 +53,7 @@ const Header = () => {
             src={ArtubeLogo3}
             style={{ cursor: "pointer", margin:'10px 0 0 50px' }}
             onClick={() => {
-              window.location.replace('/')
+              window.location.replace("/");
             }}
           />
 

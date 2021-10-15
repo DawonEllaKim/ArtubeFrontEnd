@@ -1,16 +1,49 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { ImCancelCircle } from "react-icons/im";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../redux/modules/user";
+import { profileActions } from "../redux/modules/profile";
+import { Image } from "../elements";
 
-const UserModal = (props) => {
+const UserModal = props => {
+  const dispatch = useDispatch();
+  const userInfo = useSelector(state => state.profile.userInfo);
+  const preview = useSelector(state => state.profile.preview);
+  const token = localStorage.getItem("token");
+
+  const [userPic, setUserPic] = useState("");
+  const profileImage = useRef();
+  const selectFile = e => {
+    const reader = new FileReader();
+    const file = profileImage.current.files[0];
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      dispatch(profileActions.setPreview(reader.result));
+      setUserPic(reader.result);
+    };
+  };
+
+  const [userIntro, setIntro] = useState();
+  const editProfile = () => {
+    dispatch(profileActions.updateProfileMiddleware(userPic, userIntro));
+    setIntro("");
+    setShowProfileModal(false);
+  };
+
+  useEffect(() => {
+    if (token) {
+      dispatch(profileActions.getProfleMiddleware(token));
+    }
+  }, []);
+
   const modalRef = useRef();
-
-  const closemodal = (e) => {
+  const closemodal = e => {
     if (modalRef.current === e.target) {
       setShowProfileModal(false);
     }
   };
-
   const { showProfileModal, setShowProfileModal } = props;
 
   return (
@@ -22,26 +55,45 @@ const UserModal = (props) => {
               <h2>Edit Profile</h2>
               <Cancel
                 onClick={() => {
-                  setShowProfileModal((prev) => !prev);
+                  setShowProfileModal(prev => !prev);
                 }}
               >
-                <ImCancelCircle
-                  style={{ width: "30px", height: "30px", cursor: "pointer" }}
+                <Image
+                  size="300"
+                  style={{ margin: "20px 200px 0px 0px" }}
+                  src={
+                    preview
+                      ? preview
+                      : "https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg"
+                  }
                 />
               </Cancel>
             </Head>
             <UserProfile>
               <ImageUpload>
                 <Priview />
+                <input type="file" ref={profileImage} onChange={selectFile} />
                 <BtnWrap>
                   <ImgUploadBtn>수정</ImgUploadBtn>
                   <ImgDeleteBtn>삭제</ImgDeleteBtn>
                 </BtnWrap>
               </ImageUpload>
-              <textarea style={{width: '400px', height: '100px', border:'1px solid #dbdbdb'}}>자기소개를 입력하세요</textarea>
+              <textarea
+                style={{
+                  width: "400px",
+                  height: "100px",
+                  border: "1px solid #dbdbdb",
+                }}
+                onChange={e => setIntro(e.target.value)}
+                value={userIntro}
+              >
+                {userInfo.userIntro
+                  ? userInfo.userIntro
+                  : "자기소개를 입력하세요"}
+              </textarea>
             </UserProfile>
             <BtnWrap>
-              <Complete>수정 완료</Complete>
+              <Complete onClick={editProfile}>수정 완료</Complete>
             </BtnWrap>
           </Modal>
         </Wrap>

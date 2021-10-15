@@ -15,11 +15,10 @@ import MyPage from "./pages/MyPage";
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  console.log(token);
 
   useEffect(() => {
     if (token) {
-      dispatch(userActions.userCheckAPI(token));
+      dispatch(userActions.userCheckAPI());
     }
   }, []);
 
