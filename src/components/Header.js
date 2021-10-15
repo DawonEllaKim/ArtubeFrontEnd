@@ -29,7 +29,7 @@ const Header = () => {
               margin: "10px",
             }}
             onClick={() => {
-              history.push("/");
+              window.location.replace('/')
             }}
           />
           {/* IoHomeOutline */}
@@ -39,7 +39,7 @@ const Header = () => {
             src={ArtubeLogo3}
             style={{ cursor: "pointer", margin: "10px" }}
             onClick={() => {
-              history.push("/");
+              window.location.replace('/')
             }}
           />
 

@@ -50,5 +50,5 @@ export const apis = {
   signUp: data => instance.post("/user/signUp", data),
   signIn: data => instance.post("/user/signIn", data),
   userCheck: () => instance.get("/user/me"),
-
+  editUserProfile: (userPic, userIntro) => instance.put('/user/me',{userPic, userIntro})
 };

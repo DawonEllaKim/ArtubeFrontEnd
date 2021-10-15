@@ -43,7 +43,7 @@ const getMyPostMiddleware = (userId) =>{
       .getMyPost(userId)
       .then((res) =>{
         console.log(res)
-        const my_post_list = res.data.post;
+        const my_post_list = res.data.myPagePost;
         // console.log('디스패치 할 리스트'  my_post_list)
         dispatch(getMyPost(my_post_list));
       }).catch((err) => console.error(err));
