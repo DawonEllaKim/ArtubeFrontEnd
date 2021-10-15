@@ -11,17 +11,22 @@ import { postActions } from "../redux/modules/post";
 
 import { IoIosAddCircle } from "react-icons/io";
 
-const MyPage = props => {
-  const dispatch = useDispatch();
-  const userId = props.match.params.userId;
+const MyPage = (props) => {
   console.log(props);
-  const myPostList = useSelector(state => state.post.list);
-  console.log(userId);
+  const dispatch = useDispatch();
+  // const post_list = useSelector((state) => state.post.list);
+  const userId = props.match.params.userId;
+  console.log(props.match);
+  const myPostList = useSelector((state) => state.post.list);
+  const logedInUserId = useSelector((state) => state.user.user);
+  const sameUser = userId === logedInUserId ? true : false;
+  // const myPostList = post_list.filter((p) => p.userId === userId);
+  // console.log(myPostList);
 
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal(prev => !prev);
+    setShowModal((prev) => !prev);
   };
 
   useEffect(() => {
@@ -34,18 +39,20 @@ const MyPage = props => {
         {/* 고정된 헤더 */}
         <Header />
 
+        {/* 유저 프로필 */}
         <ProfileWrap>
           <ProfileLeft>
             <ProfileImage></ProfileImage>
-            <UploadBtn>UPLOAD</UploadBtn>
           </ProfileLeft>
+
           <ProfileRight>
             <UserWrap>
-              <UserId>USERID</UserId>
-              <EditBtn>EDIT</EditBtn>
+              <UserId>{userId}</UserId>
+              {sameUser ? <EditBtn>edit</EditBtn> : null}
             </UserWrap>
+
             <Introduction>
-              <WriteTintro placeholder="자기소개를 입력하세요"></WriteTintro>
+              <p>자기소개를 입력하세요</p>
             </Introduction>
           </ProfileRight>
         </ProfileWrap>
@@ -72,6 +79,7 @@ const MyPage = props => {
       </Wrap>
 
       {/* 게시물 추가 모달창 */}
+
       <AddModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
@@ -93,10 +101,6 @@ const ProfileImage = styled.div`
 
   border: 1px solid #dbdbdb;
   box-sizing: border-box; ;
-`;
-const UploadBtn = styled.button`
-  border: 1px solid #939597;
-  background-color: transparent;
 `;
 const ProfileRight = styled.div`
   display: flex;
@@ -134,14 +138,12 @@ const WriteTintro = styled.textarea`
   border-radius: 5px;
   box-sizing: border-box;
 `;
-
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
-
 const PostWrap = styled.div`
   width: 900px;
   margin: 80px 0 0 10%;
@@ -149,8 +151,8 @@ const PostWrap = styled.div`
   grid-template-columns: 250px 250px 250px;
   grid-template-rows: 250px 250px 250px;
   gap: 3%;
+  background-color: pink;
 `;
-
 const AddButton = styled.div`
   position: fixed;
   bottom: 10px;
