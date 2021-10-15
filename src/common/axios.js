@@ -23,7 +23,8 @@ export const apis = {
   // 게시물 불러오기
   // 게시물 불러오기
   getPost: () => instance.get("/post/main"),
-  
+
+  // 유저에게 맞는 게시물 불러오기
   getMyPost: (userId) => instance.get(`/post/myPage/${userId}`),
   // 게시물 작성하기
   createPost: (contents) => instance.post("/post", contents),
@@ -50,5 +51,5 @@ export const apis = {
   signUp: data => instance.post("/user/signUp", data),
   signIn: data => instance.post("/user/signIn", data),
   userCheck: () => instance.get("/user/me"),
-
+  editUserProfile: (userPic, userIntro) => instance.put('/user/me',{userPic, userIntro})
 };

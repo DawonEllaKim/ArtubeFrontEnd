@@ -13,6 +13,9 @@ const Header = () => {
   const token = localStorage.getItem("token");
   const is_signin = token ? true : false;
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user.user);
+  console.log(userId);
+
   const signOut = () => {
     dispatch(userActions.signOutAPI());
   };
@@ -29,7 +32,7 @@ const Header = () => {
               margin: "10px",
             }}
             onClick={() => {
-              history.push("/");
+              window.location.replace('/')
             }}
           />
           {/* IoHomeOutline */}
@@ -39,7 +42,7 @@ const Header = () => {
             src={ArtubeLogo3}
             style={{ cursor: "pointer", margin: "10px" }}
             onClick={() => {
-              history.push("/");
+              window.location.replace('/')
             }}
           />
 
@@ -56,7 +59,7 @@ const Header = () => {
               margin: "10px",
             }}
             onClick={() => {
-              history.push("/mypage/:userID");
+              history.push(`/mypage/${userId}`);
             }}
           />
           {is_signin && <Button _onClick={signOut}>로그아웃</Button>}

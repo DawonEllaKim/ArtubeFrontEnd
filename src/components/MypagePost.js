@@ -1,9 +1,7 @@
 // 마이페이지에서 내가 올린 게시물 하나하나
-
 import React from "react";
 import styled from "styled-components";
 import { IoIosArrowForward } from "react-icons/io";
-
 import { history } from "../redux/configuerStore";
 
 const MypagePost = (props) => {
@@ -54,7 +52,6 @@ const Post = styled.div`
     transform: scale(1.03);
   } */
 `;
-
 const PostLink = styled.a`
   display: block;
   position: relative;
@@ -89,7 +86,6 @@ const PostLink = styled.a`
     right: 10px; */
   }
 `;
-
 const PostImage = styled.img`
   src: url(${(props) => props.src});
   width: 100%;
@@ -104,7 +100,6 @@ const PostImage = styled.img`
     opacity: 0.5;
   }
 `;
-
 const TitleWrap = styled.div`
   position: absolute;
   top: 0;
