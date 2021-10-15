@@ -23,6 +23,8 @@ export const apis = {
   // 게시물 불러오기
   // 게시물 불러오기
   getPost: () => instance.get("/post/main"),
+
+  getMyPost: userId => instance.get(`/post/myPage/${userId}`),
   // 게시물 작성하기
   createPost: contents => instance.post("/post", contents),
   // 게시물 수정하기
@@ -36,8 +38,6 @@ export const apis = {
     }),
   // 게시물 삭제하기
   deletePost: id => instance.delete(`/post/detail/${id}`),
-
-  myPost: userId => instance.get(`/post/myPage/${userId}`),
 
   // comment
   getComment: postId => instance.get(`/comment/comment/${postId}`),

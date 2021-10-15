@@ -12,13 +12,21 @@ import { postActions } from "../redux/modules/post";
 import { IoIosAddCircle } from "react-icons/io";
 
 const MyPage = props => {
+  const dispatch = useDispatch();
+  const userId = props.match.params.userId;
+  console.log(props);
+  const myPostList = useSelector(state => state.post.list);
+  console.log(userId);
+
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
     setShowModal(prev => !prev);
   };
 
-  //삭제할 부분
+  useEffect(() => {
+    dispatch(postActions.getMyPostMiddleware(userId));
+  }, [userId]);
 
   return (
     <>
@@ -44,9 +52,9 @@ const MyPage = props => {
 
         {/* 내가 올린 동영상 모음 */}
         <PostWrap>
-          {/* {myPostList.map((p, idx) => {
+          {myPostList.map((p, idx) => {
             return <MypagePost {...p} key={idx} />;
-          })} */}
+          })}
         </PostWrap>
 
         {/* 게시물 추가 모달창 여는 버튼 */}
