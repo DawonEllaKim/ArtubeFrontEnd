@@ -20,7 +20,9 @@ const Detail = props => {
     setShowModal(prev => !prev);
   };
   const dispatch = useDispatch();
+
   const currentUser = useSelector(state => state.user.user);
+
   const post_list = useSelector(state => state.post.list);
   const userId = useSelector(state => state.user.user);
   const comment_list = useSelector(state => state.comment.list);
