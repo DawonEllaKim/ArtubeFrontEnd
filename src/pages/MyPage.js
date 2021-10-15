@@ -6,6 +6,7 @@ import styled from "styled-components";
 import MypagePost from "../components/MypagePost";
 import Header from "../components/Header";
 import { AddModal } from "../components/AddModal";
+import UserModal from '../components/UserModal';
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
 
@@ -28,6 +29,12 @@ const MyPage = (props) => {
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
+
+  // 프로필 추가 모달 창
+  const [showProfileModal, setShowProfileModal] = React.useState(false);
+  const openProfileModal = () =>{
+    setShowProfileModal((prev) => !prev);
+  } 
 
   // useEffect(() => {
   //   dispatch(postActions.getPostMiddleware());
@@ -52,7 +59,7 @@ const MyPage = (props) => {
           <ProfileRight>
             <UserWrap>
               <UserId>{userId}</UserId>
-              {sameUser ? <EditBtn>edit</EditBtn> : null}
+              {sameUser ? <EditBtn onClick={openProfileModal}>edit</EditBtn> : null}
             </UserWrap>
 
             <Introduction>
@@ -83,8 +90,9 @@ const MyPage = (props) => {
       </Wrap>
 
       {/* 게시물 추가 모달창 */}
-
       <AddModal showModal={showModal} setShowModal={setShowModal} />
+      {/* 프로필 수정 모달창 */}
+      <UserModal showProfileModal={showProfileModal} setShowProfileModal={setShowProfileModal} />
     </>
   );
 };
