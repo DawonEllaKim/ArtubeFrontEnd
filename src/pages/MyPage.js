@@ -1,5 +1,3 @@
-// 내 프로필 페이지 - 내가 올린 게시물들을 볼 수 있음
-
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
@@ -23,7 +21,7 @@ const MyPage = props => {
   const logedInUserId = useSelector(state => state.user.user);
   const userInfo = useSelector(state => state.profile.userInfo);
   const sameUser = userId === logedInUserId ? true : false;
-  console.log(sameUser);
+  console.log(userInfo);
   // const myPostList = post_list.filter((p) => p.userId === userId);
   // console.log(myPostList);
 
@@ -56,7 +54,7 @@ const MyPage = props => {
         {/* 유저 프로필 */}
         <ProfileWrap>
           <ProfileLeft>
-            <ProfileImage></ProfileImage>
+            <ProfileImage src={userInfo ? userInfo.userPic : null} />
           </ProfileLeft>
 
           <ProfileRight>
@@ -68,7 +66,7 @@ const MyPage = props => {
             </UserWrap>
 
             <Introduction>
-              <p>자기소개</p>
+              <p>{userInfo ? userInfo.userIntro : "자기소개"}</p>
             </Introduction>
           </ProfileRight>
         </ProfileWrap>
@@ -113,12 +111,12 @@ const ProfileWrap = styled.div`
 const ProfileLeft = styled.div`
   width: 300px;
 `;
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
+  display: block;
   width: 150px;
   height: 150px;
   border-radius: 50%;
   margin: 20px auto;
-
   border: 1px solid #dbdbdb;
   box-sizing: border-box; ;
 `;
@@ -126,15 +124,10 @@ const ProfileRight = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
-  text-align: left;
-  /* border: 1px solid red;
-  box-sizing: border-box; */
 `;
 const UserWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 1px solid blue;
-  box-sizing: border-box; */
 `;
 const UserId = styled.div`
   font-size: 24px;
@@ -147,10 +140,7 @@ const EditBtn = styled.button`
   height: 25px;
   margin-top: 30px;
 `;
-const Introduction = styled.div`
-  /* border: 1px solid red;
-  box-sizing: border-box; */
-`;
+const Introduction = styled.div``;
 const WriteTintro = styled.textarea`
   width: 400px;
   height: 100px;
@@ -171,7 +161,6 @@ const PostWrap = styled.div`
   grid-template-columns: 250px 250px 250px;
   grid-template-rows: 250px 250px 250px;
   gap: 3%;
-  background-color: pink;
 `;
 const AddButton = styled.div`
   position: fixed;
