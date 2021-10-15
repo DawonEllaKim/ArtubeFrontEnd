@@ -61,7 +61,13 @@ const Detail = props => {
               </BtnWrap>
               <TitleWrap>{post.title}</TitleWrap>
               <ImageWrap>
-                <Image shape="rectangle" src={post.image_url} />
+                <iframe
+                  width="600px"
+                  height="400px"
+                  className="embed-responsive-item"
+                  src={post.video_url}
+                  allowFullScreen
+                ></iframe>
               </ImageWrap>
             </Left>
             <DetailWrap>
