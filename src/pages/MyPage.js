@@ -36,6 +36,31 @@ const MyPage = () => {
         {/* 고정된 헤더 */}
         <Header />
 
+        <ProfileWrap>
+          <ProfileLeft>
+            <ProfileImage>
+
+            </ProfileImage>
+            <UploadBtn>
+              UPLOAD
+            </UploadBtn>
+          </ProfileLeft>
+          <ProfileRight>
+            <UserWrap>
+              <UserId>
+                USERID
+              </UserId>
+              <EditBtn>
+                EDIT
+              </EditBtn>
+            </UserWrap> 
+            <Introduction>
+              <WriteTintro placeholder='자기소개를 입력하세요'>
+              </WriteTintro>
+            </Introduction>
+          </ProfileRight>
+        </ProfileWrap>
+
         {/* 내가 올린 동영상 모음 */}
         <PostWrap>
           {myPostList.map((p, idx) => {
@@ -62,6 +87,64 @@ const MyPage = () => {
     </>
   );
 };
+
+const ProfileWrap = styled.div`
+  display: flex;
+  margin-top: 70px;
+  width: 800px;
+`
+const ProfileLeft = styled.div`
+  width: 300px;
+`
+const ProfileImage = styled.div`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px auto;
+
+  border:1px solid #dbdbdb;
+  box-sizing: border-box;;
+`
+const UploadBtn = styled.button`
+  border: 1px solid #939597;
+  background-color: transparent;
+`
+const ProfileRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  text-align: left;
+  /* border: 1px solid red;
+  box-sizing: border-box; */
+`
+const UserWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid blue;
+  box-sizing: border-box; */
+`
+const UserId = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  padding: 30px 0;
+`
+const EditBtn = styled.button`
+  border: 1px solid #939597;
+  background-color: transparent;
+  height: 25px;
+  margin-top: 30px;
+`
+const Introduction = styled.div`
+  /* border: 1px solid red;
+  box-sizing: border-box; */
+`
+const WriteTintro = styled.textarea`
+  width: 400px;
+  height: 100px;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px ;
+  box-sizing: border-box;
+`
 
 const Wrap = styled.div`
   display: flex;
