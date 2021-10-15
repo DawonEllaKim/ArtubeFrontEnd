@@ -11,14 +11,17 @@ import { postActions } from "../redux/modules/post";
 
 import { IoIosAddCircle } from "react-icons/io";
 
-const MyPage = () => {
+const MyPage = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
-  const userId = "나당";
-
-  const myPostList = post_list.filter((p) => p.userId === userId);
-  // console.log(userId);
-  console.log(myPostList);
+  // const post_list = useSelector((state) => state.post.list);
+  const userId = props.match.params.userId;
+  console.log(props.match);
+  const myPostList = useSelector((state) => state.post.list);
+  const logedInUserId = useSelector((state) => state.user.user);
+  const sameUser = userId === logedInUserId ? true : false;
+  // const myPostList = post_list.filter((p) => p.userId === userId);
+  // console.log(myPostList);
 
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
@@ -27,8 +30,8 @@ const MyPage = () => {
   };
 
   useEffect(() => {
-    dispatch(postActions.getPostMiddleware());
-  }, []);
+    dispatch(postActions.getMyPostMiddleware(userId));
+  }, [userId]);
 
   return (
     <>
@@ -36,27 +39,20 @@ const MyPage = () => {
         {/* 고정된 헤더 */}
         <Header />
 
+        {/* 유저 프로필 */}
         <ProfileWrap>
           <ProfileLeft>
-            <ProfileImage>
-
-            </ProfileImage>
-            <UploadBtn>
-              UPLOAD
-            </UploadBtn>
+            <ProfileImage></ProfileImage>
           </ProfileLeft>
+
           <ProfileRight>
             <UserWrap>
-              <UserId>
-                USERID
-              </UserId>
-              <EditBtn>
-                EDIT
-              </EditBtn>
-            </UserWrap> 
+              <UserId>{userId}</UserId>
+              {sameUser ? <EditBtn>edit</EditBtn> : null}
+            </UserWrap>
+
             <Introduction>
-              <WriteTintro placeholder='자기소개를 입력하세요'>
-              </WriteTintro>
+              <p>자기소개를 입력하세요</p>
             </Introduction>
           </ProfileRight>
         </ProfileWrap>
@@ -83,6 +79,7 @@ const MyPage = () => {
       </Wrap>
 
       {/* 게시물 추가 모달창 */}
+
       <AddModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
@@ -92,23 +89,19 @@ const ProfileWrap = styled.div`
   display: flex;
   margin-top: 70px;
   width: 800px;
-`
+`;
 const ProfileLeft = styled.div`
   width: 300px;
-`
+`;
 const ProfileImage = styled.div`
   width: 150px;
   height: 150px;
   border-radius: 50%;
   margin: 20px auto;
 
-  border:1px solid #dbdbdb;
-  box-sizing: border-box;;
-`
-const UploadBtn = styled.button`
-  border: 1px solid #939597;
-  background-color: transparent;
-`
+  border: 1px solid #dbdbdb;
+  box-sizing: border-box; ;
+`;
 const ProfileRight = styled.div`
   display: flex;
   flex-direction: column;
@@ -116,43 +109,41 @@ const ProfileRight = styled.div`
   text-align: left;
   /* border: 1px solid red;
   box-sizing: border-box; */
-`
+`;
 const UserWrap = styled.div`
   display: flex;
   justify-content: space-between;
   /* border: 1px solid blue;
   box-sizing: border-box; */
-`
+`;
 const UserId = styled.div`
   font-size: 24px;
   font-weight: bold;
   padding: 30px 0;
-`
+`;
 const EditBtn = styled.button`
   border: 1px solid #939597;
   background-color: transparent;
   height: 25px;
   margin-top: 30px;
-`
+`;
 const Introduction = styled.div`
   /* border: 1px solid red;
   box-sizing: border-box; */
-`
+`;
 const WriteTintro = styled.textarea`
   width: 400px;
   height: 100px;
   border: 1px solid #dbdbdb;
-  border-radius: 5px ;
+  border-radius: 5px;
   box-sizing: border-box;
-`
-
+`;
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
-
 const PostWrap = styled.div`
   width: 900px;
   margin: 80px 0 0 10%;
@@ -160,8 +151,8 @@ const PostWrap = styled.div`
   grid-template-columns: 250px 250px 250px;
   grid-template-rows: 250px 250px 250px;
   gap: 3%;
+  background-color: pink;
 `;
-
 const AddButton = styled.div`
   position: fixed;
   bottom: 10px;
