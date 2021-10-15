@@ -183,6 +183,7 @@ export default handleActions(
 
 const postActions = {
   getPostMiddleware,
+  getMyPostMiddleware,
   addPostMiddleware,
   editPostMiddleware,
   deletePostMiddleware,

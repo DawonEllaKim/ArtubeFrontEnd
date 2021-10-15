@@ -29,6 +29,10 @@ const MyPage = (props) => {
     setShowModal((prev) => !prev);
   };
 
+  // useEffect(() => {
+  //   dispatch(postActions.getPostMiddleware());
+  // }, []);
+
   useEffect(() => {
     dispatch(postActions.getMyPostMiddleware(userId));
   }, [userId]);
