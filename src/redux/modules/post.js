@@ -15,7 +15,6 @@ const editPost = createAction(EDIT_POST, (postId, post) => ({
   post,
 }));
 const deletePost = createAction(DELETE_POST, postId => ({ postId }));
-const getMyPost = createAction(GET_MY_POST, post_list => ({ post_list }));
 
 const initialState = {
   list: [],
@@ -33,15 +32,6 @@ const getPostMiddleware = () => {
       .catch(err => {
         console.error(err);
       });
-  };
-};
-
-const getMyPostMiddleware = userId => {
-  return function (dispatch, getState, { history }) {
-    apis.myPost(userId).then(res => {
-      const post_list = res.data.post;
-      dispatch(getMyPost(post_list));
-    });
   };
 };
 
@@ -157,10 +147,6 @@ export default handleActions(
           ...action.payload.post,
         };
       }),
-    [GET_MY_POST]: (state, action) =>
-      produce(state, draft => {
-        draft.list = action.payload.post_list;
-      }),
   },
   initialState
 );
@@ -170,7 +156,6 @@ const postActions = {
   addPostMiddleware,
   editPostMiddleware,
   deletePostMiddleware,
-  getMyPostMiddleware,
 };
 
 export { postActions };

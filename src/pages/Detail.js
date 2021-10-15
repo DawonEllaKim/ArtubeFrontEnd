@@ -106,6 +106,7 @@ const Detail = props => {
           />
         </>
       )}
+      <div className="embed-responsive embed-responsive-16by9"></div>
     </>
   );
 };
