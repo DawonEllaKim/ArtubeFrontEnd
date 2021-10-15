@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Grid = props => {
+const Grid = (props) => {
   const {
     is_flex,
     width,
@@ -54,16 +54,16 @@ const GridBox = styled.div`
   box-sizing: border-box;
   /* margin: auto; */
 
-  width: ${props => props.width};
-  ${props => (props.bg ? `background-color: ${props.bg};` : "")};
-  ${props => (props.border ? `border: ${props.border};` : "")};
-  ${props =>
+  width: ${(props) => props.width};
+  ${(props) => (props.bg ? `background-color: ${props.bg};` : "")};
+  ${(props) => (props.border ? `border: ${props.border};` : "")};
+  ${(props) =>
     props.borderRadius ? `border-radius: ${props.borderRadius};` : ""};
-  ${props => (props.shadow ? `box-shadow: ${props.shadow};` : "")};
-  ${props => (props.padding ? `padding: ${props.padding};` : "")};
-  ${props => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.shadow ? `box-shadow: ${props.shadow};` : "")};
+  ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
 
-  ${props =>
+  ${(props) =>
     props.is_flex
       ? `display: flex; align-items: center; justify-content: center;`
       : ""}

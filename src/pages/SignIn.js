@@ -1,21 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+
 import { MdLockOutline } from "react-icons/md";
 import ArtubeLogo from "../Image/ArtubeLogo.png";
+
 import { Grid, Input, Button, Image } from "../elements";
 import { userActions } from "../redux/modules/user";
-import { useDispatch } from "react-redux";
 import { history } from "../redux/configuerStore";
 
 const SignIn = (props) => {
   const dispatch = useDispatch();
-
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
 
-  function TextInput(e, setState) {
+  const TextInput = (e, setState) => {
     setState(e.target.value);
-  }
+  };
 
   const signIn = () => {
     console.log(id, pwd);
@@ -26,13 +27,13 @@ const SignIn = (props) => {
     <>
       <Wrap>
         <LeftBox>
-          <MainBtn
+          <LogoLink
             onClick={() => {
               history.push("/");
             }}
           >
-            <img src={ArtubeLogo} style={{ width: "100%" }} />
-          </MainBtn>
+            <Logo src={ArtubeLogo} />
+          </LogoLink>
         </LeftBox>
 
         <RightBox>
@@ -95,7 +96,11 @@ const LeftBox = styled.div`
   background-color: #fff;
 `;
 
-const MainBtn = styled.button`
+const Logo = styled.img`
+  width: 100%;
+`;
+
+const LogoLink = styled.button`
   height: 100%;
   border: none;
   background-color: transparent;
@@ -117,7 +122,7 @@ const RightWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  width: 100%;
   height: 600px;
 `;
 
