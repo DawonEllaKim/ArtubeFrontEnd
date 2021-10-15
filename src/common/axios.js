@@ -15,7 +15,7 @@ const instance = axios.create({
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     authorization: `Bearer ${localStorage.getItem("token")}`,
-    // "Access-Control-Allow-Origin": true,
+    "Access-Control-Allow-Origin": true,
   },
 });
 
@@ -23,11 +23,10 @@ export const apis = {
   // 게시물 불러오기
   // 게시물 불러오기
   getPost: () => instance.get("/post/main"),
-
   // 유저에게 맞는 게시물 불러오기
-  getMyPost: (userId) => instance.get(`/post/myPage/${userId}`),
+  getMyPost: userId => instance.get(`/post/myPage/${userId}`),
   // 게시물 작성하기
-  createPost: (contents) => instance.post("/post", contents),
+  createPost: contents => instance.post("/post", contents),
   // 게시물 수정하기
   editPost: (id, title, youtube_url, desc, image_url, video_url) =>
     instance.put(`/post/myPage/${id}`, {
@@ -38,7 +37,7 @@ export const apis = {
       video_url,
     }),
   // 게시물 삭제하기
-  deletePost: (id) => instance.delete(`/post/detail/${id}`),
+  deletePost: id => instance.delete(`/post/detail/${id}`),
 
   // comment
 
@@ -50,6 +49,9 @@ export const apis = {
 
   signUp: data => instance.post("/user/signUp", data),
   signIn: data => instance.post("/user/signIn", data),
+
   userCheck: () => instance.get("/user/me"),
-  editUserProfile: (userPic, userIntro) => instance.put('/user/me',{userPic, userIntro})
+
+  editUserProfile: (userPic, userIntro) =>
+    instance.put("/user/me", { userPic, userIntro }),
 };

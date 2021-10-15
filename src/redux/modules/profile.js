@@ -2,26 +2,40 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../common/axios";
 
+const GET_PROFILE = "GET_PROFILE";
 const UPDATE_PROFILE = "UPDATE_PROFILE";
+const SET_PREVIEW = "SET_PREVIEW";
 
-const updateProfile = createAction(UPDATE_PROFILE, (user) => ({ user }));
+const getProfile = createAction(GET_PROFILE, userInfo => ({ userInfo }));
+const updateProfile = createAction(UPDATE_PROFILE, userInfo => ({ userInfo }));
+const setPreview = createAction(SET_PREVIEW, preview => ({ preview }));
 
 const initialState = {
-  list: [],
+  userInfo: null,
+  preview: null,
+};
+
+const getProfleMiddleware = token => {
+  return function (dispatch, getState, { history }) {
+    apis.userCheck().then(res => {
+      const user = res.data.user;
+      dispatch(getProfile(user));
+    });
+  };
 };
 
 const updateProfileMiddleware = (userPic, userIntro) => {
   return function (dispatch, getState, { history }) {
-    apis.updateProfile().then((res) => {
-      dispatch(
-        updateProfile({
-          userPic: res.data.userPic,
-          userIntro: res.data.userData,
-        })
-      );
-      console.log(userPic, userIntro);
-      window.alert("회원정보가 업데이트 되었습니다.");
-      history.push("/");
+    const userId = getState().user.userId;
+    console.log(userPic, userIntro);
+    const userInfo = {
+      userPic,
+      userIntro,
+    };
+    apis.editUserProfile(userPic, userIntro).then(res => {
+      console.log(res);
+      dispatch(updateProfile(userInfo));
+      history.push(`/`);
     });
   };
 };
@@ -29,9 +43,21 @@ const updateProfileMiddleware = (userPic, userIntro) => {
 export default handleActions(
   {
     [UPDATE_PROFILE]: (state, action) =>
-      produce(state, (draft) => {
-        //여기 유저 맞나여 ?
-        draft.user = action.payload.user;
+      produce(state, draft => {
+        const { userPic, userIntro } = action.payload.userInfo;
+        draft.userInfo = {
+          ...draft.userInfo,
+          userPic: userPic,
+          userIntro: userIntro,
+        };
+      }),
+    [GET_PROFILE]: (state, action) =>
+      produce(state, draft => {
+        draft.userInfo = action.payload.userInfo;
+      }),
+    [SET_PREVIEW]: (state, action) =>
+      produce(state, draft => {
+        draft.preview = action.payload.preview;
       }),
   },
   initialState
@@ -39,6 +65,8 @@ export default handleActions(
 
 const profileActions = {
   updateProfileMiddleware,
+  getProfleMiddleware,
+  setPreview,
 };
 
 export { profileActions };

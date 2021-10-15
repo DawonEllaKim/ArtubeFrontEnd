@@ -6,20 +6,24 @@ import styled from "styled-components";
 import MypagePost from "../components/MypagePost";
 import Header from "../components/Header";
 import { AddModal } from "../components/AddModal";
-import UserModal from '../components/UserModal';
+import UserModal from "../components/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
+import { profileActions } from "../redux/modules/profile";
 
 import { IoIosAddCircle } from "react-icons/io";
+import { Image } from "../elements";
 
-const MyPage = (props) => {
+const MyPage = props => {
   console.log(props);
   const dispatch = useDispatch();
   const userId = props.match.params.userId;
-  console.log(props.match);
-  const myPostList = useSelector((state) => state.post.list);
-  const logedInUserId = useSelector((state) => state.user.user);
+
+  const myPostList = useSelector(state => state.post.list);
+  const logedInUserId = useSelector(state => state.user.user);
+  const userInfo = useSelector(state => state.profile.userInfo);
   const sameUser = userId === logedInUserId ? true : false;
+  console.log(sameUser);
   // const myPostList = post_list.filter((p) => p.userId === userId);
   // console.log(myPostList);
 
@@ -29,12 +33,11 @@ const MyPage = (props) => {
     setShowModal(prev => !prev);
   };
 
-
   // 프로필 추가 모달 창
   const [showProfileModal, setShowProfileModal] = React.useState(false);
-  const openProfileModal = () =>{
-    setShowProfileModal((prev) => !prev);
-  } 
+  const openProfileModal = () => {
+    setShowProfileModal(prev => !prev);
+  };
 
   // useEffect(() => {
   //   dispatch(postActions.getPostMiddleware());
@@ -59,11 +62,13 @@ const MyPage = (props) => {
           <ProfileRight>
             <UserWrap>
               <UserId>{userId}</UserId>
-              {sameUser ? <EditBtn onClick={openProfileModal}>edit</EditBtn> : null}
+              {sameUser ? (
+                <EditBtn onClick={openProfileModal}>edit</EditBtn>
+              ) : null}
             </UserWrap>
 
             <Introduction>
-              <p>자기소개를 입력하세요</p>
+              <p>자기소개</p>
             </Introduction>
           </ProfileRight>
         </ProfileWrap>
@@ -92,7 +97,10 @@ const MyPage = (props) => {
       {/* 게시물 추가 모달창 */}
       <AddModal showModal={showModal} setShowModal={setShowModal} />
       {/* 프로필 수정 모달창 */}
-      <UserModal showProfileModal={showProfileModal} setShowProfileModal={setShowProfileModal} />
+      <UserModal
+        showProfileModal={showProfileModal}
+        setShowProfileModal={setShowProfileModal}
+      />
     </>
   );
 };
