@@ -58,24 +58,24 @@ const UserModal = props => {
                   setShowProfileModal(prev => !prev);
                 }}
               >
-                <Image
-                  size="300"
-                  style={{ margin: "20px 200px 0px 0px" }}
-                  src={
-                    preview
-                      ? preview
-                      : "https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg"
-                  }
-                />
               </Cancel>
             </Head>
             <UserProfile>
               <ImageUpload>
-                <Priview />
-                <input type="file" ref={profileImage} onChange={selectFile} />
+                <Priview>
+                    <Image
+                    size="300"
+                    style={{}}
+                    src={
+                        preview
+                        ? preview
+                        : "https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg"
+                    }
+                    />
+                </Priview>
+                <input type="file" ref={profileImage} onChange={selectFile} style={{marginTop:'30px',width: '200px'}}/>
                 <BtnWrap>
-                  <ImgUploadBtn>수정</ImgUploadBtn>
-                  <ImgDeleteBtn>삭제</ImgDeleteBtn>
+                  <ImgDeleteBtn> 프로필삭제</ImgDeleteBtn>
                 </BtnWrap>
               </ImageUpload>
               <textarea
@@ -144,27 +144,18 @@ const UserProfile = styled.div`
   margin: auto;
   padding: 20px 0;
 `;
-const ImageUpload = styled.div``;
+const ImageUpload = styled.div`
+  /* border: 1px solid red; */
+`;
 const Priview = styled.div`
   width: 300px;
   height: 300px;
   border-radius: 150px;
   border: 1px solid #dbdbdb;
+  box-sizing: border-box;
   margin: auto;
 `;
-const ImgUploadBtn = styled.button`
-  width: 100px;
-  height: 45px;
-  padding: 12px 0px;
-  margin: 20px 10px;
-  background-color: #000;
-  border: 1px solid #939597;
-  border-radius: 7px;
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
-`;
+
 const ImgDeleteBtn = styled.button`
   width: 100px;
   height: 45px;

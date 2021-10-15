@@ -107,7 +107,7 @@ const MyPage = props => {
 
 const ProfileWrap = styled.div`
   display: flex;
-  margin-top: 70px;
+  margin-top: 100px;
   width: 800px;
 `;
 const ProfileLeft = styled.div`
@@ -162,9 +162,9 @@ const PostWrap = styled.div`
   width: 900px;
   margin: 80px 0 0 10%;
   display: grid;
-  grid-template-columns: 250px 250px 250px;
-  grid-template-rows: 250px 250px 250px;
-  gap: 3%;
+  grid-template-columns: 230px 230px 230px;
+  grid-template-rows: 230px 230px 230px;
+  gap: 20px;
 `;
 const AddButton = styled.div`
   position: fixed;

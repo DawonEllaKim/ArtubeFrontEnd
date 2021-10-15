@@ -57,22 +57,6 @@ export const AddModal = ({ showModal, setShowModal }) => {
             </Head>
 
             <Body>
-              <UserInfo>
-                <IoPersonOutline
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    border: "2px solid #000",
-                    borderRadius: "50%",
-                    padding: "2px",
-                    cursor: "pointer",
-                    zIndex: "10000",
-                    margin: "10px",
-                  }}
-                />
-                <h3>userid</h3>
-              </UserInfo>
-
               <PostInput>
                 <PostWrap>
                   <p style={{ textAlign: "left" }}> 동영상 제목:</p>
