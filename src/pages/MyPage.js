@@ -113,7 +113,8 @@ const ProfileWrap = styled.div`
 const ProfileLeft = styled.div`
   width: 300px;
 `;
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
+  display: block;
   width: 150px;
   height: 150px;
   border-radius: 50%;
