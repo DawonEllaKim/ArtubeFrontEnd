@@ -6,6 +6,7 @@ const GET_POST = "GET_POST";
 const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
+const GET_MY_POST = "GET_MY_POST";
 
 const getPost = createAction(GET_POST, post_list => ({ post_list }));
 const addPost = createAction(ADD_POST, post => ({ post }));
@@ -14,6 +15,7 @@ const editPost = createAction(EDIT_POST, (postId, post) => ({
   post,
 }));
 const deletePost = createAction(DELETE_POST, postId => ({ postId }));
+const getMyPost = createAction(GET_MY_POST, post_list => ({ post_list }));
 
 const initialState = {
   list: [],
@@ -34,12 +36,21 @@ const getPostMiddleware = () => {
   };
 };
 
+const getMyPostMiddleware = userId => {
+  return function (dispatch, getState, { history }) {
+    apis.myPost(userId).then(res => {
+      const post_list = res.data.post;
+      dispatch(getMyPost(post_list));
+    });
+  };
+};
+
 const addPostMiddleware = _post => {
   return function (dispatch, getState, { history }) {
     console.log(_post);
     const videoId = _post.url.split("=")[1];
 
-    const post = {
+    const temp_post = {
       title: _post.title,
       youtube_url: _post.url,
       image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
@@ -48,11 +59,11 @@ const addPostMiddleware = _post => {
     };
 
     apis
-      .createPost(post)
+      .createPost(temp_post)
       .then(res => {
         console.log(res);
-        // const post = res.data
-        // dispatch(addPost(post));
+        const post = res.data.newPost;
+        dispatch(addPost(post));
         history.push("/");
       })
       .catch(err => {
@@ -74,21 +85,6 @@ const editPostMiddleware = (postId, _post) => {
     };
 
     console.log(post);
-
-    //id, title, youtube_url, desc
-    // const {}
-    // title, youtube_url, desc
-
-    // const post = {
-    //   id: postId,
-    //   userId: "나당",
-    //   title: _post.title,
-    //   youtube_url: _post.url,
-    //   image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
-    //   video_url: `https://www.youtube.com/embed/${videoId}`,
-    //   desc: _post.desc,
-    //   date: "2021-10-11",
-    // };
 
     apis
       .editPost(
@@ -112,12 +108,17 @@ const editPostMiddleware = (postId, _post) => {
 
 const deletePostMiddleware = postId => {
   return function (dispatch, getState, { history }) {
-    apis.deletePost(postId).then(res => {
-      console.log(res);
-      dispatch(deletePost(postId));
-      history.push("/");
-    });
-    return null;
+    console.log(postId);
+    apis
+      .deletePost(postId)
+      .then(res => {
+        console.log(res);
+        dispatch(deletePost(postId));
+        history.push("/");
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
@@ -156,6 +157,10 @@ export default handleActions(
           ...action.payload.post,
         };
       }),
+    [GET_MY_POST]: (state, action) =>
+      produce(state, draft => {
+        draft.list = action.payload.post_list;
+      }),
   },
   initialState
 );
@@ -165,6 +170,7 @@ const postActions = {
   addPostMiddleware,
   editPostMiddleware,
   deletePostMiddleware,
+  getMyPostMiddleware,
 };
 
 export { postActions };
