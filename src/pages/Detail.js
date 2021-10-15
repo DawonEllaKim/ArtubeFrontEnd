@@ -14,24 +14,27 @@ import { commentActions } from "../redux/modules/comment";
 import { postActions } from "../redux/modules/post";
 import { EditModal } from "../components/EditModal";
 
-const Detail = (props) => {
+const Detail = props => {
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
-  const comment_list = useSelector((state) => state.comment.list);
+  const post_list = useSelector(state => state.post.list);
+  const userId = useSelector(state => state.user.user);
+  const comment_list = useSelector(state => state.comment.list);
   const postId = props.match.params.postId;
-  const post = post_list.filter((p) => p.id === postId)[0];
+  const post = post_list.filter(p => p.id === postId)[0];
 
   const [commentDesc, setComment] = useState("");
 
   const addComment = () => {
-    const commentUserId = "나다요";
-    dispatch(
-      commentActions.addCommentMiddleware(commentUserId, commentDesc, postId)
-    );
+    const comment = {
+      userId,
+      commentDesc,
+      postId,
+    };
+    dispatch(commentActions.addCommentMiddleware(comment));
     setComment("");
     console.log("등록");
   };
@@ -88,7 +91,7 @@ const Detail = (props) => {
               </Comments>
               <InputWrap>
                 <InputBox
-                  onChange={(e) => setComment(e.target.value)}
+                  onChange={e => setComment(e.target.value)}
                   value={commentDesc}
                 />
                 <AddButton onClick={addComment}>등록</AddButton>

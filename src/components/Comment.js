@@ -3,16 +3,17 @@ import styled from "styled-components";
 import { IoMdClose } from "react-icons/io";
 
 import { Grid, Input, Button, Text } from "../elements";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
 const Comment = (props) => {
   const { commentUserId, commentDesc, commentId, postId } = props;
 
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.user.user);
 
   const deleteComment = () => {
-    dispatch(commentActions.deleteCommentMiddleware(commentId));
+    dispatch(commentActions.deleteCommentMiddleware(commentId, userId));
   };
 
   useEffect(() => {
