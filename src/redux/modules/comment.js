@@ -24,8 +24,6 @@ const initialState = {
 const getCommentMiddleware = postId => {
   return function (dispatch, getState, { history }) {
     apis.getComment(postId).then(res => {
-      console.log(res);
-
       const comment_list = res.data.comment;
       dispatch(getComment(comment_list));
     });

@@ -90,7 +90,6 @@ const signOutAPI = () => {
 const userCheckAPI = token => {
   return function (dispatch, getState, { history }) {
     apis.userCheck().then(res => {
-      console.log(res);
       const user = res.data.user.userId;
       dispatch(getUser(user));
     });
