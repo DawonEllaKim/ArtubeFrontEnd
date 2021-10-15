@@ -11,14 +11,16 @@ import { postActions } from "../redux/modules/post";
 
 import { IoIosAddCircle } from "react-icons/io";
 
-const MyPage = () => {
+const MyPage = (props) => {
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
-  const userId = "나당";
-
-  const myPostList = post_list.filter((p) => p.userId === userId);
+  // const post_list = useSelector((state) => state.post.list);
+  const userId = props.match.params.userId;
+  console.log(props);
+  const myPostList = useSelector((state) => state.post.list);
+  console.log(userId)
+  // const myPostList = post_list.filter((p) => p.userId === userId);
   // console.log(userId);
-  console.log(myPostList);
+  // console.log(myPostList);
 
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
@@ -26,9 +28,13 @@ const MyPage = () => {
     setShowModal((prev) => !prev);
   };
 
+  // useEffect(() => {
+  //   dispatch(postActions.getPostMiddleware());
+  // }, []);
+
   useEffect(() => {
-    dispatch(postActions.getPostMiddleware());
-  }, []);
+    dispatch(postActions.getMyPostMiddleware(userId));
+  }, [userId]);
 
   return (
     <>

@@ -23,6 +23,8 @@ export const apis = {
   // 게시물 불러오기
   // 게시물 불러오기
   getPost: () => instance.get("/post/main"),
+  
+  getMyPost: (userId) => instance.get(`/post/myPage/${userId}`),
   // 게시물 작성하기
   createPost: (contents) => instance.post("/post", contents),
   // 게시물 수정하기
@@ -38,16 +40,7 @@ export const apis = {
   deletePost: (id) => instance.delete(`/post/detail/${id}`),
 
   // comment
-<<<<<<< HEAD
-  getComment: (postId) => instance.get(`/comment/comment/${postId}`),
-  deleteComment: (commentId) => instance.delete(`/comment/comment`, commentId),
-  addComment: (commentUserId, commentDesc, postId) =>
-    instance.post("/comment/comment", { commentUserId, commentDesc, postId }),
 
-  signUp: (data) => instance.post("/user/signUp", data),
-  signIn: (data) => instance.post("/user/signIn", data),
-  userCheck: (token) => instance.get("/user/me", token),
-=======
   getComment: postId => instance.get(`/comment/comment/${postId}`),
   deleteComment: (commentId, commentUserId) =>
     instance.delete(`/comment/comment/${commentId}`, commentUserId),
@@ -57,5 +50,5 @@ export const apis = {
   signUp: data => instance.post("/user/signUp", data),
   signIn: data => instance.post("/user/signIn", data),
   userCheck: () => instance.get("/user/me"),
->>>>>>> redux
+
 };

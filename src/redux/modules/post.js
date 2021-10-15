@@ -3,11 +3,13 @@ import { produce } from "immer";
 import { apis } from "../../common/axios";
 
 const GET_POST = "GET_POST";
+const GET_MY_POST = "GET_MYPOST";
 const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
 
 const getPost = createAction(GET_POST, post_list => ({ post_list }));
+const getMyPost = createAction(GET_MY_POST, my_post_list =>({ my_post_list }));
 const addPost = createAction(ADD_POST, post => ({ post }));
 const editPost = createAction(EDIT_POST, (postId, post) => ({
   postId,
@@ -33,6 +35,20 @@ const getPostMiddleware = () => {
       });
   };
 };
+
+const getMyPostMiddleware = (userId) =>{
+  return function (dispatch, getState, {histoey}){
+    // console.log('아이디 받아오기' userId)
+    apis
+      .getMyPost(userId)
+      .then((res) =>{
+        console.log(res)
+        const my_post_list = res.data.post;
+        // console.log('디스패치 할 리스트'  my_post_list)
+        dispatch(getMyPost(my_post_list));
+      }).catch((err) => console.error(err));
+  }
+}
 
 const addPostMiddleware = _post => {
   return function (dispatch, getState, { history }) {
@@ -140,6 +156,10 @@ export default handleActions(
           }
         }, []);
       }),
+    [GET_MY_POST]: (state, action) =>
+      produce(state,draft =>{
+        draft.list = action.payload.my_post_list;
+      }),
     [ADD_POST]: (state, action) =>
       produce(state, draft => {
         draft.list.unshift(action.payload.post);
@@ -162,6 +182,7 @@ export default handleActions(
 
 const postActions = {
   getPostMiddleware,
+  getMyPostMiddleware,
   addPostMiddleware,
   editPostMiddleware,
   deletePostMiddleware,
