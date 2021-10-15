@@ -24,39 +24,40 @@ const initialState = {
 const getCommentMiddleware = postId => {
   return function (dispatch, getState, { history }) {
     apis.getComment(postId).then(res => {
-      const _comment_list = res.data.comment;
-      const comment_list = _comment_list.filter(c => c.postId === postId);
+      console.log(res);
+
+      const comment_list = res.data.comment;
       dispatch(getComment(comment_list));
     });
   };
 };
 
-const addCommentMiddleware = (commentUserId, commentDesc, postId) => {
+const addCommentMiddleware = _comment => {
   return function (dispatch, getState, { history }) {
     // (commentUserId, commentDesc, postId)
-
-    console.log(commentUserId, commentDesc, postId);
-
-    apis.addComment(commentUserId, commentDesc, postId).then(res => {
-      console.log(res);
-      const comment = {
-        commentId: res.data.commentId,
-        commentUserId: commentUserId,
-        commentDesc: commentDesc,
-        postId,
-      };
-      dispatch(addComment(comment));
-    });
+    apis
+      .addComment(_comment.userId, _comment.commentDesc, _comment.postId)
+      .then(res => {
+        const comment = {
+          ..._comment,
+          commentId: res.data.commentId,
+        };
+        dispatch(addComment(comment));
+      });
   };
 };
 
-const deleteCommentMiddleware = commentId => {
+const deleteCommentMiddleware = (commentId, commnetUserId) => {
   return function (dispatch, getState, { history }) {
-    console.log(commentId);
-    apis.deleteComment(commentId).then(res => {
-      console.log(res);
-      dispatch(deleteComment(commentId));
-    });
+    console.log(commnetUserId);
+    apis
+      .deleteComment(commentId, commnetUserId)
+      .then(res => {
+        dispatch(deleteComment(commentId));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
@@ -72,7 +73,12 @@ export default handleActions(
       }),
     [DELETE_COMMENT]: (state, action) =>
       produce(state, draft => {
-        draft.list = draft.list.filter(c => c.id !== action.payload.commentId);
+        console.log(action.payload.commentId);
+        console.log(draft.list);
+
+        draft.list = draft.list.filter(
+          c => c.commentId !== action.payload.commentId
+        );
       }),
   },
   initialState

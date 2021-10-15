@@ -7,11 +7,14 @@ import { apis } from "../../common/axios";
 
 const SIGN_IN = "SIGN_IN";
 const SIGN_OUT = "SIGN_OUT";
+const GET_USER = "GET_USER";
 
 const signIn = createAction(SIGN_IN, token => ({ token }));
 const signOut = createAction(SIGN_OUT);
+const getUser = createAction(GET_USER, user => ({ user }));
 
 const initialState = {
+  user: null,
   token: null,
   is_login: false,
 };
@@ -86,7 +89,11 @@ const signOutAPI = () => {
 
 const userCheckAPI = token => {
   return function (dispatch, getState, { history }) {
-    dispatch(signIn(token));
+    apis.userCheck().then(res => {
+      console.log(res);
+      const user = res.data.user.userId;
+      dispatch(getUser(user));
+    });
   };
 };
 
@@ -94,13 +101,21 @@ export default handleActions(
   {
     [SIGN_IN]: (state, action) =>
       produce(state, draft => {
+        draft.user = action.payload.user;
         draft.token = action.payload.token;
         draft.is_login = true;
       }),
     [SIGN_OUT]: (state, action) =>
       produce(state, draft => {
         draft.user = null;
+        draft.token = null;
         draft.is_login = false;
+      }),
+    [GET_USER]: (state, action) =>
+      produce(state, draft => {
+        draft.user = action.payload.user;
+        draft.token = localStorage.getItem("token");
+        draft.is_login = true;
       }),
   },
   initialState

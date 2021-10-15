@@ -50,8 +50,9 @@ const addPostMiddleware = _post => {
     apis
       .createPost(post)
       .then(res => {
+        console.log(res);
         // const post = res.data
-        dispatch(addPost(post));
+        // dispatch(addPost(post));
         history.push("/");
       })
       .catch(err => {
@@ -72,6 +73,8 @@ const editPostMiddleware = (postId, _post) => {
       desc: _post.desc,
     };
 
+    console.log(post);
+
     //id, title, youtube_url, desc
     // const {}
     // title, youtube_url, desc
@@ -88,7 +91,14 @@ const editPostMiddleware = (postId, _post) => {
     // };
 
     apis
-      .editPost(post)
+      .editPost(
+        postId,
+        post.title,
+        post.youtube_url,
+        post.desc,
+        post.image_url,
+        post.video_url
+      )
       .then(res => {
         console.log(res);
         // dispatch(editPost(postId, post));
