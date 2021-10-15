@@ -1,22 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { MdLockOutline } from "react-icons/md";
-import { Grid, Input, Button } from "../elements";
-// import ArtubeLogo from "../Image/ArtubeLogo.png";
+
+import { Input, Button } from "../elements";
 import { history } from "../redux/configuerStore";
 import { userActions } from "../redux/modules/user";
-import { useDispatch } from "react-redux";
+
+import { MdLockOutline } from "react-icons/md";
 
 const SignUp = (props) => {
   const dispatch = useDispatch();
-
   const [userId, setId] = useState("");
   const [password, setPwd] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  function TextInput(e, setState) {
+  const TextInput = (e, setState) => {
     setState(e.target.value);
-  }
+  };
 
   const signup = () => {
     console.log(userId, password, confirmPassword);
@@ -26,6 +26,7 @@ const SignUp = (props) => {
   return (
     <>
       <Wrap>
+        {/* 헤드 : 아이콘 + SignUp텍스트*/}
         <div>
           <IconWrap>
             <MdLockOutline
@@ -35,44 +36,33 @@ const SignUp = (props) => {
           <SignInText>Sign Up</SignInText>
         </div>
 
+        {/* 바디 : 인풋3개 */}
         <Body>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "left",
-              alignItems: "left",
-              width: "90%",
-              padding: "0 20px",
-            }}
-          >
-            <IdInput
-              label=""
-              placeholder="Id*"
-              onChange={(e) => TextInput(e, setId)}
-              value={userId}
-            />
-            <PWcheck>중복확인</PWcheck>
-          </div>
-
-          <div>
-            <Input
-              label=""
-              placeholder="Password*"
-              type="password"
-              _onChange={(e) => TextInput(e, setPwd)}
-              value={password}
-            />
-            <Input
-              label=""
-              placeholder="Password Check*"
-              type="password"
-              _onChange={(e) => TextInput(e, setConfirmPassword)}
-              value={confirmPassword}
-            />
-          </div>
+          <Input
+            label=""
+            placeholder="Id*"
+            type="text"
+            _onChange={(e) => TextInput(e, setId)}
+            value={userId}
+            // 이게 필요한 이유?
+          />
+          <Input
+            label=""
+            placeholder="Password*"
+            type="password"
+            _onChange={(e) => TextInput(e, setPwd)}
+            value={password}
+          />
+          <Input
+            label=""
+            placeholder="Password Check*"
+            type="password"
+            _onChange={(e) => TextInput(e, setConfirmPassword)}
+            value={confirmPassword}
+          />
         </Body>
 
+        {/* 푸터 : 버튼 2개 */}
         <div>
           <Button _onClick={signup}>Sign Up</Button>
           <UserExist
@@ -96,7 +86,8 @@ const Wrap = styled.div`
   align-items: center;
   width: 500px;
   height: 600px;
-  margin: 5% auto;
+  margin: auto;
+  transform: translateY(5%);
   background-color: #f5df4d;
   border-radius: 5px;
   box-shadow: 5px 5px 10px 5px #9e9e9e;
@@ -123,46 +114,46 @@ const Body = styled.div`
   width: 90%;
 `;
 
-const IdInput = styled.input`
-  box-sizing: border-box;
-  width: 190%;
-  height: 45px;
-  margin: 0 0 20px 0;
-  padding: 15px 10px;
-  border: 1px solid #939597;
-  border-radius: 5px;
-  font-size: 16px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-`;
-const PWcheck = styled.button`
-  width: 50%;
-  height: 45px;
-  margin: 0 0 15px 0px;
-  padding: 12px 0px;
-  background-color: #000;
-  border: 1px solid #939597;
-  border-radius: 7px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+// const IdInput = styled.input`
+//   box-sizing: border-box;
+//   width: 190%;
+//   height: 45px;
+//   margin: 0 0 20px 0;
+//   padding: 15px 10px;
+//   border: 1px solid #939597;
+//   border-radius: 5px;
+//   font-size: 16px;
+//   border-top-right-radius: 0;
+//   border-bottom-right-radius: 0;
+// `;
+// const PWcheck = styled.button`
+//   width: 50%;
+//   height: 45px;
+//   margin: 0 0 15px 0px;
+//   padding: 12px 0px;
+//   background-color: #000;
+//   border: 1px solid #939597;
+//   border-radius: 7px;
+//   border-top-left-radius: 0;
+//   border-bottom-left-radius: 0;
 
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
+//   color: #fff;
+//   font-weight: 700;
+//   font-size: 15px;
 
-  cursor: pointer;
-`;
+//   cursor: pointer;
+// `;
 
-const PwInput = styled.input`
-  box-sizing: border-box;
-  width: 120%;
-  height: 45px;
-  margin-bottom: 20px;
-  padding: 15px 10px;
-  border: 1px solid #939597;
-  border-radius: 5px;
-  font-size: 16px;
-`;
+// const PwInput = styled.input`
+//   box-sizing: border-box;
+//   width: 120%;
+//   height: 45px;
+//   margin-bottom: 20px;
+//   padding: 15px 10px;
+//   border: 1px solid #939597;
+//   border-radius: 5px;
+//   font-size: 16px;
+// `;
 
 const UserExist = styled.button`
   border: none;

@@ -13,11 +13,11 @@ import { history } from "../redux/configuerStore";
 
 const Main = () => {
   const dispatch = useDispatch();
-  const post_list = useSelector(state => state.post.list);
+  const post_list = useSelector((state) => state.post.list);
   console.log(post_list);
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal(prev => !prev);
+    setShowModal((prev) => !prev);
   };
 
   useEffect(() => {

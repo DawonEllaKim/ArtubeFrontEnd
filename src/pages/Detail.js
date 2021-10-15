@@ -60,7 +60,6 @@ const Detail = props => {
                 />
               </BtnWrap>
               <TitleWrap>{post.title}</TitleWrap>
-
               <ImageWrap>
                 <Image shape="rectangle" src={post.image_url} />
               </ImageWrap>
