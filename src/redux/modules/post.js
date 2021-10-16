@@ -56,7 +56,6 @@ const addPostMiddleware = (_post) => {
   return function (dispatch, getState, { history }) {
     console.log(_post);
     const initialvideoId = _post.url.split("=")[1];
-
     const videoId = initialvideoId.split("&")[0];
 
     const post = {

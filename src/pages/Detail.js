@@ -25,6 +25,7 @@ const Detail = (props) => {
   const post_list = useSelector((state) => state.post.list);
   const postId = props.match.params.postId;
   const post = post_list.filter((p) => p.id === postId)[0];
+  // console.log(post.userId);
 
   const [commentDesc, setComment] = useState("");
   const comment_list = useSelector((state) => state.comment.list);
@@ -80,17 +81,16 @@ const Detail = (props) => {
                   }}
                 />
                 <UserLink
-                  onClick={() => {
-                    history.push(`/myPage/${post.userId}`);
-                  }}
+                // onClick={() => {
+                //   history.push(`/myPage/${post.userId}`);
+                // }}
                 >
                   <Text bold>{post.userId}</Text>
                 </UserLink>
                 {/* <EditButton onClick={openModal}>Edit</EditButton> */}
-
-                {/* {post.userId === userId ? (
+                {post.userId === user.userId ? (
                   <EditButton onClick={openModal}>Edit</EditButton>
-                ) : null} */}
+                ) : null}
               </User>
               <Description>{post.desc}</Description>
               <Comments>

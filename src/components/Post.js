@@ -8,7 +8,6 @@ import { history } from "../redux/configuerStore";
 
 const Post = (props) => {
   const { userId, title, date, postId, image_url } = props;
-
   return (
     <>
       <Grid
@@ -43,7 +42,7 @@ const Post = (props) => {
             </UserLink>
           </Grid>
 
-          <Grid is_flex >
+          <Grid is_flex>
             {/* 데이트*/}
             <Text color="#939597" size="16px">
               {date}
@@ -90,7 +89,7 @@ const Post = (props) => {
 const Top = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const UserLink = styled.button`
   border: none;
