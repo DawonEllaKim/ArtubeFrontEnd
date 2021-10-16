@@ -55,7 +55,9 @@ const getMyPostMiddleware = (userId) => {
 const addPostMiddleware = (_post) => {
   return function (dispatch, getState, { history }) {
     console.log(_post);
-    const videoId = _post.url.split("=")[1];
+    const initialvideoId = _post.url.split("=")[1];
+
+    const videoId = initialvideoId.split("&")[0];
 
     const post = {
       title: _post.title,
@@ -64,6 +66,8 @@ const addPostMiddleware = (_post) => {
       video_url: `https://www.youtube.com/embed/${videoId}`,
       desc: _post.desc,
     };
+
+    // www.youtube.com/watch?v=IRyJe-0Uie0&ab_channel=Musictag
 
     apis
       .createPost(post)

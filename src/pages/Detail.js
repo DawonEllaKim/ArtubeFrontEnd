@@ -12,21 +12,22 @@ import { history } from "../redux/configuerStore";
 import { commentActions } from "../redux/modules/comment";
 import { postActions } from "../redux/modules/post";
 
-const Detail = props => {
+const Detail = (props) => {
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal(prev => !prev);
+    setShowModal((prev) => !prev);
   };
-
+  const token = localStorage.getItem("token");
+  const is_signin = token ? true : false;
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
+  const user = useSelector((state) => state.user.user);
 
-  const post_list = useSelector(state => state.post.list);
+  const post_list = useSelector((state) => state.post.list);
   const postId = props.match.params.postId;
-  const post = post_list.filter(p => p.id === postId)[0];
+  const post = post_list.filter((p) => p.id === postId)[0];
 
   const [commentDesc, setComment] = useState("");
-  const comment_list = useSelector(state => state.comment.list);
+  const comment_list = useSelector((state) => state.comment.list);
 
   const addComment = () => {
     const comment = {
@@ -87,9 +88,9 @@ const Detail = props => {
                 </UserLink>
                 {/* <EditButton onClick={openModal}>Edit</EditButton> */}
 
-                {/* {post.userId === userId ? (
+                {post.userId === user.userId ? (
                   <EditButton onClick={openModal}>Edit</EditButton>
-                ) : null} */}
+                ) : null}
               </User>
               <Description>{post.desc}</Description>
               <Comments>
@@ -97,13 +98,15 @@ const Detail = props => {
                   return <Comment {...c} key={idx} />;
                 })}
               </Comments>
-              <InputWrap>
-                <InputBox
-                  onChange={e => setComment(e.target.value)}
-                  value={commentDesc}
-                />
-                <AddButton onClick={addComment}>등록</AddButton>
-              </InputWrap>
+              {is_signin ? (
+                <InputWrap>
+                  <InputBox
+                    onChange={(e) => setComment(e.target.value)}
+                    value={commentDesc}
+                  />
+                  <AddButton onClick={addComment}>등록</AddButton>
+                </InputWrap>
+              ) : null}
             </DetailWrap>
           </CommentWrap>
 
@@ -195,8 +198,9 @@ const Description = styled.div`
 `;
 
 const Comments = styled.div`
-  /* padding-right: 5px; */
-  /* border: 1px solid red; */
+  height: 310px;
+  margin-top: 4px;
+  overflow: auto;
 `;
 const InputWrap = styled.div`
   display: flex;

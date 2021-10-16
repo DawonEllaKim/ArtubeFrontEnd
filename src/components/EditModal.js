@@ -57,7 +57,7 @@ export const EditModal = (props) => {
   };
 
   return (
-    <div style={{overflow: 'auto'}}>
+    <div style={{ overflow: "auto" }}>
       {showModal && _post ? (
         <Wrap ref={modalRef} onClick={closemodal}>
           <ModalContent showModal={showModal}>
@@ -93,10 +93,7 @@ export const EditModal = (props) => {
                     marginLeft: "50px",
                   }}
                 >
-                  <p
-                  >
-                    동영상 url:
-                  </p>
+                  <p>동영상 url:</p>
                   <PicBtn onClick={getPreview}>썸네일 확인하기</PicBtn>
                 </div>
 
@@ -152,7 +149,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: initial !important
+  overflow-y: initial !important;
 `;
 const Head = styled.div`
   display: flex;
