@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { apis } from "../../common/axios";
 
 const GET_POST = "GET_POST";
-const GET_MY_POST = "GET_MYPOST";
+const GET_MY_POST = "GET_MY_POST";
 const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
@@ -13,7 +13,6 @@ const getMyPost = createAction(GET_MY_POST, (my_post_list) => ({
   my_post_list,
 }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
-
 const editPost = createAction(EDIT_POST, (postId, post) => ({
   postId,
   post,
@@ -40,8 +39,8 @@ const getPostMiddleware = () => {
 };
 
 const getMyPostMiddleware = (userId) => {
-  return function (dispatch, getState, { histoey }) {
-    // console.log('아이디 받아오기' userId)
+  return function (dispatch, getState, { history }) {
+    console.log(userId);
     apis
       .getMyPost(userId)
       .then((res) => {

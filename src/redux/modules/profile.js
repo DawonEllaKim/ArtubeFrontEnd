@@ -6,18 +6,20 @@ const GET_PROFILE = "GET_PROFILE";
 const UPDATE_PROFILE = "UPDATE_PROFILE";
 const SET_PREVIEW = "SET_PREVIEW";
 
-const getProfile = createAction(GET_PROFILE, user => ({ user }));
-const updateProfile = createAction(UPDATE_PROFILE, userInfo => ({ userInfo }));
-const setPreview = createAction(SET_PREVIEW, preview => ({ preview }));
+const getProfile = createAction(GET_PROFILE, (user) => ({ user }));
+const updateProfile = createAction(UPDATE_PROFILE, (userInfo) => ({
+  userInfo,
+}));
+const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview }));
 
 const initialState = {
   userInfo: null,
   preview: null,
 };
 
-const getUserProfile = userId => {
+const getUserProfile = (userId) => {
   return function (dispatch, getState, { history }) {
-    apis.getUserProfile(userId).then(res => {
+    apis.getUserProfile(userId).then((res) => {
       const user = res.data.userProfile;
       dispatch(getProfile(user));
     });
@@ -32,10 +34,11 @@ const updateProfileMiddleware = (userPic, userIntro) => {
       userPic,
       userIntro,
     };
-    apis.editUserProfile(userPic, userIntro).then(res => {
+    apis.editUserProfile(userPic, userIntro).then((res) => {
       console.log(res);
       dispatch(updateProfile(userInfo));
-      history.push(`/`);
+      // history.push(`/`);
+      console.log(userId);
     });
   };
 };
@@ -43,7 +46,7 @@ const updateProfileMiddleware = (userPic, userIntro) => {
 export default handleActions(
   {
     [UPDATE_PROFILE]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         const { userPic, userIntro } = action.payload.user;
         draft.userInfo = {
           ...draft.userInfo,
@@ -52,11 +55,11 @@ export default handleActions(
         };
       }),
     [GET_PROFILE]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.userInfo = action.payload.user;
       }),
     [SET_PREVIEW]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.preview = action.payload.preview;
       }),
   },

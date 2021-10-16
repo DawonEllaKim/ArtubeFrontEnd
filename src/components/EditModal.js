@@ -24,6 +24,8 @@ export const EditModal = (props) => {
   const _post = useSelector((state) => state.post.list).filter(
     (p) => p.id === _postId
   )[0];
+  const userId = _post.userId;
+  // console.log(_post.userId);
 
   const [title, setTitle] = useState(_post.title);
   const [url, setUrl] = useState(_post.youtube_url);
@@ -60,7 +62,7 @@ export const EditModal = (props) => {
         <Wrap ref={modalRef} onClick={closemodal}>
           <ModalContent showModal={showModal}>
             <Head>
-              <h2>Create Post</h2>
+              <h2>Edit Post</h2>
               <Cancel
                 onClick={() => {
                   setShowModal((prev) => !prev);
@@ -73,53 +75,57 @@ export const EditModal = (props) => {
             </Head>
 
             <Body>
-              <UserInfo>
-                <IoPersonOutline
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    border: "2px solid #000",
-                    borderRadius: "50%",
-                    padding: "2px",
-                    cursor: "pointer",
-                    zIndex: "10000",
-                    margin: "10px",
-                  }}
+              <InputBox>
+                <p> 동영상 제목:</p>
+                <Input
+                  defaultValue={_post.title}
+                  onChange={(e) => TextInput(e, setTitle)}
                 />
-                <h3>userid</h3>
-              </UserInfo>
+              </InputBox>
 
-              <PostInput>
-                <PostWrap>
-                  <p style={{ textAlign: "left" }}> 동영상 제목:</p>
-                  <Input
-                    defaultValue={_post.title}
-                    onChange={(e) => TextInput(e, setTitle)}
-                  />
-                </PostWrap>
-                <PostWrap>
-                  <p> 동영상 url:</p>
-                  <Input
-                    defaultValue={_post.youtube_url}
-                    onChange={(e) => TextInput(e, setUrl)}
-                  />
-                  <Submit onClick={getPreview}>이미지</Submit>
-                </PostWrap>
-                <PostWrap>
-                  <Image shape="rectangle" src={preview} />
-                </PostWrap>
-                <PostWrap>
-                  <p> 동영상 후기:</p>
-                  <Input
-                    defaultValue={_post.desc}
-                    onChange={(e) => TextInput(e, setDesc)}
-                  />
-                </PostWrap>
-                <Buttons>
-                  <Submit onClick={editPost}>수정 완료</Submit>
-                  <Submit onClick={deletePost}>게시물 삭제</Submit>
-                </Buttons>
-              </PostInput>
+              <InputBox>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    marginLeft: "50px",
+                  }}
+                >
+                  <p
+                  // style={{ marginLeft: "180px" }}
+                  >
+                    동영상 url:
+                  </p>
+                  <PicBtn onClick={getPreview}>썸네일 확인하기</PicBtn>
+                </div>
+
+                <Input
+                  defaultValue={_post.youtube_url}
+                  onChange={(e) => TextInput(e, setUrl)}
+                />
+              </InputBox>
+
+              <div>
+                <img
+                  src={preview}
+                  style={{ width: "80%", marginTop: "10px" }}
+                />
+              </div>
+
+              <div>
+                <p> 동영상 후기:</p>
+                <Input
+                  defaultValue={_post.desc}
+                  onChange={(e) => TextInput(e, setDesc)}
+                />
+              </div>
+
+              <Buttons>
+                <Submit onClick={editPost}>수정 완료</Submit>
+                <Submit onClick={deletePost}>게시물 삭제</Submit>
+              </Buttons>
             </Body>
           </ModalContent>
         </Wrap>
@@ -128,6 +134,19 @@ export const EditModal = (props) => {
   );
 };
 
+const PicBtn = styled.button`
+  height: 50px;
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+  /* font-size: large; */
+`;
+const InputBox = styled.div`
+  width: 100%;
+  /* background-color: black; */
+  /* color: white; */
+`;
 const Wrap = styled.div`
   width: 100vw;
   height: 100%;
@@ -138,7 +157,6 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 const Head = styled.div`
   display: flex;
   flex-direction: row;
@@ -146,8 +164,8 @@ const Head = styled.div`
   align-items: center;
   position: relative;
   border-bottom: 1.5px solid #e5e5e5;
+  /* background-color: black; */
 `;
-
 const Cancel = styled.div`
   width: 40px;
   height: 40px;
@@ -161,39 +179,33 @@ const Cancel = styled.div`
 const ModalContent = styled.div`
   position: fixed;
   top: 10%;
-  width: 676px;
-  height: 800px;
+  width: 50%;
+  /* height: 1%; */
   background-color: white;
+  border-radius: 20px;
 `;
-
 const Body = styled.div`
-  width: 100%;
+  width: 90%;
+
   margin: auto;
   padding: 20px;
-`;
-const UserInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-self: left;
-`;
-
-const PostInput = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-self: center;
-  width: 90%;
+  justify-content: center;
   margin: auto auto auto -1px;
+  /* background-color: pink; */
+
+  /* align-items: center; */
 `;
+
 const PostWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-self: center;
   width: 100%;
+  height: 90px;
 `;
-
 const Input = styled.input`
   box-sizing: border-box;
   width: 80%;
@@ -205,11 +217,11 @@ const Input = styled.input`
   border-radius: 5px;
   font-size: 16px;
 `;
-
 const Submit = styled.button`
+  /* width: 100px;
+  height: 45px; */
   width: 100px;
-  height: 45px;
-  margin: 30px 10px;
+  /* margin: 30px 10px; */
   padding: 12px 0px;
   background-color: #000;
   border: 1px solid #939597;
@@ -218,11 +230,13 @@ const Submit = styled.button`
   font-weight: 700;
   font-size: 15px;
   cursor: pointer;
+  /* margin: auto; */
 `;
-
 const Buttons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100px;
 `;
