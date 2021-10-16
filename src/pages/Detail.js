@@ -12,22 +12,21 @@ import { history } from "../redux/configuerStore";
 import { commentActions } from "../redux/modules/comment";
 import { postActions } from "../redux/modules/post";
 
-const Detail = (props) => {
+const Detail = props => {
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
+  const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const is_signin = token ? true : false;
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-
-  const post_list = useSelector((state) => state.post.list);
+  const post = useSelector(state => state.post.list);
   const postId = props.match.params.postId;
-  const post = post_list.filter((p) => p.id === postId)[0];
+
+  console.log(post);
 
   const [commentDesc, setComment] = useState("");
-  const comment_list = useSelector((state) => state.comment.list);
+  const comment_list = useSelector(state => state.comment.list);
 
   const addComment = () => {
     const comment = {
@@ -39,84 +38,79 @@ const Detail = (props) => {
   };
 
   useEffect(() => {
-    dispatch(postActions.getPostMiddleware());
-    dispatch(commentActions.getCommentMiddleware(postId));
+    dispatch(postActions.getPostMiddleware(postId));
   }, []);
 
   return (
     <>
-      {post && (
-        <>
-          <Header />
-          <CommentWrap>
-            <Left>
-              <BtnWrap>
-                <IoArrowBackCircleOutline
-                  onClick={() => {
-                    history.goBack();
-                  }}
-                  style={{ width: "32px", height: "32px" }}
-                />
-              </BtnWrap>
-              <TitleWrap>{post.title}</TitleWrap>
-              <ImageWrap>
-                <iframe
-                  width="600px"
-                  height="400px"
-                  className="embed-responsive-item"
-                  src={post.video_url}
-                  allowFullScreen
-                ></iframe>
-              </ImageWrap>
-            </Left>
-            <DetailWrap>
-              <User>
-                <FaUserCircle
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                    color: "#939597",
-                    margin: "10px",
-                  }}
-                />
-                <UserLink
-                  onClick={() => {
-                    history.push(`/myPage/${post.userId}`);
-                  }}
-                >
-                  <Text bold>{post.userId}</Text>
-                </UserLink>
-                {/* <EditButton onClick={openModal}>Edit</EditButton> */}
+      <Header />
+      <CommentWrap>
+        <Left>
+          <BtnWrap>
+            <IoArrowBackCircleOutline
+              onClick={() => {
+                history.goBack();
+              }}
+              style={{ width: "32px", height: "32px" }}
+            />
+          </BtnWrap>
+          <TitleWrap>타이틀</TitleWrap>
+          <ImageWrap>
+            <iframe
+              width="600px"
+              height="400px"
+              className="embed-responsive-item"
+              src={post.video_url}
+              allowFullScreen
+            ></iframe>
+          </ImageWrap>
+        </Left>
+        <DetailWrap>
+          <User>
+            <FaUserCircle
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#939597",
+                margin: "10px",
+              }}
+            />
+            <UserLink
+              onClick={() => {
+                history.push(`/myPage/${post.userId}`);
+              }}
+            >
+              <Text bold>{post.userId}</Text>
+            </UserLink>
+            <EditButton onClick={openModal}>Edit</EditButton>
 
-                {post.userId === user.userId ? (
-                  <EditButton onClick={openModal}>Edit</EditButton>
-                ) : null}
-              </User>
-              <Description>{post.desc}</Description>
-              <Comments>
-                {comment_list.map((c, idx) => {
-                  return <Comment {...c} key={idx} />;
-                })}
-              </Comments>
-              {is_signin ? (
-                <InputWrap>
-                  <InputBox
-                    onChange={(e) => setComment(e.target.value)}
-                    value={commentDesc}
-                  />
-                  <AddButton onClick={addComment}>등록</AddButton>
-                </InputWrap>
-              ) : null}
-            </DetailWrap>
-          </CommentWrap>
+            {/* {post.userId === user.userId ? (
+              <EditButton onClick={openModal}>Edit</EditButton>
+            ) : null} */}
+          </User>
+          <Description>{post.desc}</Description>
+          <Comments>
+            {comment_list.map((c, idx) => {
+              return <Comment {...c} key={idx} />;
+            })}
+          </Comments>
+          {is_signin ? (
+            <InputWrap>
+              <InputBox
+                onChange={e => setComment(e.target.value)}
+                value={commentDesc}
+              />
+              <AddButton onClick={() => {}}>등록</AddButton>
+            </InputWrap>
+          ) : null}
+        </DetailWrap>
+      </CommentWrap>
 
-          <EditModal
-            _postId={postId}
-            showModal={showModal}
-            setShowModal={setShowModal}
-          />
-        </>
-      )}
+      {/* <EditModal
+        _postId={postId}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      /> */}
     </>
   );
 };

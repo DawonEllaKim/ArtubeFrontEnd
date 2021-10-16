@@ -13,8 +13,7 @@ const Header = () => {
   const token = localStorage.getItem("token");
   const is_signin = token ? true : false;
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  console.log(user);
+  const user = useSelector(state => state.user.user);
 
   const signOut = () => {
     dispatch(userActions.signOutAPI());
