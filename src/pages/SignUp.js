@@ -45,6 +45,7 @@ const SignUp = (props) => {
             _onChange={(e) => TextInput(e, setId)}
             value={userId}
           />
+          <Detail>* 아이디는 영대소문자, 숫자 포함 3자 이상 가능합니다 (특수문자 사용 불가)</Detail>
           <Input
             label=""
             placeholder="Password*"
@@ -52,6 +53,9 @@ const SignUp = (props) => {
             _onChange={(e) => TextInput(e, setPwd)}
             value={password}
           />
+          <Detail>* 비밀번호는 영대소문자, 숫자 포함 3자 이상 가능합니다 (특수문자 사용 불가)</Detail>
+          <Detail>* 비밀번호에 아이디가 포함될 수 없습니다</Detail>
+
           <Input
             label=""
             placeholder="Password Check*"
@@ -112,6 +116,13 @@ const SignInText = styled.div`
 const Body = styled.div`
   width: 90%;
 `;
+
+const Detail = styled.p`
+  font-size: 11px;
+  color: #939597;
+  text-align: left;
+  margin: 0 0 0 30px;
+`
 
 // const IdInput = styled.input`
 //   box-sizing: border-box;

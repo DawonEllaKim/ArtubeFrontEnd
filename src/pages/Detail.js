@@ -199,8 +199,9 @@ const Description = styled.div`
 `;
 
 const Comments = styled.div`
-  /* padding-right: 5px; */
-  /* border: 1px solid red; */
+  height: 310px;
+  margin-top: 4px ;
+  overflow: auto;
 `;
 const InputWrap = styled.div`
   display: flex;

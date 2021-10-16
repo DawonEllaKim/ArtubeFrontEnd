@@ -52,10 +52,11 @@ const User = styled.div`
   font-size: 14px;
 `;
 const UserComment = styled.div`
-  width: 190px;
+  /* width: 190px; */
   text-align: left;
   font-size: 14px;
   word-break: break-all;
+  margin-right: 25px;
 `;
 const DeleteBtn = styled.div`
   position: absolute;
