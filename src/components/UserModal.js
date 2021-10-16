@@ -47,7 +47,7 @@ const UserModal = (props) => {
   const { showProfileModal, setShowProfileModal } = props;
 
   return (
-    <>
+    <div>
       {showProfileModal ? (
         <Wrap ref={modalRef} onClick={closemodal}>
           <Modal showModal={showProfileModal}>
@@ -102,7 +102,7 @@ const UserModal = (props) => {
           </Modal>
         </Wrap>
       ) : null}
-    </>
+    </div>
   );
 };
 
@@ -110,12 +110,13 @@ const Wrap = styled.div`
   width: 100vw;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
+  position: fixed;
   z-index: 2;
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 `;
 const Modal = styled.div`
   position: fixed;

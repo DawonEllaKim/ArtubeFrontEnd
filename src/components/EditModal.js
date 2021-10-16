@@ -57,7 +57,7 @@ export const EditModal = (props) => {
   };
 
   return (
-    <div>
+    <div style={{overflow: 'auto'}}>
       {showModal && _post ? (
         <Wrap ref={modalRef} onClick={closemodal}>
           <ModalContent showModal={showModal}>
@@ -94,7 +94,6 @@ export const EditModal = (props) => {
                   }}
                 >
                   <p
-                  // style={{ marginLeft: "180px" }}
                   >
                     동영상 url:
                   </p>
@@ -140,22 +139,20 @@ const PicBtn = styled.button`
   background-color: transparent;
   text-decoration: underline;
   cursor: pointer;
-  /* font-size: large; */
 `;
 const InputBox = styled.div`
   width: 100%;
-  /* background-color: black; */
-  /* color: white; */
 `;
 const Wrap = styled.div`
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: initial !important
 `;
 const Head = styled.div`
   display: flex;
@@ -164,7 +161,6 @@ const Head = styled.div`
   align-items: center;
   position: relative;
   border-bottom: 1.5px solid #e5e5e5;
-  /* background-color: black; */
 `;
 const Cancel = styled.div`
   width: 40px;
@@ -180,9 +176,9 @@ const ModalContent = styled.div`
   position: fixed;
   top: 10%;
   width: 50%;
-  /* height: 1%; */
+  height: 85%;
   background-color: white;
-  border-radius: 20px;
+  overflow-y: auto;
 `;
 const Body = styled.div`
   width: 90%;
@@ -193,9 +189,6 @@ const Body = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: auto auto auto -1px;
-  /* background-color: pink; */
-
-  /* align-items: center; */
 `;
 
 const PostWrap = styled.div`
@@ -211,17 +204,14 @@ const Input = styled.input`
   width: 80%;
   height: 50px;
   margin: 0 0 10px 0;
-  /* margin-bottom: 10px; */
   padding: 15px 10px;
   border: 1px solid #939597;
   border-radius: 5px;
   font-size: 16px;
 `;
 const Submit = styled.button`
-  /* width: 100px;
-  height: 45px; */
   width: 100px;
-  /* margin: 30px 10px; */
+  margin: 0 10px;
   padding: 12px 0px;
   background-color: #000;
   border: 1px solid #939597;
@@ -230,7 +220,6 @@ const Submit = styled.button`
   font-weight: 700;
   font-size: 15px;
   cursor: pointer;
-  /* margin: auto; */
 `;
 const Buttons = styled.div`
   display: flex;
