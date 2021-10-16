@@ -3,7 +3,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "./redux/configuerStore";
 import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "./redux/modules/user";
+import user, { userActions } from "./redux/modules/user";
+import { profileActions } from "./redux/modules/profile";
 
 import "./App.css";
 import Main from "./pages/Main";
@@ -15,11 +16,13 @@ import MyPage from "./pages/MyPage";
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  console.log(token);
+  const userId = useSelector(state => state.user.user);
+  console.log(userId);
 
   useEffect(() => {
     if (token) {
-      dispatch(userActions.userCheckAPI(token));
+      // dispatch(userActions.userCheckAPI());
+      dispatch(profileActions.getUserProfile(userId));
     }
   }, []);
 

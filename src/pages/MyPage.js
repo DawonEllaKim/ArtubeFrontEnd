@@ -1,27 +1,24 @@
-// 내 프로필 페이지 - 내가 올린 게시물들을 볼 수 있음
-
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import MypagePost from "../components/MypagePost";
 import Header from "../components/Header";
 import { AddModal } from "../components/AddModal";
+import UserModal from "../components/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
+import { profileActions } from "../redux/modules/profile";
 
 import { IoIosAddCircle } from "react-icons/io";
+import { Image } from "../elements";
 
 const MyPage = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
-  // const post_list = useSelector((state) => state.post.list);
   const userId = props.match.params.userId;
-  console.log(props.match);
+
   const myPostList = useSelector((state) => state.post.list);
-  const logedInUserId = useSelector((state) => state.user.user);
-  const sameUser = userId === logedInUserId ? true : false;
-  // const myPostList = post_list.filter((p) => p.userId === userId);
-  // console.log(myPostList);
+  const userInfo = useSelector((state) => state.profile);
+  console.log(userInfo);
 
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
@@ -29,76 +26,98 @@ const MyPage = (props) => {
     setShowModal((prev) => !prev);
   };
 
+  // 프로필 추가 모달 창
+  const [showProfileModal, setShowProfileModal] = React.useState(false);
+  const openProfileModal = () => {
+    setShowProfileModal((prev) => !prev);
+  };
+
   useEffect(() => {
+    dispatch(profileActions.getUserProfile(userId));
     dispatch(postActions.getMyPostMiddleware(userId));
-  }, [userId]);
+  }, []);
 
   return (
     <>
-      <Wrap>
-        {/* 고정된 헤더 */}
-        <Header />
+      {userInfo && (
+        <>
+          <Wrap>
+            {/* 고정된 헤더 */}
+            <Header />
 
-        {/* 유저 프로필 */}
-        <ProfileWrap>
-          <ProfileLeft>
-            <ProfileImage></ProfileImage>
-          </ProfileLeft>
+            {/* 유저 프로필 */}
+            <ProfileWrap>
+              <ProfileLeft>
+                <ProfileImage src={userInfo ? userInfo.userPic : null} />
+              </ProfileLeft>
 
-          <ProfileRight>
-            <UserWrap>
-              <UserId>{userId}</UserId>
-              {sameUser ? <EditBtn>edit</EditBtn> : null}
-            </UserWrap>
+              <ProfileRight>
+                <UserWrap>
+                  <UserId>{userId}</UserId>
+                  {userId === userInfo.userId ? (
+                    <EditBtn onClick={openProfileModal}>edit</EditBtn>
+                  ) : null}
+                </UserWrap>
 
-            <Introduction>
-              <p>자기소개를 입력하세요</p>
-            </Introduction>
-          </ProfileRight>
-        </ProfileWrap>
+                <Introduction>
+                  <p>
+                    {userInfo.userIntro
+                      ? userInfo.userIntro
+                      : `안녕하세요 ${userId}입니다.`}
+                  </p>
+                </Introduction>
+              </ProfileRight>
+            </ProfileWrap>
 
-        {/* 내가 올린 동영상 모음 */}
-        <PostWrap>
-          {myPostList.map((p, idx) => {
-            return <MypagePost {...p} key={idx} />;
-          })}
-        </PostWrap>
+            {/* 내가 올린 동영상 모음 */}
+            <PostWrap>
+              {myPostList.map((p, idx) => {
+                return <MypagePost {...p} key={idx} />;
+              })}
+            </PostWrap>
 
-        {/* 게시물 추가 모달창 여는 버튼 */}
-        <AddButton>
-          <IoIosAddCircle
-            style={{
-              width: "50px",
-              height: "50px",
-              color: "#f5df4d",
-              cursor: "pointer",
-            }}
-            onClick={openModal}
+            {/* 게시물 추가 모달창 여는 버튼 */}
+            <AddButton>
+              <IoIosAddCircle
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  color: "#f5df4d",
+                  cursor: "pointer",
+                }}
+                onClick={openModal}
+              />
+            </AddButton>
+          </Wrap>
+
+          {/* 게시물 추가 모달창 */}
+          <AddModal showModal={showModal} setShowModal={setShowModal} />
+          {/* 프로필 수정 모달창 */}
+          <UserModal
+            userId={userId}
+            showProfileModal={showProfileModal}
+            setShowProfileModal={setShowProfileModal}
           />
-        </AddButton>
-      </Wrap>
-
-      {/* 게시물 추가 모달창 */}
-
-      <AddModal showModal={showModal} setShowModal={setShowModal} />
+        </>
+      )}
     </>
   );
 };
 
 const ProfileWrap = styled.div`
   display: flex;
-  margin-top: 70px;
+  margin-top: 100px;
   width: 800px;
 `;
 const ProfileLeft = styled.div`
   width: 300px;
 `;
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
+  display: block;
   width: 150px;
   height: 150px;
   border-radius: 50%;
   margin: 20px auto;
-
   border: 1px solid #dbdbdb;
   box-sizing: border-box; ;
 `;
@@ -106,15 +125,10 @@ const ProfileRight = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
-  text-align: left;
-  /* border: 1px solid red;
-  box-sizing: border-box; */
 `;
 const UserWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 1px solid blue;
-  box-sizing: border-box; */
 `;
 const UserId = styled.div`
   font-size: 24px;
@@ -127,10 +141,7 @@ const EditBtn = styled.button`
   height: 25px;
   margin-top: 30px;
 `;
-const Introduction = styled.div`
-  /* border: 1px solid red;
-  box-sizing: border-box; */
-`;
+const Introduction = styled.div``;
 const WriteTintro = styled.textarea`
   width: 400px;
   height: 100px;
@@ -148,10 +159,9 @@ const PostWrap = styled.div`
   width: 900px;
   margin: 80px 0 0 10%;
   display: grid;
-  grid-template-columns: 250px 250px 250px;
-  grid-template-rows: 250px 250px 250px;
-  gap: 3%;
-  background-color: pink;
+  grid-template-columns: 230px 230px 230px;
+  grid-template-rows: 230px 230px 230px;
+  gap: 20px;
 `;
 const AddButton = styled.div`
   position: fixed;

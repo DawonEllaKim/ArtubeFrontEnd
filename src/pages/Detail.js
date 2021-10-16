@@ -12,21 +12,21 @@ import { history } from "../redux/configuerStore";
 import { commentActions } from "../redux/modules/comment";
 import { postActions } from "../redux/modules/post";
 
-const Detail = (props) => {
+const Detail = props => {
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
 
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.user);
+  const userId = useSelector(state => state.user.user);
 
-  const post_list = useSelector((state) => state.post.list);
+  const post_list = useSelector(state => state.post.list);
   const postId = props.match.params.postId;
-  const post = post_list.filter((p) => p.id === postId)[0];
+  const post = post_list.filter(p => p.id === postId)[0];
 
   const [commentDesc, setComment] = useState("");
-  const comment_list = useSelector((state) => state.comment.list);
+  const comment_list = useSelector(state => state.comment.list);
 
   const addComment = () => {
     const comment = {
@@ -56,7 +56,7 @@ const Detail = (props) => {
                   onClick={() => {
                     history.goBack();
                   }}
-                  style={{ fontSize: "28px" }}
+                  style={{ width:'32px', height: '32px' }}
                 />
               </BtnWrap>
               <TitleWrap>{post.title}</TitleWrap>
@@ -87,6 +87,7 @@ const Detail = (props) => {
                 >
                   <Text bold>{post.userId}</Text>
                 </UserLink>
+                {/* <EditButton onClick={openModal}>Edit</EditButton> */}
 
                 {post.userId === userId ? (
                   <EditButton onClick={openModal}>Edit</EditButton>
@@ -100,7 +101,7 @@ const Detail = (props) => {
               </Comments>
               <InputWrap>
                 <InputBox
-                  onChange={(e) => setComment(e.target.value)}
+                  onChange={e => setComment(e.target.value)}
                   value={commentDesc}
                 />
                 <AddButton onClick={addComment}>등록</AddButton>
@@ -131,11 +132,12 @@ const CommentWrap = styled.div`
 
 const Left = styled.div`
   position: relative;
+  margin-left: 10px;
 `;
 const BtnWrap = styled.div`
   position: absolute;
-  top: 10px;
-  left: 12px;
+  top:8px;
+  left: 8px;
   color: #939597;
   cursor: pointer;
 `;
@@ -143,22 +145,23 @@ const TitleWrap = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: #939597;
-  padding: 11px 0;
+  padding: 10px 0;
 `;
 const ImageWrap = styled.div`
   width: 600px;
 `;
 const DetailWrap = styled.div`
   position: relative;
-  width: 295px;
-  margin-right: 5px;
+  width: 275px;
+  margin: 0  10px 5px 10px;
   box-sizing: border-box;
 `;
 
-const User = styled.div`
+const User = styled.div` 
+  position : relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   border-bottom: 1px solid #dbdbdb;
   background-color: #fff;
@@ -172,6 +175,9 @@ const UserLink = styled.button`
   cursor: pointer;
 `;
 const EditButton = styled.button`
+  position : absolute;
+  top: 7px;
+  right: 0;
   width: 45px;
   height: 30px;
   border: 1px solid #dbdbdb;
@@ -187,10 +193,12 @@ const Description = styled.div`
   padding: 58px 5px 10px 10px;
   border-bottom: 1px solid #dbdbdb;
   box-sizing: border-box;
+  word-break: break-all;
 `;
 
 const Comments = styled.div`
-  padding-right: 5px;
+  /* padding-right: 5px; */
+  /* border: 1px solid red; */
 `;
 const InputWrap = styled.div`
   display: flex;
@@ -199,14 +207,14 @@ const InputWrap = styled.div`
   position: absolute;
   bottom: 0;
   border-top: 1px solid #dbdbdb;
-  padding-top: 5px;
+  padding-top: 10px;
 `;
 
 const InputBox = styled.input`
   border: none;
   border-bottom: 1px solid #939597;
   padding: 4px;
-  width: 235px;
+  width: 210px;
 `;
 const AddButton = styled.button`
   border: none;

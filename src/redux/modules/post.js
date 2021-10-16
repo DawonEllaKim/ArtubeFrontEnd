@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { apis } from "../../common/axios";
 
 const GET_POST = "GET_POST";
-const GET_MY_POST = "GET_MY_POST";
+const GET_MY_POST = "GET_MYPOST";
 const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
@@ -13,6 +13,7 @@ const getMyPost = createAction(GET_MY_POST, (my_post_list) => ({
   my_post_list,
 }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
+
 const editPost = createAction(EDIT_POST, (postId, post) => ({
   postId,
   post,
@@ -39,11 +40,12 @@ const getPostMiddleware = () => {
 };
 
 const getMyPostMiddleware = (userId) => {
-  return function (dispatch, getState, { history }) {
-    console.log(userId);
+  return function (dispatch, getState, { histoey }) {
+    // console.log('아이디 받아오기' userId)
     apis
       .getMyPost(userId)
       .then((res) => {
+        console.log(res);
         const my_post_list = res.data.myPagePost;
         dispatch(getMyPost(my_post_list));
       })
@@ -68,8 +70,8 @@ const addPostMiddleware = (_post) => {
       .createPost(post)
       .then((res) => {
         console.log(res);
-        // const post = res.data
-        // dispatch(addPost(post));
+        const post = res.data.newPost;
+        dispatch(addPost(post));
         history.push("/");
       })
       .catch((err) => {
@@ -127,15 +129,7 @@ export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(...action.payload.post_list);
-        draft.list = draft.list.reduce((acc, cur) => {
-          if (acc.findIndex((a) => a.id === cur.id) === -1) {
-            return [...acc, cur];
-          } else {
-            acc[acc.findIndex((a) => a.id === cur.id)] = cur;
-            return acc;
-          }
-        }, []);
+        draft.list = action.payload.post_list;
       }),
     [GET_MY_POST]: (state, action) =>
       produce(state, (draft) => {
@@ -167,7 +161,6 @@ const postActions = {
   addPostMiddleware,
   editPostMiddleware,
   deletePostMiddleware,
-  getMyPostMiddleware,
 };
 
 export { postActions };

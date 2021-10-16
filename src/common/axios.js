@@ -40,12 +40,20 @@ export const apis = {
   deletePost: (id) => instance.delete(`/post/detail/${id}`),
 
   // comment
+
   getComment: (postId) => instance.get(`/comment/comment/${postId}`),
-  deleteComment: (commentId) => instance.delete(`/comment/comment`, commentId),
+  deleteComment: (commentId, commentUserId) =>
+    instance.delete(`/comment/comment/${commentId}`, commentUserId),
   addComment: (commentUserId, commentDesc, postId) =>
     instance.post("/comment/comment", { commentUserId, commentDesc, postId }),
 
   signUp: (data) => instance.post("/user/signUp", data),
   signIn: (data) => instance.post("/user/signIn", data),
-  userCheck: (token) => instance.get("/user/me", token),
+
+  userCheck: () => instance.get("/user/me"),
+
+  getUserProfile: (userId) => instance.get(`/user/userProfile/${userId}`),
+
+  editUserProfile: (userPic, userIntro) =>
+    instance.put("/user/me", { userPic, userIntro }),
 };
