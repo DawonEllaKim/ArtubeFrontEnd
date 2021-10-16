@@ -19,7 +19,8 @@ const Detail = props => {
   };
 
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.user.user);
+  const user = useSelector(state => state.user.user);
+  console.log(user);
 
   const post_list = useSelector(state => state.post.list);
   const postId = props.match.params.postId;
@@ -30,13 +31,11 @@ const Detail = props => {
 
   const addComment = () => {
     const comment = {
-      userId,
       commentDesc,
       postId,
     };
     dispatch(commentActions.addCommentMiddleware(comment));
     setComment("");
-    console.log("등록");
   };
 
   useEffect(() => {
@@ -56,7 +55,7 @@ const Detail = props => {
                   onClick={() => {
                     history.goBack();
                   }}
-                  style={{ width:'32px', height: '32px' }}
+                  style={{ width: "32px", height: "32px" }}
                 />
               </BtnWrap>
               <TitleWrap>{post.title}</TitleWrap>
@@ -89,9 +88,9 @@ const Detail = props => {
                 </UserLink>
                 {/* <EditButton onClick={openModal}>Edit</EditButton> */}
 
-                {post.userId === userId ? (
+                {/* {post.userId === userId ? (
                   <EditButton onClick={openModal}>Edit</EditButton>
-                ) : null}
+                ) : null} */}
               </User>
               <Description>{post.desc}</Description>
               <Comments>
@@ -136,7 +135,7 @@ const Left = styled.div`
 `;
 const BtnWrap = styled.div`
   position: absolute;
-  top:8px;
+  top: 8px;
   left: 8px;
   color: #939597;
   cursor: pointer;
@@ -153,12 +152,12 @@ const ImageWrap = styled.div`
 const DetailWrap = styled.div`
   position: relative;
   width: 275px;
-  margin: 0  10px 5px 10px;
+  margin: 0 10px 5px 10px;
   box-sizing: border-box;
 `;
 
-const User = styled.div` 
-  position : relative;
+const User = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -175,7 +174,7 @@ const UserLink = styled.button`
   cursor: pointer;
 `;
 const EditButton = styled.button`
-  position : absolute;
+  position: absolute;
   top: 7px;
   right: 0;
   width: 45px;
