@@ -20,13 +20,11 @@ const Detail = (props) => {
   const token = localStorage.getItem("token");
   const is_signin = token ? true : false;
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.user.userId);
-  // console.log(userId);
+  const userId = useSelector((state) => state.user.user);
 
   const post_list = useSelector((state) => state.post.list);
   const postId = props.match.params.postId;
   const post = post_list.filter((p) => p.id === postId)[0];
-  console.log(post);
 
   const [commentDesc, setComment] = useState("");
   const comment_list = useSelector((state) => state.comment.list);
