@@ -11,8 +11,8 @@ const UserModal = props => {
   const userId = props.userId;
 
   const userInfo = useSelector(state => state.profile.userInfo);
+  console.log(userInfo);
   const preview = useSelector(state => state.profile.preview);
-  const token = localStorage.getItem("token");
 
   const [userPic, setUserPic] = useState("");
   const profileImage = useRef();

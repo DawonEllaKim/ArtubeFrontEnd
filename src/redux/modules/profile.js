@@ -20,7 +20,9 @@ const initialState = {
 const getUserProfile = userId => {
   return function (dispatch, getState, { history }) {
     apis.getUserProfile(userId).then(res => {
+      console.log(res);
       const user = res.data.userProfile;
+      console.log(user);
       dispatch(getProfile(user));
     });
   };
@@ -36,7 +38,7 @@ const updateProfileMiddleware = (userPic, userIntro) => {
     };
     apis.editUserProfile(userPic, userIntro).then(res => {
       console.log(res);
-      dispatch(updateProfile(userInfo));
+      dispatch(updateProfile(userPic, userIntro));
       // history.push(`/`);
       console.log(userId);
     });

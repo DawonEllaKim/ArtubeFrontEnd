@@ -21,7 +21,6 @@ const Detail = (props) => {
   const is_signin = token ? true : false;
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  console.log(user);
 
   const post_list = useSelector((state) => state.post.list);
   const postId = props.match.params.postId;
@@ -200,7 +199,7 @@ const Description = styled.div`
 
 const Comments = styled.div`
   height: 310px;
-  margin-top: 4px ;
+  margin-top: 4px;
   overflow: auto;
 `;
 const InputWrap = styled.div`

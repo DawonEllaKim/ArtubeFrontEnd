@@ -49,7 +49,7 @@ const addCommentMiddleware = (_comment) => {
 
 const deleteCommentMiddleware = (commentId, commnetUserId) => {
   return function (dispatch, getState, { history }) {
-    console.log(commnetUserId);
+    console.log(commentId, commnetUserId);
     apis
       .deleteComment(commentId, commnetUserId)
       .then((res) => {
@@ -73,9 +73,6 @@ export default handleActions(
       }),
     [DELETE_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.commentId);
-        console.log(draft.list);
-
         draft.list = draft.list.filter(
           (c) => c.commentId !== action.payload.commentId
         );
