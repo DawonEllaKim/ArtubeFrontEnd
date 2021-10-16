@@ -37,7 +37,8 @@ const updateProfileMiddleware = (userPic, userIntro) => {
     apis.editUserProfile(userPic, userIntro).then((res) => {
       console.log(res);
       dispatch(updateProfile(userInfo));
-      history.push(`/`);
+      // history.push(`/`);
+      console.log(userId);
     });
   };
 };

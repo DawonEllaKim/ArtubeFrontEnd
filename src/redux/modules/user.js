@@ -35,10 +35,13 @@ const signUpAPI = (userId, password, confirmPassword) => {
 
     apis
       .signUp(data)
-      .then(res => {
+      .then((res) => {
         history.push("/signIn");
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert("입력 정보를 확인하세요.");
+      });
 
     // axios({
     //   method: "POST",
@@ -66,21 +69,22 @@ const signInAPI = (userId, password) => {
 
     apis
       .signIn(data)
-      .then(res => {
+      .then((res) => {
         const token = res.data.token;
         localStorage.setItem("token", token);
         dispatch(signIn(userId, token));
         history.push("/");
       })
-      .catch(err => {
+      .catch((err) => {
+        alert("아이디/비밀번호가 올바르지 않습니다.");
         console.log(err);
       });
   };
 };
 
-const userCheckAPI = token => {
+const userCheckAPI = (token) => {
   return function (dispatch, getState, { history }) {
-    apis.userCheck().then(res => {
+    apis.userCheck().then((res) => {
       const userId = res.data.user.userId;
       const user = res.data.user;
       dispatch(getUser(userId, user));
@@ -100,20 +104,20 @@ const signOutAPI = () => {
 export default handleActions(
   {
     [SIGN_IN]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.user = action.payload.userId;
         draft.token = action.payload.token;
         draft.is_login = true;
       }),
     [SIGN_OUT]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.user = null;
         draft.token = null;
         draft.userInfo = null;
         draft.is_login = false;
       }),
     [GET_USER]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.user = action.payload.userId;
         draft.userInfo = action.payload.userInfo;
         draft.is_login = true;
