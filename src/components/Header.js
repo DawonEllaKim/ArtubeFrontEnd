@@ -13,16 +13,15 @@ const Header = () => {
   const token = localStorage.getItem("token");
   const is_signin = token ? true : false;
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.user.user);
+  const userId = useSelector((state) => state.user.user);
 
   const signOut = () => {
     dispatch(userActions.signOutAPI());
-    history.replace('/')
+    history.replace("/");
   };
-  const signIn = () =>{
-    history.push('/signin')
-  }
-
+  const signIn = () => {
+    history.push("/signin");
+  };
 
   useEffect(() => {
     if (token) {
@@ -51,37 +50,37 @@ const Header = () => {
           {/* 로고: 이거 눌러도 "/"로 이동*/}
           <Logo
             src={ArtubeLogo3}
-            style={{ cursor: "pointer", margin:'10px 0 0 50px' }}
+            style={{ cursor: "pointer", margin: "10px 0 0 50px" }}
             onClick={() => {
               window.location.replace("/");
             }}
           />
 
           {/* My Profile 버튼: 이거 누르면 "/mypage"로 이동*/}
-          {is_signin ?
-          <IoPersonOutline
-            style={{
-              width: "25px",
-              height: "25px",
-              border: "2px solid #000",
-              borderRadius: "50%",
-              padding: "2px",
-              cursor: "pointer",
-              zIndex: "10000",
-              marginLeft: '80px',
-            }}
-            onClick={() => {
-              history.push(`/mypage/${userId}`);
-            }}
-          />
-          : null
-          }
+          {is_signin ? (
+            <IoPersonOutline
+              style={{
+                width: "25px",
+                height: "25px",
+                border: "2px solid #000",
+                borderRadius: "50%",
+                padding: "2px",
+                cursor: "pointer",
+                zIndex: "10000",
+                marginLeft: "80px",
+              }}
+              onClick={() => {
+                history.push(`/mypage/${userId}`);
+              }}
+            />
+          ) : null}
 
           {/* 로그인/로그아웃 버튼 */}
-          {is_signin ? 
+          {is_signin ? (
             <LogInOut onClick={signOut}>로그아웃</LogInOut>
-          : <LogInOut onClick={signIn}>로그인</LogInOut>
-          }
+          ) : (
+            <LogInOut onClick={signIn}>로그인</LogInOut>
+          )}
         </Box>
       </Wrap>
     </>
@@ -125,4 +124,4 @@ const LogInOut = styled.button`
   color: #000;
   height: 34px;
   margin-right: 30px;
-`
+`;
