@@ -4,7 +4,7 @@ import styled from "styled-components";
 import MypagePost from "../components/MypagePost";
 import Header from "../components/Header";
 import { AddModal } from "../components/AddModal";
-import UserModal from "../components/UserModal";
+// import UserModal from "../components/UserModal";
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
 import { profileActions } from "../redux/modules/profile";
@@ -29,10 +29,10 @@ const MyPage = (props) => {
   };
 
   // 프로필 추가 모달 창
-  const [showProfileModal, setShowProfileModal] = React.useState(false);
-  const openProfileModal = () => {
-    setShowProfileModal((prev) => !prev);
-  };
+  // const [showProfileModal, setShowProfileModal] = React.useState(false);
+  // const openProfileModal = () => {
+  //   setShowProfileModal(prev => !prev);
+  // };
 
   useEffect(() => {
     dispatch(profileActions.getUserProfile(userId));
@@ -46,9 +46,13 @@ const MyPage = (props) => {
           <Wrap>
             {/* 고정된 헤더 */}
             <Header />
+            <UserId>
+              {userId}
+              <span style={{ fontSize: "20px" }}> 님의 페이지입니다</span>
+            </UserId>
 
             {/* 유저 프로필 */}
-            <ProfileWrap>
+            {/* <ProfileWrap>
               <ProfileLeft>
                 <ProfileImage src={userInfo ? userInfo.userPic : null} />
               </ProfileLeft>
@@ -69,7 +73,7 @@ const MyPage = (props) => {
                   </p>
                 </Introduction>
               </ProfileRight>
-            </ProfileWrap>
+            </ProfileWrap> */}
 
             {/* 내가 올린 동영상 모음 */}
             <PostWrap>
@@ -95,11 +99,11 @@ const MyPage = (props) => {
           {/* 게시물 추가 모달창 */}
           <AddModal showModal={showModal} setShowModal={setShowModal} />
           {/* 프로필 수정 모달창 */}
-          <UserModal
+          {/* <UserModal
             userId={userId}
             showProfileModal={showProfileModal}
             setShowProfileModal={setShowProfileModal}
-          />
+          /> */}
         </>
       )}
     </>
@@ -121,7 +125,7 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   margin: 20px auto;
   border: 1px solid #dbdbdb;
-  box-sizing: border-box; ;
+  box-sizing: border-box;
 `;
 const ProfileRight = styled.div`
   display: flex;
@@ -133,9 +137,11 @@ const UserWrap = styled.div`
   justify-content: space-between;
 `;
 const UserId = styled.div`
+  color: #939597;
   font-size: 24px;
   font-weight: bold;
-  padding: 30px 0;
+  padding: 120px 20px 20px 20px;
+  border-bottom: 1px solid #dbdbdb;
 `;
 const EditBtn = styled.button`
   border: 1px solid #939597;
@@ -158,11 +164,11 @@ const Wrap = styled.div`
   align-items: center;
 `;
 const PostWrap = styled.div`
-  width: 900px;
-  margin: 80px 0 0 10%;
+  width: 790px;
+  margin-top: 60px;
   display: grid;
-  grid-template-columns: 230px 230px 230px;
-  grid-template-rows: 230px 230px 230px;
+  grid-template-columns: 250px 250px 250px;
+  grid-template-rows: 250px 250px 250px;
   gap: 20px;
 `;
 const AddButton = styled.div`

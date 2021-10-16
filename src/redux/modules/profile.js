@@ -28,20 +28,21 @@ const getUserProfile = (userId) => {
   };
 };
 
-const updateProfileMiddleware = (userPic, userIntro) => {
+const updateProfileMiddleware = (userIntro) => {
   return function (dispatch, getState, { history }) {
     const userId = getState().user.userId;
-    console.log(userPic, userIntro);
+    console.log(userIntro);
     const userInfo = {
-      userPic,
       userIntro,
     };
-    apis.editUserProfile(userPic, userIntro).then((res) => {
+    apis.editUserProfile(userIntro).then((res) => {
       console.log(res);
-      dispatch(updateProfile(userPic, userIntro));
+      dispatch(updateProfile(userIntro));
       // history.push(`/`);
-      console.log(userId);
     });
+    console.log(userId);
+    console.log(userInfo);
+    console.log(userIntro);
   };
 };
 
@@ -49,10 +50,11 @@ export default handleActions(
   {
     [UPDATE_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        const { userPic, userIntro } = action.payload.user;
+        const userIntro = action.payload.userInfo;
+        console.log(userIntro);
         draft.userInfo = {
           ...draft.userInfo,
-          userPic: userPic ? userPic : null,
+          // userPic: userPic ? userPic : null,
           userIntro: userIntro ? userIntro : null,
         };
       }),
