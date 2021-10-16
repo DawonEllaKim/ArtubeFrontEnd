@@ -9,7 +9,7 @@ export const AddModal = ({ showModal, setShowModal }) => {
   const modalRef = useRef();
   const dispatch = useDispatch();
 
-  const closemodal = (e) => {
+  const closemodal = e => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
@@ -18,7 +18,6 @@ export const AddModal = ({ showModal, setShowModal }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [desc, setDesc] = useState("");
-  console.log("it works");
 
   function TextInput(e, setState) {
     setState(e.target.value);
@@ -48,7 +47,7 @@ export const AddModal = ({ showModal, setShowModal }) => {
               <h2>Create Post</h2>
               <Cancel
                 onClick={() => {
-                  setShowModal((prev) => !prev);
+                  setShowModal(prev => !prev);
                 }}
               >
                 <ImCancelCircle
@@ -58,37 +57,18 @@ export const AddModal = ({ showModal, setShowModal }) => {
             </Head>
 
             <Body>
-              <UserInfo>
-                <IoPersonOutline
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    border: "2px solid #000",
-                    borderRadius: "50%",
-                    padding: "2px",
-                    cursor: "pointer",
-                    zIndex: "10000",
-                    margin: "10px",
-                  }}
-                />
-                <h3>userid</h3>
-              </UserInfo>
-
               <PostInput>
                 <PostWrap>
                   <p style={{ textAlign: "left" }}> 동영상 제목:</p>
-                  <Input
-                    onChange={(e) => TextInput(e, setTitle)}
-                    value={title}
-                  />
+                  <Input onChange={e => TextInput(e, setTitle)} value={title} />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 url:</p>
-                  <Input onChange={(e) => TextInput(e, setUrl)} value={url} />
+                  <Input onChange={e => TextInput(e, setUrl)} value={url} />
                 </PostWrap>
                 <PostWrap>
                   <p> 동영상 후기:</p>
-                  <Input onChange={(e) => TextInput(e, setDesc)} value={desc} />
+                  <Input onChange={e => TextInput(e, setDesc)} value={desc} />
                 </PostWrap>
                 <Submit onClick={addPost}>게시물 추가</Submit>
               </PostInput>

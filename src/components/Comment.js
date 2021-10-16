@@ -36,12 +36,13 @@ const Comment = (props) => {
 };
 
 const CommentWrap = styled.div`
+  position: relative;
   display: flex;
   justify-content: flex-start;
   margin: 10px 0;
 `;
 const User = styled.div`
-  width: 77px;
+  padding: 0 10px;
   font-weight: bold;
   font-size: 14px;
 `;
@@ -52,6 +53,9 @@ const UserComment = styled.div`
   word-break: break-all;
 `;
 const DeleteBtn = styled.div`
+  position: absolute;
+  top: 0; 
+  right: 0;
   width: 23px;
   color: #939597;
   cursor: pointer;

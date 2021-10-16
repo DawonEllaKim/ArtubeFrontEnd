@@ -9,12 +9,16 @@ const SIGN_IN = "SIGN_IN";
 const SIGN_OUT = "SIGN_OUT";
 const GET_USER = "GET_USER";
 
-const signIn = createAction(SIGN_IN, (token) => ({ token }));
+const signIn = createAction(SIGN_IN, (userId, token) => ({ userId, token }));
 const signOut = createAction(SIGN_OUT);
-const getUser = createAction(GET_USER, (user) => ({ user }));
+const getUser = createAction(GET_USER, (userId, userInfo) => ({
+  userId,
+  userInfo,
+}));
 
 const initialState = {
   user: null,
+  userInfo: null,
   token: null,
   is_login: false,
 };
@@ -31,13 +35,10 @@ const signUpAPI = (userId, password, confirmPassword) => {
 
     apis
       .signUp(data)
-      .then((res) => {
-        console.log(res);
-        // const token = res.data.token;
-        // localStorage.setItem("token", token);
+      .then(res => {
         history.push("/signIn");
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
 
     // axios({
     //   method: "POST",
@@ -65,16 +66,25 @@ const signInAPI = (userId, password) => {
 
     apis
       .signIn(data)
-      .then((res) => {
-        console.log(res);
+      .then(res => {
         const token = res.data.token;
         localStorage.setItem("token", token);
+        dispatch(signIn(userId, token));
         history.push("/");
-        dispatch(signIn(token));
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
+  };
+};
+
+const userCheckAPI = token => {
+  return function (dispatch, getState, { history }) {
+    apis.userCheck().then(res => {
+      const userId = res.data.user.userId;
+      const user = res.data.user;
+      dispatch(getUser(userId, user));
+    });
   };
 };
 
@@ -87,33 +97,25 @@ const signOutAPI = () => {
   };
 };
 
-const userCheckAPI = (token) => {
-  return function (dispatch, getState, { history }) {
-    apis.userCheck().then((res) => {
-      const user = res.data.user.userId;
-      dispatch(getUser(user));
-    });
-  };
-};
-
 export default handleActions(
   {
     [SIGN_IN]: (state, action) =>
-      produce(state, (draft) => {
-        draft.user = action.payload.user;
+      produce(state, draft => {
+        draft.user = action.payload.userId;
         draft.token = action.payload.token;
         draft.is_login = true;
       }),
     [SIGN_OUT]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.user = null;
         draft.token = null;
+        draft.userInfo = null;
         draft.is_login = false;
       }),
     [GET_USER]: (state, action) =>
-      produce(state, (draft) => {
-        draft.user = action.payload.user;
-        draft.token = localStorage.getItem("token");
+      produce(state, draft => {
+        draft.user = action.payload.userId;
+        draft.userInfo = action.payload.userInfo;
         draft.is_login = true;
       }),
   },

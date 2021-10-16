@@ -15,7 +15,7 @@ const instance = axios.create({
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     authorization: `Bearer ${localStorage.getItem("token")}`,
-    // "Access-Control-Allow-Origin": true,
+    "Access-Control-Allow-Origin": true,
   },
 });
 
@@ -40,15 +40,18 @@ export const apis = {
   deletePost: (id) => instance.delete(`/post/detail/${id}`),
 
   // comment
+
   getComment: (postId) => instance.get(`/comment/comment/${postId}`),
-  deleteComment: (commentId) => instance.delete(`/comment/comment`, commentId),
+  deleteComment: (commentId, commentUserId) =>
+    instance.delete(`/comment/comment/${commentId}`, commentUserId),
   addComment: (commentUserId, commentDesc, postId) =>
     instance.post("/comment/comment", { commentUserId, commentDesc, postId }),
 
   signUp: (data) => instance.post("/user/signUp", data),
   signIn: (data) => instance.post("/user/signIn", data),
-  userCheck: (token) => instance.get("/user/me", token),
 
-  updateProfile: (userId, userPic, userIntro) =>
-    instance.put("/userProfile/main"),
+  userCheck: () => instance.get("/user/me"),
+
+  editUserProfile: (userPic, userIntro) =>
+    instance.put("/user/me", { userPic, userIntro }),
 };

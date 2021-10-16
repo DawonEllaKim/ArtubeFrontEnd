@@ -44,6 +44,7 @@ const getMyPostMiddleware = (userId) => {
     apis
       .getMyPost(userId)
       .then((res) => {
+        console.log(res);
         const my_post_list = res.data.myPagePost;
         dispatch(getMyPost(my_post_list));
       })
@@ -68,8 +69,8 @@ const addPostMiddleware = (_post) => {
       .createPost(post)
       .then((res) => {
         console.log(res);
-        // const post = res.data
-        // dispatch(addPost(post));
+        const post = res.data.newPost;
+        dispatch(addPost(post));
         history.push("/");
       })
       .catch((err) => {
@@ -91,21 +92,6 @@ const editPostMiddleware = (postId, _post) => {
     };
 
     console.log(post);
-
-    //id, title, youtube_url, desc
-    // const {}
-    // title, youtube_url, desc
-
-    // const post = {
-    //   id: postId,
-    //   userId: "나당",
-    //   title: _post.title,
-    //   youtube_url: _post.url,
-    //   image_url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
-    //   video_url: `https://www.youtube.com/embed/${videoId}`,
-    //   desc: _post.desc,
-    //   date: "2021-10-11",
-    // };
 
     apis
       .editPost(
@@ -142,20 +128,7 @@ export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(...action.payload.post_list);
-
-        // 중복 post가 있다면 제거
-        // cur에 postlist값이 하나하나 들어올텐데
-        // postlist id와 cur id가 같은게 없으면 -1
-        // -1인 값만 acc에 넣어주기
-        draft.list = draft.list.reduce((acc, cur) => {
-          if (acc.findIndex((a) => a.id === cur.id) === -1) {
-            return [...acc, cur];
-          } else {
-            acc[acc.findIndex((a) => a.id === cur.id)] = cur;
-            return acc;
-          }
-        }, []);
+        draft.list = action.payload.post_list;
       }),
     [GET_MY_POST]: (state, action) =>
       produce(state, (draft) => {
@@ -187,7 +160,6 @@ const postActions = {
   addPostMiddleware,
   editPostMiddleware,
   deletePostMiddleware,
-  getMyPostMiddleware,
 };
 
 export { postActions };
