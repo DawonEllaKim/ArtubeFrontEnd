@@ -20,7 +20,8 @@ const Detail = (props) => {
   const token = localStorage.getItem("token");
   const is_signin = token ? true : false;
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user);
+  console.log(user);
 
   const post_list = useSelector((state) => state.post.list);
   const postId = props.match.params.postId;
@@ -31,13 +32,11 @@ const Detail = (props) => {
 
   const addComment = () => {
     const comment = {
-      userId,
       commentDesc,
       postId,
     };
     dispatch(commentActions.addCommentMiddleware(comment));
     setComment("");
-    console.log("등록");
   };
 
   useEffect(() => {
@@ -90,9 +89,9 @@ const Detail = (props) => {
                 </UserLink>
                 {/* <EditButton onClick={openModal}>Edit</EditButton> */}
 
-                {post.userId === userId ? (
+                {/* {post.userId === userId ? (
                   <EditButton onClick={openModal}>Edit</EditButton>
-                ) : null}
+                ) : null} */}
               </User>
               <Description>{post.desc}</Description>
               <Comments>

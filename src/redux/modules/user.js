@@ -11,7 +11,7 @@ const GET_USER = "GET_USER";
 
 const signIn = createAction(SIGN_IN, (userId, token) => ({ userId, token }));
 const signOut = createAction(SIGN_OUT);
-const getUser = createAction(GET_USER, (user) => ({ user }));
+const getUser = createAction(GET_USER, user => ({ user }));
 
 const initialState = {
   user: null,
@@ -32,10 +32,10 @@ const signUpAPI = (userId, password, confirmPassword) => {
 
     apis
       .signUp(data)
-      .then((res) => {
+      .then(res => {
         history.push("/signIn");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         alert("입력 정보를 확인하세요.");
       });
@@ -51,14 +51,14 @@ const signInAPI = (userId, password) => {
 
     apis
       .signIn(data)
-      .then((res) => {
+      .then(res => {
         console.log(res);
         const token = res.data.token;
         localStorage.setItem("token", token);
         dispatch(signIn(userId, token));
         history.push("/");
       })
-      .catch((err) => {
+      .catch(err => {
         alert("아이디/비밀번호가 올바르지 않습니다.");
         console.log(err);
       });
@@ -67,7 +67,7 @@ const signInAPI = (userId, password) => {
 
 const userCheckAPI = () => {
   return function (dispatch, getState, { history }) {
-    apis.userCheck().then((res) => {
+    apis.userCheck().then(res => {
       const user = res.data.user;
       dispatch(getUser(user));
     });
@@ -86,20 +86,20 @@ const signOutAPI = () => {
 export default handleActions(
   {
     [SIGN_IN]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.user = action.payload.userId;
         draft.token = action.payload.token;
         draft.is_login = true;
       }),
     [SIGN_OUT]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.user = null;
         draft.token = null;
         draft.userInfo = null;
         draft.is_login = false;
       }),
     [GET_USER]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
