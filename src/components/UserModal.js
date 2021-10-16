@@ -8,8 +8,10 @@ import { Image } from "../elements";
 
 const UserModal = (props) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.profile.userInfo);
-  const preview = useSelector((state) => state.profile.preview);
+  const userId = props.userId;
+
+  const userInfo = useSelector(state => state.profile.userInfo);
+  const preview = useSelector(state => state.profile.preview);
   const token = localStorage.getItem("token");
 
   const [userPic, setUserPic] = useState("");
@@ -33,9 +35,7 @@ const UserModal = (props) => {
   };
 
   useEffect(() => {
-    if (token) {
-      dispatch(profileActions.getProfleMiddleware(token));
-    }
+    dispatch(profileActions.getUserProfile(userId));
   }, []);
 
   const modalRef = useRef();
