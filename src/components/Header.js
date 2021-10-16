@@ -14,6 +14,7 @@ const Header = () => {
   const is_signin = token ? true : false;
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  console.log(user);
 
   const signOut = () => {
     dispatch(userActions.signOutAPI());
@@ -29,60 +30,61 @@ const Header = () => {
 
   return (
     <>
-      {user && (
-        <Wrap>
-          <Box>
-            {/* Home 버튼: 이거 누르면 "/"로 이동*/}
-            <IoHomeSharp
+      {/* {user && ( */}
+      <Wrap>
+        <Box>
+          {/* Home 버튼: 이거 누르면 "/"로 이동*/}
+          <IoHomeSharp
+            style={{
+              width: "26px",
+              height: "26px",
+              cursor: "pointer",
+              marginLeft: "30px",
+            }}
+            onClick={() => {
+              window.location.replace("/");
+            }}
+          />
+          {/* IoHomeOutline */}
+
+          {/* 로고: 이거 눌러도 "/"로 이동*/}
+          <Logo
+            src={ArtubeLogo3}
+            style={{ cursor: "pointer", margin: "10px 0 0 50px" }}
+            onClick={() => {
+              window.location.replace("/");
+            }}
+          />
+
+          {/* My Profile 버튼: 이거 누르면 "/mypage"로 이동*/}
+          {is_signin ? (
+            <IoPersonOutline
               style={{
-                width: "26px",
-                height: "26px",
+                width: "25px",
+                height: "25px",
+                border: "2px solid #000",
+                borderRadius: "50%",
+                padding: "2px",
                 cursor: "pointer",
-                marginLeft: "30px",
+                zIndex: "10000",
+                marginLeft: "80px",
               }}
               onClick={() => {
-                window.location.replace("/");
+                history.push(`/mypage/${user.userId}`);
               }}
             />
-            {/* IoHomeOutline */}
+          ) : null}
 
-            {/* 로고: 이거 눌러도 "/"로 이동*/}
-            <Logo
-              src={ArtubeLogo3}
-              style={{ cursor: "pointer", margin: "10px 0 0 50px" }}
-              onClick={() => {
-                window.location.replace("/");
-              }}
-            />
-
-            {/* My Profile 버튼: 이거 누르면 "/mypage"로 이동*/}
-            {is_signin ? (
-              <IoPersonOutline
-                style={{
-                  width: "25px",
-                  height: "25px",
-                  border: "2px solid #000",
-                  borderRadius: "50%",
-                  padding: "2px",
-                  cursor: "pointer",
-                  zIndex: "10000",
-                  marginLeft: "80px",
-                }}
-                onClick={() => {
-                  history.push(`/mypage/${user.userId}`);
-                }}
-              />
-            ) : null}
-
-            {/* 로그인/로그아웃 버튼 */}
-            {is_signin ? (
-              <LogInOut onClick={signOut}>로그아웃</LogInOut>
-            ) : (
-              <LogInOut onClick={signIn}>로그인</LogInOut>
-            )}
-          </Box>
-        </Wrap>
-      )}
+          {/* 로그인/로그아웃 버튼 */}
+          {is_signin ? (
+            <LogInOut onClick={signOut}>로그아웃</LogInOut>
+          ) : (
+            <LogInOut onClick={signIn}>로그인</LogInOut>
+          )}
+        </Box>
+      </Wrap>
+      {/* )
+			} */}
     </>
   );
 };
