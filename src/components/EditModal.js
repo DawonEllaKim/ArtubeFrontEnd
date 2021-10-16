@@ -24,6 +24,8 @@ export const EditModal = (props) => {
   const _post = useSelector((state) => state.post.list).filter(
     (p) => p.id === _postId
   )[0];
+  const userId = _post.userId;
+  // console.log(_post.userId);
 
   const [title, setTitle] = useState(_post.title);
   const [url, setUrl] = useState(_post.youtube_url);
@@ -60,7 +62,7 @@ export const EditModal = (props) => {
         <Wrap ref={modalRef} onClick={closemodal}>
           <ModalContent showModal={showModal}>
             <Head>
-              <h2>Create Post</h2>
+              <h2>Edit Post</h2>
               <Cancel
                 onClick={() => {
                   setShowModal((prev) => !prev);
@@ -86,7 +88,7 @@ export const EditModal = (props) => {
                     margin: "10px",
                   }}
                 />
-                <h3>userid</h3>
+                <h3>{userId}</h3>
               </UserInfo>
 
               <PostInput>
@@ -106,8 +108,9 @@ export const EditModal = (props) => {
                   <Submit onClick={getPreview}>이미지</Submit>
                 </PostWrap>
                 <PostWrap>
-                  <Image shape="rectangle" src={preview} />
+                  <img src={preview} style={{ width: "80%" }} />
                 </PostWrap>
+
                 <PostWrap>
                   <p> 동영상 후기:</p>
                   <Input
@@ -138,7 +141,6 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 const Head = styled.div`
   display: flex;
   flex-direction: row;
@@ -146,8 +148,8 @@ const Head = styled.div`
   align-items: center;
   position: relative;
   border-bottom: 1.5px solid #e5e5e5;
+  background-color: black;
 `;
-
 const Cancel = styled.div`
   width: 40px;
   height: 40px;
@@ -161,30 +163,36 @@ const Cancel = styled.div`
 const ModalContent = styled.div`
   position: fixed;
   top: 10%;
-  width: 676px;
-  height: 800px;
+  width: 50%;
+  height: 85%;
   background-color: white;
+  border-radius: 20px;
 `;
-
 const Body = styled.div`
   width: 100%;
   margin: auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
 `;
 const UserInfo = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-self: left;
+  height: 30px;
 `;
-
 const PostInput = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-self: center;
   width: 90%;
+  height: 100%;
   margin: auto auto auto -1px;
+  background-color: pink;
 `;
 const PostWrap = styled.div`
   display: flex;
@@ -192,8 +200,8 @@ const PostWrap = styled.div`
   align-items: center;
   justify-self: center;
   width: 100%;
+  height: 100px;
 `;
-
 const Input = styled.input`
   box-sizing: border-box;
   width: 80%;
@@ -205,10 +213,11 @@ const Input = styled.input`
   border-radius: 5px;
   font-size: 16px;
 `;
-
 const Submit = styled.button`
-  width: 100px;
-  height: 45px;
+  /* width: 100px;
+  height: 45px; */
+  width: 100%;
+  height: 100px;
   margin: 30px 10px;
   padding: 12px 0px;
   background-color: #000;
@@ -219,10 +228,11 @@ const Submit = styled.button`
   font-size: 15px;
   cursor: pointer;
 `;
-
 const Buttons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100px;
 `;

@@ -48,4 +48,7 @@ export const apis = {
   signUp: (data) => instance.post("/user/signUp", data),
   signIn: (data) => instance.post("/user/signIn", data),
   userCheck: (token) => instance.get("/user/me", token),
+
+  updateProfile: (userId, userPic, userIntro) =>
+    instance.put("/userProfile/main"),
 };
