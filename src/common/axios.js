@@ -15,7 +15,7 @@ const instance = axios.create({
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     authorization: `Bearer ${localStorage.getItem("token")}`,
-    "Access-Control-Allow-Origin": true,
+    // "Access-Control-Allow-Origin": true,
   },
 });
 
@@ -51,6 +51,8 @@ export const apis = {
   signIn: (data) => instance.post("/user/signIn", data),
 
   userCheck: () => instance.get("/user/me"),
+
+  getUserProfile: userId => instance.get(`/user/userProfile/${userId}`),
 
   editUserProfile: (userPic, userIntro) =>
     instance.put("/user/me", { userPic, userIntro }),

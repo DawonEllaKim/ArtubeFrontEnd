@@ -6,7 +6,7 @@ const GET_PROFILE = "GET_PROFILE";
 const UPDATE_PROFILE = "UPDATE_PROFILE";
 const SET_PREVIEW = "SET_PREVIEW";
 
-const getProfile = createAction(GET_PROFILE, (userInfo) => ({ userInfo }));
+const getProfile = createAction(GET_PROFILE, (user) => ({ user }));
 const updateProfile = createAction(UPDATE_PROFILE, (userInfo) => ({
   userInfo,
 }));
@@ -17,10 +17,10 @@ const initialState = {
   preview: null,
 };
 
-const getProfleMiddleware = (token) => {
+const getUserProfile = (userId) => {
   return function (dispatch, getState, { history }) {
-    apis.userCheck().then((res) => {
-      const user = res.data.user;
+    apis.getUserProfile(userId).then((res) => {
+      const user = res.data.userProfile;
       dispatch(getProfile(user));
     });
   };
@@ -47,16 +47,16 @@ export default handleActions(
   {
     [UPDATE_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        const { userPic, userIntro } = action.payload.userInfo;
+        const { userPic, userIntro } = action.payload.user;
         draft.userInfo = {
           ...draft.userInfo,
-          userPic: userPic,
-          userIntro: userIntro,
+          userPic: userPic ? userPic : null,
+          userIntro: userIntro ? userIntro : null,
         };
       }),
     [GET_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        draft.userInfo = action.payload.userInfo;
+        draft.userInfo = action.payload.user;
       }),
     [SET_PREVIEW]: (state, action) =>
       produce(state, (draft) => {
@@ -68,7 +68,7 @@ export default handleActions(
 
 const profileActions = {
   updateProfileMiddleware,
-  getProfleMiddleware,
+  getUserProfile,
   setPreview,
 };
 

@@ -11,10 +11,7 @@ const GET_USER = "GET_USER";
 
 const signIn = createAction(SIGN_IN, (userId, token) => ({ userId, token }));
 const signOut = createAction(SIGN_OUT);
-const getUser = createAction(GET_USER, (userId, userInfo) => ({
-  userId,
-  userInfo,
-}));
+const getUser = createAction(GET_USER, (user) => ({ user }));
 
 const initialState = {
   user: null,
@@ -42,21 +39,6 @@ const signUpAPI = (userId, password, confirmPassword) => {
         console.log(err);
         alert("입력 정보를 확인하세요.");
       });
-
-    // axios({
-    //   method: "POST",
-    //   url: "/user/signUp",
-    //   data,
-    // })
-    //   .then(res => {
-    //     console.log(res); // signup 정보 확인
-    //     window.alert("축하합니다");
-    //     history.push("/login");
-    //   })
-    //   .catch(err => {
-    //     console.log("signupAPI에서 오류발생", err);
-    //     window.alert("회원가입에 실패했습니다.");
-    //   });
   };
 };
 
@@ -70,6 +52,7 @@ const signInAPI = (userId, password) => {
     apis
       .signIn(data)
       .then((res) => {
+        console.log(res);
         const token = res.data.token;
         localStorage.setItem("token", token);
         dispatch(signIn(userId, token));
@@ -82,12 +65,11 @@ const signInAPI = (userId, password) => {
   };
 };
 
-const userCheckAPI = (token) => {
+const userCheckAPI = () => {
   return function (dispatch, getState, { history }) {
     apis.userCheck().then((res) => {
-      const userId = res.data.user.userId;
       const user = res.data.user;
-      dispatch(getUser(userId, user));
+      dispatch(getUser(user));
     });
   };
 };
@@ -118,8 +100,7 @@ export default handleActions(
       }),
     [GET_USER]: (state, action) =>
       produce(state, (draft) => {
-        draft.user = action.payload.userId;
-        draft.userInfo = action.payload.userInfo;
+        draft.user = action.payload.user;
         draft.is_login = true;
       }),
   },
