@@ -6,17 +6,18 @@ import { userActions } from "../redux/modules/user";
 import { profileActions } from "../redux/modules/profile";
 import { Image } from "../elements";
 
-const UserModal = (props) => {
+const UserModal = props => {
   const dispatch = useDispatch();
   const userId = props.userId;
 
-  const userInfo = useSelector((state) => state.profile.userInfo);
-  const preview = useSelector((state) => state.profile.preview);
+  const userInfo = useSelector(state => state.profile.userInfo);
+  const preview = useSelector(state => state.profile.preview);
   const token = localStorage.getItem("token");
 
   const [userPic, setUserPic] = useState("");
   const profileImage = useRef();
-  const selectFile = (e) => {
+
+  const selectFile = e => {
     const reader = new FileReader();
     const file = profileImage.current.files[0];
     reader.readAsDataURL(file);
@@ -39,7 +40,7 @@ const UserModal = (props) => {
   }, []);
 
   const modalRef = useRef();
-  const closemodal = (e) => {
+  const closemodal = e => {
     if (modalRef.current === e.target) {
       setShowProfileModal(false);
     }
@@ -55,7 +56,7 @@ const UserModal = (props) => {
               <h2>Edit Profile</h2>
               <Cancel
                 onClick={() => {
-                  setShowProfileModal((prev) => !prev);
+                  setShowProfileModal(prev => !prev);
                 }}
               ></Cancel>
             </Head>
@@ -88,7 +89,7 @@ const UserModal = (props) => {
                   height: "100px",
                   border: "1px solid #dbdbdb",
                 }}
-                onChange={(e) => setIntro(e.target.value)}
+                onChange={e => setIntro(e.target.value)}
                 value={userIntro}
               >
                 {userInfo.userIntro

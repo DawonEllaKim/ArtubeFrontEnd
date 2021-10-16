@@ -14,13 +14,13 @@ import { Image } from "../elements";
 
 // const logedInUserId = useSelector((state) => state.user.user);
 // const sameUser = userId === logedInUserId ? true : false;
-const MyPage = (props) => {
+const MyPage = props => {
   const dispatch = useDispatch();
 
-  const myPostList = useSelector((state) => state.post.list);
+  const myPostList = useSelector(state => state.post.list);
   const userId = props.match.params.userId;
   console.log("지금 프로필의 유저", props.match.params);
-  const userInfo = useSelector((state) => state.user.user);
+  const userInfo = useSelector(state => state.user.user);
   console.log("지금로그인한 사람 ", userInfo);
   // const currentUser = useSelector((state) =>
   //   console.log("로그인 아이디", state.user.user)
@@ -30,13 +30,13 @@ const MyPage = (props) => {
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
 
   // 프로필 추가 모달 창
   const [showProfileModal, setShowProfileModal] = React.useState(false);
   const openProfileModal = () => {
-    setShowProfileModal((prev) => !prev);
+    setShowProfileModal(prev => !prev);
   };
 
   useEffect(() => {

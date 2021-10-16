@@ -6,7 +6,8 @@ import { Grid, Input, Button, Text } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
-const Comment = (props) => {
+const Comment = props => {
+  console.log(props);
   const { commentUserId, commentDesc, commentId, postId } = props;
 
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const UserComment = styled.div`
   margin-right: 25px;`;
 const DeleteBtn = styled.div`
   position: absolute;
-  top: 0; 
+  top: 0;
   right: 0;
   width: 23px;
   color: #939597;
