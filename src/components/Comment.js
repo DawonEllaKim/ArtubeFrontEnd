@@ -10,7 +10,7 @@ const Comment = (props) => {
   const { commentUserId, commentDesc, commentId, postId } = props;
 
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.user.user);
+  const userId = useSelector((state) => state.user.user);
 
   const deleteComment = () => {
     dispatch(commentActions.deleteCommentMiddleware(commentId, userId));
@@ -54,7 +54,7 @@ const UserComment = styled.div`
 `;
 const DeleteBtn = styled.div`
   position: absolute;
-  top: 0; 
+  top: 0;
   right: 0;
   width: 23px;
   color: #939597;
