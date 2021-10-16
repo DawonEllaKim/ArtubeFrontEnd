@@ -43,7 +43,7 @@ const ElButton = styled.button`
   box-sizing: border-box;
   width: ${(props) => props.width};
   height: 45px;
-  margin-bottom: 15px;
+  margin: 15px 0;
   padding: 12px 0px;
   background-color: #000;
   border: 1px solid #939597;

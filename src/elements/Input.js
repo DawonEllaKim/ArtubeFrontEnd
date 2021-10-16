@@ -79,7 +79,7 @@ const ElInput = styled.input`
   box-sizing: border-box;
   width: 90%;
   height: 45px;
-  margin-bottom: 20px;
+  margin: 10px 0;
   padding: 15px 10px;
   border: 1px solid #939597;
   border-radius: 5px;

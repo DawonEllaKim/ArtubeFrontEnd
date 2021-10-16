@@ -196,7 +196,9 @@ const Description = styled.div`
 `;
 
 const Comments = styled.div`
-  overflow: auto;;
+  height: 310px;
+  margin-top: 4px ;
+  overflow: auto;
 `;
 const InputWrap = styled.div`
   display: flex;
