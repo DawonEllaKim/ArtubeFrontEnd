@@ -7,14 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
 const Comment = props => {
-  console.log(props);
   const { commentUserId, commentDesc, commentId, postId } = props;
-
+  const user = useSelector(state => state.user.user);
+  console.log(user);
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.user.user);
 
   const deleteComment = () => {
-    dispatch(commentActions.deleteCommentMiddleware(commentId, userId));
+    dispatch(commentActions.deleteCommentMiddleware(commentId, commentUserId));
   };
 
   useEffect(() => {
@@ -23,15 +22,17 @@ const Comment = props => {
 
   return (
     <>
-      <Grid>
-        <CommentWrap>
-          <User>{commentUserId}</User>
-          <UserComment>{commentDesc}</UserComment>
-          <DeleteBtn onClick={deleteComment}>
-            <IoMdClose />
-          </DeleteBtn>
-        </CommentWrap>
-      </Grid>
+      {user && (
+        <Grid>
+          <CommentWrap>
+            <User>{commentUserId}</User>
+            <UserComment>{commentDesc}</UserComment>
+            <DeleteBtn onClick={deleteComment}>
+              {user.userId === commentUserId && <IoMdClose />}
+            </DeleteBtn>
+          </CommentWrap>
+        </Grid>
+      )}
     </>
   );
 };

@@ -20,7 +20,6 @@ const Detail = props => {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
-  console.log(user);
 
   const post_list = useSelector(state => state.post.list);
   const postId = props.match.params.postId;
