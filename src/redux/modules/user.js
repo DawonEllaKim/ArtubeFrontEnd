@@ -52,11 +52,15 @@ const signInAPI = (userId, password) => {
     apis
       .signIn(data)
       .then(res => {
-        console.log(res);
         const token = res.data.token;
         localStorage.setItem("token", token);
-        dispatch(signIn(userId, token));
-        history.push("/");
+        apis.userCheck().then(res => {
+          console.log(localStorage.getItem("token"));
+          const user = res.data.user;
+          dispatch(signIn(userId, token));
+          dispatch(getUser(user));
+          history.push("/");
+        });
       })
       .catch(err => {
         alert("아이디/비밀번호가 올바르지 않습니다.");
@@ -91,6 +95,7 @@ export default handleActions(
         draft.token = action.payload.token;
         draft.is_login = true;
       }),
+
     [SIGN_OUT]: (state, action) =>
       produce(state, draft => {
         draft.user = null;

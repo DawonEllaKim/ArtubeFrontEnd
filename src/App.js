@@ -16,15 +16,10 @@ import MyPage from "./pages/MyPage";
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  const userId = useSelector(state => state.user.user);
-  console.log(userId);
+  const user = useSelector(state => state.user.user);
+  console.log(user, "App.js");
 
-  useEffect(() => {
-    if (token) {
-      // dispatch(userActions.userCheckAPI());
-      dispatch(profileActions.getUserProfile(userId));
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="App">

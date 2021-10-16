@@ -16,6 +16,7 @@ import { profileActions } from "../redux/modules/profile";
 const Main = () => {
   const token = localStorage.getItem("token");
   const is_signin = token ? true : false;
+  const user = useSelector(state => state.user.user);
 
   const dispatch = useDispatch();
   const post_list = useSelector(state => state.post.list);
