@@ -6,12 +6,14 @@ import { Grid, Input, Button, Text } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
-const Comment = props => {
+const Comment = (props) => {
   console.log(props);
   const { commentUserId, commentDesc, commentId, postId } = props;
 
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.user);
+  const userId = useSelector((state) => console.log(state.user.user));
+  const same_user = userId === commentUserId ? true : false;
+  console.log(userId, commentUserId);
 
   const deleteComment = () => {
     dispatch(commentActions.deleteCommentMiddleware(commentId, userId));
@@ -27,9 +29,11 @@ const Comment = props => {
         <CommentWrap>
           <User>{commentUserId}</User>
           <UserComment>{commentDesc}</UserComment>
-          <DeleteBtn onClick={deleteComment}>
-            <IoMdClose />
-          </DeleteBtn>
+          {same_user ? (
+            <DeleteBtn onClick={deleteComment}>
+              <IoMdClose />
+            </DeleteBtn>
+          ) : null}
         </CommentWrap>
       </Grid>
     </>
