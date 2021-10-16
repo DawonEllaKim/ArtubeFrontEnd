@@ -43,6 +43,8 @@ const addCommentMiddleware = (_comment) => {
           commentId: res.data.commentId,
         };
         dispatch(addComment(comment));
+        // window.location.replace('/');
+        history.push('/')
       });
   };
 };

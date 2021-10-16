@@ -88,9 +88,9 @@ const Detail = (props) => {
                 </UserLink>
                 {/* <EditButton onClick={openModal}>Edit</EditButton> */}
 
-                {/* {post.userId === userId ? (
+                {post.userId === user.userId ? (
                   <EditButton onClick={openModal}>Edit</EditButton>
-                ) : null} */}
+                ) : null}
               </User>
               <Description>{post.desc}</Description>
               <Comments>
