@@ -34,6 +34,7 @@ const Post = (props) => {
             {/* user id */}
             <UserLink
               onClick={() => {
+                // window.alert('로그인 후 이용해주세요')
                 history.push(`/mypage/${userId}`);
               }}
             >
