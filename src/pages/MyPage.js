@@ -11,24 +11,34 @@ import { profileActions } from "../redux/modules/profile";
 
 import { IoIosAddCircle } from "react-icons/io";
 import { Image } from "../elements";
+<<<<<<< HEAD
+=======
+
+// const logedInUserId = useSelector((state) => state.user.user);
+// const sameUser = userId === logedInUserId ? true : false;
+>>>>>>> d9087400911fc825a1cc038c331814039c94fd1b
 const MyPage = props => {
   const dispatch = useDispatch();
-  const userId = props.match.params.userId;
 
   const myPostList = useSelector(state => state.post.list);
+<<<<<<< HEAD
   const userInfo = useSelector(state => state.profile);
+=======
+  const userId = props.match.params.userId;
+  const userInfo = useSelector(state => state.profile.userInfo);
+>>>>>>> d9087400911fc825a1cc038c331814039c94fd1b
   console.log(userInfo);
 
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
 
   // 프로필 추가 모달 창
   const [showProfileModal, setShowProfileModal] = React.useState(false);
   const openProfileModal = () => {
-    setShowProfileModal((prev) => !prev);
+    setShowProfileModal(prev => !prev);
   };
 
   useEffect(() => {

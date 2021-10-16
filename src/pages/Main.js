@@ -14,12 +14,15 @@ import { userActions } from "../redux/modules/user";
 import { profileActions } from "../redux/modules/profile";
 
 const Main = () => {
+  const token = localStorage.getItem("token");
+  const is_signin = token ? true : false;
+
   const dispatch = useDispatch();
-  const post_list = useSelector(state => state.post.list);
+  const post_list = useSelector((state) => state.post.list);
 
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal(prev => !prev);
+    setShowModal((prev) => !prev);
   };
 
   useEffect(() => {
@@ -35,17 +38,20 @@ const Main = () => {
           {post_list.map((p, idx) => {
             return <Post {...p} key={idx} />;
           })}
-          <AddButton>
-            <IoIosAddCircle
-              style={{
-                width: "50px",
-                height: "50px",
-                color: "#f5df4d",
-                cursor: "pointer",
-              }}
-              onClick={openModal}
-            />
-          </AddButton>
+          {is_signin ? (
+            <AddButton>
+              <IoIosAddCircle
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  color: "#f5df4d",
+                  cursor: "pointer",
+                }}
+                onClick={openModal}
+              />
+            </AddButton>
+          ) : null}
+
           <AddModal showModal={showModal} setShowModal={setShowModal} />
         </>
       )}

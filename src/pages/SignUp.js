@@ -44,7 +44,6 @@ const SignUp = (props) => {
             type="text"
             _onChange={(e) => TextInput(e, setId)}
             value={userId}
-            // 이게 필요한 이유?
           />
           <Input
             label=""

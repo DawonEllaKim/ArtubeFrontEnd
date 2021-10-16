@@ -35,7 +35,10 @@ const signUpAPI = (userId, password, confirmPassword) => {
       .then(res => {
         history.push("/signIn");
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        alert("입력 정보를 확인하세요.");
+      });
   };
 };
 
@@ -56,6 +59,7 @@ const signInAPI = (userId, password) => {
         history.push("/");
       })
       .catch(err => {
+        alert("아이디/비밀번호가 올바르지 않습니다.");
         console.log(err);
       });
   };

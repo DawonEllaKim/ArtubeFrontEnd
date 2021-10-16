@@ -32,22 +32,22 @@ const getCommentMiddleware = postId => {
 
 const addCommentMiddleware = _comment => {
   return function (dispatch, getState, { history }) {
-    // (commentUserId, commentDesc, postId)
-    apis
-      .addComment(_comment.userId, _comment.commentDesc, _comment.postId)
-      .then(res => {
-        const comment = {
-          ..._comment,
-          commentId: res.data.commentId,
-        };
-        dispatch(addComment(comment));
-      });
+    const userId = getState().user.user.userId;
+
+    apis.addComment(userId, _comment.commentDesc, _comment.postId).then(res => {
+      const comment = {
+        userId,
+        _comment,
+        commentId: res.data.commentId,
+      };
+      dispatch(addComment(comment));
+    });
   };
 };
 
 const deleteCommentMiddleware = (commentId, commnetUserId) => {
   return function (dispatch, getState, { history }) {
-    console.log(commnetUserId);
+    console.log(commentId, commnetUserId);
     apis
       .deleteComment(commentId, commnetUserId)
       .then(res => {
@@ -71,9 +71,6 @@ export default handleActions(
       }),
     [DELETE_COMMENT]: (state, action) =>
       produce(state, draft => {
-        console.log(action.payload.commentId);
-        console.log(draft.list);
-
         draft.list = draft.list.filter(
           c => c.commentId !== action.payload.commentId
         );
