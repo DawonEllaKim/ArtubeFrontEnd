@@ -6,13 +6,13 @@ const GET_COMMENT = "GET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
 const DELETE_COMMENT = "DELETE_COMMENT";
 
-const getComment = createAction(GET_COMMENT, (comment_list) => ({
+const getComment = createAction(GET_COMMENT, comment_list => ({
   comment_list,
 }));
-const addComment = createAction(ADD_COMMENT, (comment) => ({
+const addComment = createAction(ADD_COMMENT, comment => ({
   comment,
 }));
-const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({
+const deleteComment = createAction(DELETE_COMMENT, commentId => ({
   commentId,
 }));
 
@@ -21,31 +21,27 @@ const initialState = {
   is_loading: false,
 };
 
-const getCommentMiddleware = (postId) => {
+const getCommentMiddleware = postId => {
   return function (dispatch, getState, { history }) {
-    apis.getComment(postId).then((res) => {
+    apis.getComment(postId).then(res => {
       const comment_list = res.data.comment;
       dispatch(getComment(comment_list));
     });
   };
 };
 
-const addCommentMiddleware = (_comment) => {
+const addCommentMiddleware = _comment => {
   return function (dispatch, getState, { history }) {
     const userId = getState().user.user.userId;
 
-    apis
-      .addComment(userId, _comment.commentDesc, _comment.postId)
-      .then((res) => {
-        const comment = {
-          userId,
-          _comment,
-          commentId: res.data.commentId,
-        };
-        dispatch(addComment(comment));
-        // window.location.replace('/');
-        history.push('/')
-      });
+    apis.addComment(userId, _comment.commentDesc, _comment.postId).then(res => {
+      const comment = {
+        userId,
+        ..._comment,
+        commentId: res.data.commentId,
+      };
+      dispatch(addComment(comment));
+    });
   };
 };
 
@@ -54,10 +50,10 @@ const deleteCommentMiddleware = (commentId, commnetUserId) => {
     console.log(commentId, commnetUserId);
     apis
       .deleteComment(commentId, commnetUserId)
-      .then((res) => {
+      .then(res => {
         dispatch(deleteComment(commentId));
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };
@@ -66,17 +62,17 @@ const deleteCommentMiddleware = (commentId, commnetUserId) => {
 export default handleActions(
   {
     [ADD_COMMENT]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.list.unshift(action.payload.comment);
       }),
     [GET_COMMENT]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.list = action.payload.comment_list;
       }),
     [DELETE_COMMENT]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.list = draft.list.filter(
-          (c) => c.commentId !== action.payload.commentId
+          c => c.commentId !== action.payload.commentId
         );
       }),
   },

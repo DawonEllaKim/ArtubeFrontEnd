@@ -23,8 +23,6 @@ const Detail = props => {
   const post = useSelector(state => state.post.list);
   const postId = props.match.params.postId;
 
-  console.log(post);
-
   const [commentDesc, setComment] = useState("");
   const comment_list = useSelector(state => state.comment.list);
 
@@ -39,6 +37,7 @@ const Detail = props => {
 
   useEffect(() => {
     dispatch(postActions.getPostMiddleware(postId));
+    dispatch(commentActions.getCommentMiddleware(postId));
   }, []);
 
   return (
@@ -100,17 +99,17 @@ const Detail = props => {
                 onChange={e => setComment(e.target.value)}
                 value={commentDesc}
               />
-              <AddButton onClick={() => {}}>등록</AddButton>
+              <AddButton onClick={addComment}>등록</AddButton>
             </InputWrap>
           ) : null}
         </DetailWrap>
       </CommentWrap>
 
-      {/* <EditModal
+      <EditModal
         _postId={postId}
         showModal={showModal}
         setShowModal={setShowModal}
-      /> */}
+      />
     </>
   );
 };

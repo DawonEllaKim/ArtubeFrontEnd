@@ -17,7 +17,6 @@ const Header = () => {
 
   const signOut = () => {
     dispatch(userActions.signOutAPI());
-    history.replace("/");
   };
   const signIn = () => {
     history.push("/signin");

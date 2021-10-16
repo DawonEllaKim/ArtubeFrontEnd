@@ -78,8 +78,8 @@ const signOutAPI = () => {
   return function (dispatch, getState, { history }) {
     localStorage.removeItem("token");
     localStorage.clear();
-    history.push("/signin");
     dispatch(signOut());
+    history.push("/signin");
   };
 };
 

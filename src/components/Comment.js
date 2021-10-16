@@ -6,10 +6,9 @@ import { Grid, Input, Button, Text } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { commentActions } from "../redux/modules/comment";
 
-const Comment = (props) => {
+const Comment = props => {
   const { commentUserId, commentDesc, commentId, postId } = props;
-  const user = useSelector((state) => state.user.user);
-  console.log(user);
+  const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
   const deleteComment = () => {

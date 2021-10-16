@@ -6,10 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { postActions } from "../redux/modules/post";
 import { Image } from "../elements";
 
-export const EditModal = (props) => {
+export const EditModal = props => {
   const modalRef = useRef();
 
-  const closemodal = (e) => {
+  const closemodal = e => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
@@ -21,9 +21,8 @@ export const EditModal = (props) => {
     setState(e.target.value);
   }
 
-  const _post = useSelector((state) => state.post.list).filter(
-    (p) => p.id === _postId
-  )[0];
+  const _post = useSelector(state => state.post.list);
+
   const userId = _post.userId;
   // console.log(_post.userId);
 
@@ -65,7 +64,7 @@ export const EditModal = (props) => {
               <h2>Edit Post</h2>
               <Cancel
                 onClick={() => {
-                  setShowModal((prev) => !prev);
+                  setShowModal(prev => !prev);
                 }}
               >
                 <ImCancelCircle
@@ -79,7 +78,7 @@ export const EditModal = (props) => {
                 <p> 동영상 제목:</p>
                 <Input
                   defaultValue={_post.title}
-                  onChange={(e) => TextInput(e, setTitle)}
+                  onChange={e => TextInput(e, setTitle)}
                 />
               </InputBox>
 
@@ -99,7 +98,7 @@ export const EditModal = (props) => {
 
                 <Input
                   defaultValue={_post.youtube_url}
-                  onChange={(e) => TextInput(e, setUrl)}
+                  onChange={e => TextInput(e, setUrl)}
                 />
               </InputBox>
 
@@ -114,7 +113,7 @@ export const EditModal = (props) => {
                 <p> 동영상 후기:</p>
                 <Input
                   defaultValue={_post.desc}
-                  onChange={(e) => TextInput(e, setDesc)}
+                  onChange={e => TextInput(e, setDesc)}
                 />
               </div>
 

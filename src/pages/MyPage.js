@@ -12,15 +12,11 @@ import { profileActions } from "../redux/modules/profile";
 import { IoIosAddCircle } from "react-icons/io";
 import { Image } from "../elements";
 
-// const logedInUserId = useSelector((state) => state.user.user);
-// const sameUser = userId === logedInUserId ? true : false;
 const MyPage = props => {
   const dispatch = useDispatch();
+  const userId = props.match.params.userId;
 
   const myPostList = useSelector(state => state.post.list);
-  const userId = props.match.params.userId;
-  const userInfo = useSelector(state => state.profile.userInfo);
-  console.log(userInfo);
 
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
@@ -28,28 +24,28 @@ const MyPage = props => {
     setShowModal(prev => !prev);
   };
 
-  // 프로필 추가 모달 창
-  // const [showProfileModal, setShowProfileModal] = React.useState(false);
-  // const openProfileModal = () => {
-  //   setShowProfileModal(prev => !prev);
-  // };
-
   useEffect(() => {
     dispatch(profileActions.getUserProfile(userId));
     dispatch(postActions.getMyPostMiddleware(userId));
   }, []);
 
+  if (!myPostList) {
+    return;
+  }
+
   return (
     <>
-      {userInfo && (
-        <>
-          <Wrap>
-            {/* 고정된 헤더 */}
-            <Header />
-            <UserId>{userId}<span style={{fontSize:'20px'}}>  님의 페이지입니다</span></UserId>
+      <>
+        <Wrap>
+          {/* 고정된 헤더 */}
+          <Header />
+          <UserId>
+            {userId}
+            <span style={{ fontSize: "20px" }}> 님의 페이지입니다</span>
+          </UserId>
 
-            {/* 유저 프로필 */}
-            {/* <ProfileWrap>
+          {/* 유저 프로필 */}
+          {/* <ProfileWrap>
               <ProfileLeft>
                 <ProfileImage src={userInfo ? userInfo.userPic : null} />
               </ProfileLeft>
@@ -72,37 +68,36 @@ const MyPage = props => {
               </ProfileRight>
             </ProfileWrap> */}
 
-            {/* 내가 올린 동영상 모음 */}
-            <PostWrap>
-              {myPostList.map((p, idx) => {
-                return <MypagePost {...p} key={idx} />;
-              })}
-            </PostWrap>
+          {/* 내가 올린 동영상 모음 */}
+          <PostWrap>
+            {myPostList.map((p, idx) => {
+              return <MypagePost {...p} key={idx} />;
+            })}
+          </PostWrap>
 
-            {/* 게시물 추가 모달창 여는 버튼 */}
-            <AddButton>
-              <IoIosAddCircle
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  color: "#f5df4d",
-                  cursor: "pointer",
-                }}
-                onClick={openModal}
-              />
-            </AddButton>
-          </Wrap>
+          {/* 게시물 추가 모달창 여는 버튼 */}
+          <AddButton>
+            <IoIosAddCircle
+              style={{
+                width: "50px",
+                height: "50px",
+                color: "#f5df4d",
+                cursor: "pointer",
+              }}
+              onClick={openModal}
+            />
+          </AddButton>
+        </Wrap>
 
-          {/* 게시물 추가 모달창 */}
-          <AddModal showModal={showModal} setShowModal={setShowModal} />
-          {/* 프로필 수정 모달창 */}
-          {/* <UserModal
+        {/* 게시물 추가 모달창 */}
+        <AddModal showModal={showModal} setShowModal={setShowModal} />
+        {/* 프로필 수정 모달창 */}
+        {/* <UserModal
             userId={userId}
             showProfileModal={showProfileModal}
             setShowProfileModal={setShowProfileModal}
           /> */}
-        </>
-      )}
+      </>
     </>
   );
 };
@@ -122,7 +117,7 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   margin: 20px auto;
   border: 1px solid #dbdbdb;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 `;
 const ProfileRight = styled.div`
   display: flex;

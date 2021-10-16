@@ -18,21 +18,23 @@ const Main = () => {
   const is_signin = token ? true : false;
 
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
+  const post_list = useSelector(state => state.post.list);
 
   const [showModal, setShowModal] = React.useState(false);
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
 
   useEffect(() => {
-    dispatch(postActions.getPostMiddleware());
-    dispatch(userActions.userCheckAPI());
+    if (post_list.length < 2) {
+      dispatch(postActions.getPostMiddleware());
+      dispatch(userActions.userCheckAPI());
+    }
   }, []);
 
   return (
     <>
-      {post_list && (
+      {post_list.length > 2 && (
         <>
           <Header />
           {post_list.map((p, idx) => {
