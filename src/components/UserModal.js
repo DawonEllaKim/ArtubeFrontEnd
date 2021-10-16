@@ -10,8 +10,8 @@ const UserModal = (props) => {
   const dispatch = useDispatch();
   const userId = props.userId;
 
-  const userInfo = useSelector(state => state.profile.userInfo);
-  const preview = useSelector(state => state.profile.preview);
+  const userInfo = useSelector((state) => state.profile.userInfo);
+  const preview = useSelector((state) => state.profile.preview);
   const token = localStorage.getItem("token");
 
   const [userPic, setUserPic] = useState("");

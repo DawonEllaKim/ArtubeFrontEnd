@@ -4,13 +4,13 @@ const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
 
   // 성규님 주소
-  baseURL: "http://3.34.95.37",
+  // baseURL: "http://3.34.95.37",
 
   // 유정님 주소
   // baseURL: "http://3.35.141.41",
 
   //제이슨 서버
-  // baseURL: "http://localhost:4000",
+  baseURL: "http://localhost:4000",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -52,7 +52,7 @@ export const apis = {
 
   userCheck: () => instance.get("/user/me"),
 
-  getUserProfile: userId => instance.get(`/user/userProfile/${userId}`),
+  getUserProfile: (userId) => instance.get(`/user/userProfile/${userId}`),
 
   editUserProfile: (userPic, userIntro) =>
     instance.put("/user/me", { userPic, userIntro }),
