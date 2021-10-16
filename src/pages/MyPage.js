@@ -13,17 +13,12 @@ import { IoIosAddCircle } from "react-icons/io";
 import { Image } from "../elements";
 
 const MyPage = props => {
-  console.log(props);
   const dispatch = useDispatch();
   const userId = props.match.params.userId;
 
   const myPostList = useSelector(state => state.post.list);
-  const logedInUserId = useSelector(state => state.user.user);
-  const userInfo = useSelector(state => state.profile.userInfo);
-  const sameUser = userId === logedInUserId ? true : false;
+  const userInfo = useSelector(state => state.profile);
   console.log(userInfo);
-  // const myPostList = post_list.filter((p) => p.userId === userId);
-  // console.log(myPostList);
 
   // 게시물 추가 모달 창 function
   const [showModal, setShowModal] = React.useState(false);
@@ -37,68 +32,74 @@ const MyPage = props => {
     setShowProfileModal(prev => !prev);
   };
 
-  // useEffect(() => {
-  //   dispatch(postActions.getPostMiddleware());
-  // }, []);
-
   useEffect(() => {
+    dispatch(profileActions.getUserProfile(userId));
     dispatch(postActions.getMyPostMiddleware(userId));
-  }, [userId]);
+  }, []);
 
   return (
     <>
-      <Wrap>
-        {/* 고정된 헤더 */}
-        <Header />
+      {userInfo && (
+        <>
+          <Wrap>
+            {/* 고정된 헤더 */}
+            <Header />
 
-        {/* 유저 프로필 */}
-        <ProfileWrap>
-          <ProfileLeft>
-            <ProfileImage src={userInfo ? userInfo.userPic : null} />
-          </ProfileLeft>
+            {/* 유저 프로필 */}
+            <ProfileWrap>
+              <ProfileLeft>
+                <ProfileImage src={userInfo ? userInfo.userPic : null} />
+              </ProfileLeft>
 
-          <ProfileRight>
-            <UserWrap>
-              <UserId>{userId}</UserId>
-              {sameUser ? (
-                <EditBtn onClick={openProfileModal}>edit</EditBtn>
-              ) : null}
-            </UserWrap>
+              <ProfileRight>
+                <UserWrap>
+                  <UserId>{userId}</UserId>
+                  {userId === userInfo.userId ? (
+                    <EditBtn onClick={openProfileModal}>edit</EditBtn>
+                  ) : null}
+                </UserWrap>
 
-            <Introduction>
-              <p>{userInfo ? userInfo.userIntro : "자기소개"}</p>
-            </Introduction>
-          </ProfileRight>
-        </ProfileWrap>
+                <Introduction>
+                  <p>
+                    {userInfo.userIntro
+                      ? userInfo.userIntro
+                      : `안녕하세요 ${userId}입니다.`}
+                  </p>
+                </Introduction>
+              </ProfileRight>
+            </ProfileWrap>
 
-        {/* 내가 올린 동영상 모음 */}
-        <PostWrap>
-          {myPostList.map((p, idx) => {
-            return <MypagePost {...p} key={idx} />;
-          })}
-        </PostWrap>
+            {/* 내가 올린 동영상 모음 */}
+            <PostWrap>
+              {myPostList.map((p, idx) => {
+                return <MypagePost {...p} key={idx} />;
+              })}
+            </PostWrap>
 
-        {/* 게시물 추가 모달창 여는 버튼 */}
-        <AddButton>
-          <IoIosAddCircle
-            style={{
-              width: "50px",
-              height: "50px",
-              color: "#f5df4d",
-              cursor: "pointer",
-            }}
-            onClick={openModal}
+            {/* 게시물 추가 모달창 여는 버튼 */}
+            <AddButton>
+              <IoIosAddCircle
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  color: "#f5df4d",
+                  cursor: "pointer",
+                }}
+                onClick={openModal}
+              />
+            </AddButton>
+          </Wrap>
+
+          {/* 게시물 추가 모달창 */}
+          <AddModal showModal={showModal} setShowModal={setShowModal} />
+          {/* 프로필 수정 모달창 */}
+          <UserModal
+            userId={userId}
+            showProfileModal={showProfileModal}
+            setShowProfileModal={setShowProfileModal}
           />
-        </AddButton>
-      </Wrap>
-
-      {/* 게시물 추가 모달창 */}
-      <AddModal showModal={showModal} setShowModal={setShowModal} />
-      {/* 프로필 수정 모달창 */}
-      <UserModal
-        showProfileModal={showProfileModal}
-        setShowProfileModal={setShowProfileModal}
-      />
+        </>
+      )}
     </>
   );
 };

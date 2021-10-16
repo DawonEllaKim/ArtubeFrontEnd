@@ -8,6 +8,8 @@ import { Image } from "../elements";
 
 const UserModal = props => {
   const dispatch = useDispatch();
+  const userId = props.userId;
+
   const userInfo = useSelector(state => state.profile.userInfo);
   const preview = useSelector(state => state.profile.preview);
   const token = localStorage.getItem("token");
@@ -33,9 +35,7 @@ const UserModal = props => {
   };
 
   useEffect(() => {
-    if (token) {
-      dispatch(profileActions.getProfleMiddleware(token));
-    }
+    dispatch(profileActions.getUserProfile(userId));
   }, []);
 
   const modalRef = useRef();
@@ -57,23 +57,27 @@ const UserModal = props => {
                 onClick={() => {
                   setShowProfileModal(prev => !prev);
                 }}
-              >
-              </Cancel>
+              ></Cancel>
             </Head>
             <UserProfile>
               <ImageUpload>
                 <Priview>
-                    <Image
+                  <Image
                     size="300"
                     style={{}}
                     src={
-                        preview
+                      preview
                         ? preview
                         : "https://img.seoul.co.kr/img/upload/2021/09/28/SSI_20210928100517.jpg"
                     }
-                    />
+                  />
                 </Priview>
-                <input type="file" ref={profileImage} onChange={selectFile} style={{marginTop:'30px',width: '200px'}}/>
+                <input
+                  type="file"
+                  ref={profileImage}
+                  onChange={selectFile}
+                  style={{ marginTop: "30px", width: "200px" }}
+                />
                 <BtnWrap>
                   <ImgDeleteBtn> 프로필삭제</ImgDeleteBtn>
                 </BtnWrap>
