@@ -197,8 +197,7 @@ const Description = styled.div`
 `;
 
 const Comments = styled.div`
-  /* padding-right: 5px; */
-  /* border: 1px solid red; */
+  overflow: auto;;
 `;
 const InputWrap = styled.div`
   display: flex;
